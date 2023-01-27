@@ -1,0 +1,173 @@
+<div class="body" data-id="{{ product_id }}">
+	<p class="headline">{{ heading_title }}</p>
+	<div class="product">
+		<div class="images swiper">
+			<ul class="thumbnails swiper-wrapper">
+				{% if thumb %}
+					<li class="swiper-slide">
+						<a class="thumbnail" href="{{ popup }}" data-fancybox="images" title="{{ heading_title }}">
+							<img itemprop="image" src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
+						</a>
+					</li>
+				{% endif %} 
+				{% if images %}
+					{% for image in images %}
+						<li class="swiper-slide">
+							<a class="thumbnail" data-fancybox="images" href="{{ image.popup }}" title="{{ heading_title }}">
+								<img src="{{ image.popup }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
+							</a>
+						</li>
+					{% endfor %}
+				{% endif %}
+			</ul>
+			<div class="swiper-pagination"></div>
+		</div>
+		<div class="info">
+			<div class="price">
+				<div class="price-option {% if stock_status_id == 5 %}disabled{% endif %}">
+					<div class="price-option-checkbox {% if stock_status_id != 5 %}border-yellow{% endif %}" onclick="quickViewConfig(this)">
+						{% if main_category == 59 %}
+							Цена полотна:
+						{% else %}
+							Цена:
+						{% endif %} 
+						<div>
+							<span id="calc-price" class="price_value">{% if special %}{{ special }}{% else %}{{ price }}{% endif %}</span>
+							<span>₽</span>
+						</div>
+					</div>
+
+					{% if main_category == 59 and is_options_with_checkboxes != 0 %}
+						<div class="price-option-checkbox" onclick="quickViewConfig(this)">
+							Цена комплекта: 
+							<img src="/catalog/view/theme/custom/image/info-discription.svg" alt="информация о комплекте">
+							<div>
+								<span id="calc-final" class="price_value">{{ price_with_options }}</span>
+								<span>₽</span>
+							</div>
+							<div class="option_info"><b>в комплект входит: </b>{{ tooltip_to_option_price }}</div>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+
+			{% set isset_options = 0 %}
+			{% for option in options %}
+				{% if option.type == 'radio' %}
+					{% set isset_options = 1 %}
+				{% endif %}
+			{% endfor %}
+
+			{% if isset_options %}
+				<div class="product-link-option">
+					{% for option in options %}
+						{% if option.type == 'radio' %}
+							<div class="title">
+								{% if main_category == 59 %}
+									Размер полотна:
+								{% else %}
+									Размер коробки:
+								{% endif %}
+							</div>
+							{% for key, option_value in option.product_option_value %}
+								{% if key == 0 %}
+									<input id="option[{{ option.product_option_id }}]x{{option_value.id_name}}" type="radio"
+										value="{{ option_value.product_option_value_id }}" checked
+										name="option[{{ option.product_option_id }}]" />
+								{% else %}
+									<input id="option[{{ option.product_option_id }}]x{{option_value.id_name}}" type="radio"
+										value="{{ option_value.product_option_value_id }}"
+										name="option[{{ option.product_option_id }}]" />
+								{% endif %}
+								<label class="size option_value" for="option[{{ option.product_option_id }}]x{{option_value.id_name}}">
+									{{ option_value.name }}
+									{% if option_value.price %}
+										({{ option_value.price_prefix }}{{ option_value.price }})
+									{% endif %}
+								</label>
+							{% endfor %}
+						{% endif %}
+					{% endfor %}
+				</div>
+			{% endif %}
+
+			{% if products_related_by_color %}
+				<div class="product-link-option">
+					<div class="title">Цвет полотна</div>
+					{% for related_color in products_related_by_color|sort %}
+						{% if related_color.href %}
+							<div class="color-link" data-id="{{ related_color.product_id }}" onclick="quickViewChooseColor(this)">
+								<div class="color" style="background: url(/image/{{ related_color.color_image }});"></div>
+							</div>
+						{% else %}
+							<div class="color current-option" style="background: url(/image/{{ related_color.color_image }});"></div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			{% endif %}
+
+			<div class="door-controls">
+				{% if stock_status_id == 5 %}
+					<div class="product-buttons">
+						<button type="button" id="report_receipt" class="btn btn-block" data-fancybox data-src="#modal">Сообщить о поступлении товара</button>	
+					</div>
+				{% else %}
+					<div class="quantity">
+						<div class="minus" onclick="quickViewMinus(this)">
+							<svg width="12" height="6" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M7.5927 8.11905C7.98322 8.50958 8.61639 8.50958 9.00691 8.11905L15.3709 1.75509C15.7614 1.36457 15.7614 0.731403 15.3709 0.340878C14.9803 -0.0496454 14.3472 -0.0496454 13.9567 0.340878L8.2998 5.99773L2.64295 0.340878C2.25243 -0.0496454 1.61926 -0.0496454 1.22874 0.340878C0.838212 0.731403 0.838212 1.36457 1.22874 1.75509L7.5927 8.11905ZM7.2998 6.07861V7.41195H9.2998V6.07861H7.2998Z" fill="#2C2B3F" />
+							</svg>
+						</div>
+
+						<input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity"/>
+
+						<div class="plus" onclick="quickViewPlus(this)">
+							<svg width="12" height="6" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M7.5927 8.11905C7.98322 8.50958 8.61639 8.50958 9.00691 8.11905L15.3709 1.75509C15.7614 1.36457 15.7614 0.731403 15.3709 0.340878C14.9803 -0.0496454 14.3472 -0.0496454 13.9567 0.340878L8.2998 5.99773L2.64295 0.340878C2.25243 -0.0496454 1.61926 -0.0496454 1.22874 0.340878C0.838212 0.731403 0.838212 1.36457 1.22874 1.75509L7.5927 8.11905ZM7.2998 6.07861V7.41195H9.2998V6.07861H7.2998Z" fill="#2C2B3F" />
+							</svg>
+						</div>
+					</div>
+
+					<div class="product-buttons">
+						<input type="hidden" name="product_id" value="{{ product_id }}" />
+						<button type="button" onclick="quickViewAddToCart()">Добавить в корзину</button>
+					</div>
+
+					<button type="button" class="one_click">
+						<img src="image/product_card/one-click-arrow.svg" alt="купить в 1 клик">							
+						<span>Купить в 1 клик</span>
+					</button>
+				{% endif %}
+			</div>
+
+			{% if attribute_groups %}
+				<p class="attribute_title">Характеристики</p>
+				<div class="attributes_table">
+					{% for attribute_group in attribute_groups %}
+						{% for attribute in attribute_group.attribute %}
+							{% if attribute.attribute_id in attributes_to_show %}
+								<div class="attribute">
+									<p>{{ attribute.name }}</p>
+									<p>{{ attribute.text }}</p>
+								</div>
+							{% endif %}
+						{% endfor %}
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+		{% if options and is_options_with_checkboxes != 0 %}
+				{% for option in options %} 
+					{% if option.type =='checkbox' %}
+						{% for key,option_value in option.product_option_value %}
+								{% if key < 2 %}
+									<input type="checkbox" id="option[{{ option.product_option_id }}][]{{ loop.index }}" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}" data-kopmlekt="{{ option_value.price }}" checked />
+								{% endif %}
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+	</div>
+	<a class="more_details" href="{{ href }}">Подробнее</a>
+	<button class="cross" onclick="closeQuickView()"></button>
+</div>

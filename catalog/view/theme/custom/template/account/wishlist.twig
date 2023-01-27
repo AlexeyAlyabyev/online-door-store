@@ -1,0 +1,148 @@
+{{ header }}
+<div id="account-wishlist" class="wrapper">
+  <ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+		{% for key,breadcrumb in breadcrumbs %}
+			<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+				{% if loop.last %}
+					<p itemprop="item">
+						<span itemprop="name">
+							{{ breadcrumb.text }}
+						</span>
+					</p>
+				{% else %}
+					<a itemprop="item" href="{{ breadcrumb.href }}">
+						<span itemprop="name">
+							{{ breadcrumb.text }}
+						</span>
+					</a>				
+				{% endif %}
+				{% set position = key + 1 %}
+				<meta itemprop="position" content="{{ position }}" />
+			</li>
+		{% endfor %}
+	</ul>
+
+	{# {% if success %}
+  <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %} #}
+
+  <div class="row">{{ column_left }}
+		{% if column_left and column_right %}
+			{% set class = 'col-sm-6' %}
+		{% elseif column_left or column_right %}
+			{% set class = 'col-sm-9' %}
+		{% else %}
+			{% set class = 'col-sm-12' %}
+		{% endif %}
+    <div class="body {{ class }}">
+			<h1 class="headline">{{ heading_title }}</h1>
+
+			{% if products %}
+				{% if mobile %}
+					<div class="products-list">
+						<div class="products-list-body">
+							{% for key,product in products %}
+								<div class="product {{ crutch }}" data-id="{{ product.product_id }}">
+									{% if product.special_label != '' %}
+										<div class="product-special">-{{ product.special_label }}%</div>
+									{% endif %}
+
+									<div class="product-top">
+										<div class="product-image">
+											<a href="{{ product.href }}" title="{% if product.product_color %}{{ product.name }}, цвет: {{ product.product_color }}{% else %}{{ product.name }}{% endif %}">
+												{% if key > 5 %}
+													<img class="{{ crutch }}" height="220px" width="100%" loading="lazy" src="{{ product.thumb }}" alt="{{ product.name }}"  />
+												{% else %}
+													<img class="{{ crutch }}" height="220px" width="100%" src="{{ product.thumb }}" alt="{{ product.name }}"  />
+												{% endif %}
+											</a>
+											<button class="wishlist" onclick="wishlist($(this).parents('.product'))">
+												<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M11.5 21L9.9775 19.5668C4.57 14.4714 1 11.109 1 6.99455C1 3.63215 3.53575 1 6.775 1C8.602 1 10.3555 1.88283 11.5 3.27248C12.6445 1.88283 14.398 1 16.225 1C19.4642 1 22 3.63215 22 6.99455C22 11.109 18.43 14.4714 13.0225 19.5668L11.5 21Z" fill="#ffffff" stroke="#989898"/>
+												</svg>											
+											</button>	
+										</div>
+										<p class="product-name">{{ product.name }}</p>
+									</div>								
+
+									<div class="product-caption">
+										<div class="product-caption-price">
+											{% if not product.special %}
+												<p class="new">{{ product.price }}</p>
+											{% else %}
+												<p class="old line-through">{{ product.price }}</p>
+												<p class="new">{{ product.special }}</p>
+											{% endif %}
+										</div>
+										<div class="button-wrapper">
+											<input type="hidden" name="product_id" value="{{ product.product_id }}">
+											<button type="button" data-loading-text="Загрузка..." onclick="addToCart(this)">{# Добавить в корзину #}</button>
+										</div>
+									</div>				
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% else %}
+					<div class="products-list">
+						<div class="products-list-body desktop">
+							{% for product in products %}
+								<div class="product {{ crutch }}" data-id="{{ product.product_id }}">
+
+									<div class="product-top">
+										<p class="product-name">{{ product.name }}</p>
+										{% if product.product_color %}
+											<p class="product-color">{{ product.product_color }}</p>
+										{% else %}
+											<p class="product-color"> </p>
+										{% endif %}
+									</div>			
+									
+									<div class="product-image">
+										<a href="{{ product.href }}" title="{% if product.product_color %}{{ product.name }}, цвет: {{ product.product_color }}{% else %}{{ product.name }}{% endif %}">
+											<img class="{{ crutch }}" height="266px" width="100%" loading="lazy" src="{{ product.thumb }}" alt="{{ product.name }}" onerror='this.onerror = null; this.src="{{ product.reserve_img }}"' />
+										</a>
+										{% if product.special_label != '' %}
+											<div class="product-special">-{{ product.special_label }}%</div>
+										{% endif %}
+										<button class="wishlist" onclick="wishlist($(this).parents('.product'))">
+											<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M11.5 21L9.9775 19.5668C4.57 14.4714 1 11.109 1 6.99455C1 3.63215 3.53575 1 6.775 1C8.602 1 10.3555 1.88283 11.5 3.27248C12.6445 1.88283 14.398 1 16.225 1C19.4642 1 22 3.63215 22 6.99455C22 11.109 18.43 14.4714 13.0225 19.5668L11.5 21Z" fill="#ffffff" stroke="#989898"/>
+											</svg>											
+										</button>	
+									</div>
+
+									<div class="product-caption">
+										<div class="button-wrapper">
+											<input type="hidden" name="product_id" value="{{ product.product_id }}">
+											<button type="button" data-loading-text="Загрузка..." onclick="addToCart(this)">{# Добавить в корзину #}</button>
+										</div>
+										<div class="product-caption-price">
+											{% if not product.special %}
+											<p class="old"> </p>
+												<p class="new">{{ product.price }}</p>
+											{% else %}
+												<p class="old line-through">{{ product.price }}</p>
+												<p class="new">{{ product.special }}</p>
+											{% endif %}
+										</div>
+									</div>						
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %} 
+			{% endif %} 
+
+			{% if not products %}
+				<p>{{ text_empty }}</p>
+				<div class="back_button">
+					<a href="/">На главную</a>
+				</div>
+			{% endif %}
+		</div>
+    {{ column_right }}</div>
+</div>
+{{ footer }}

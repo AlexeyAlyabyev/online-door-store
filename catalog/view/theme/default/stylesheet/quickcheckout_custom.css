@@ -1,0 +1,41 @@
+.quickcheckoutleft {
+	flex-basis: 49%;
+}
+.quickcheckoutright {
+	flex-basis: 49%;
+}
+.quickcheckoutmid {
+	width: 100%;
+}
+.extra-width {
+	width: 42%;
+}
+#quickcheckoutconfirm .col-sm-6 {
+	flex-basis: 100%;
+	margin-bottom: 10px;
+}
+
+#quickcheckoutconfirm .col-sm-6:first-child,
+#quickcheckoutconfirm .col-sm-6:nth-child(3) {
+	flex-basis: 49%;
+}
+
+#quickcheckoutconfirm #login .col-sm-3,
+#quickcheckoutconfirm #login .col-sm-9{
+	width: 100% !important;
+	padding:0 !important;
+}
+#quickcheckoutconfirm #login label[for="input-login-password"]{
+	margin-top: 10px;
+}
+
+#cart1 {
+	padding-top: 10px;
+	overflow: auto;
+}
+table.quickcheckout-cart {
+	overflow: auto;
+}
+.quickcheckout-cart td.image img {
+	height: auto;
+}

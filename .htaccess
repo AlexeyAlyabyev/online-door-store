@@ -1,0 +1,63 @@
+Options +SymLinksIfOwnerMatch
+
+Options -Indexes
+
+<FilesMatch "(?i)((\.tpl|.twig|\.ini|\.log|(?<!robots)\.txt))">
+ Require all denied
+</FilesMatch>
+
+# One year for image files
+<filesMatch ".(jpg|jpeg|png|gif|ico|webp|avif)$">
+Header set Cache-Control "max-age=31536000, public"
+</filesMatch>
+# One month for css and js
+<filesMatch ".(css|js)$">
+Header set Cache-Control "max-age=2628000, public"
+</filesMatch>
+
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^mezhkomnatnye-dveri/compack/$ systems [R=301,NC,L]
+
+RewriteRule ^index\.html$ https://develop.100-dverei.ru/ [L,R=301]
+RewriteRule ^index/$ https://develop.100-dverei.ru/ [L,R=301]
+RewriteRule ^home.php$ https://develop.100-dverei.ru/ [L,R=301]
+RewriteRule ^sitemap.xml$ index.php?route=extension/feed/fast_yandex_sitemap [L]
+RewriteRule ^akcii$ specials/ [R=301,NC,L]
+RewriteRule ^dveri-s-ustanovkoi-pod-klyuch$ vhodnye-dveri-s-ustanovkoy [R=301,NC,L]
+#RewriteRule ^googlebase.xml$ index.php?route=extension/feed/google_base [L]
+RewriteRule ^system/storage/(.*) index.php?route=error/not_found [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
+RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
+
+RewriteCond %{THE_REQUEST} //
+RewriteRule .* /$0 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+RewriteRule ^index\.php$ http://develop.100-dverei.ru/ [L,R=301]
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+
+php_value display_errors 1
+
+#<IfModule mod_expires.c>
+#ExpiresActive On
+#ExpiresByType image/jpg "access 1 year"
+#ExpiresByType image/jpeg "access 1 year"
+#ExpiresByType image/gif "access 1 year"
+#ExpiresByType image/png "access 1 year"
+#ExpiresByType text/css "access 1 month"
+#ExpiresByType text/html "access 1 month"
+#ExpiresByType application/pdf "access 1 month"
+#ExpiresByType text/x-javascript "access 1 month"
+#ExpiresByType application/x-shockwave-flash "access 1 month"
+#ExpiresByType image/x-icon "access 1 year"
+#ExpiresDefault "access 1 month"
+#</IfModule>

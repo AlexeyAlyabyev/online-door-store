@@ -1,0 +1,951 @@
+{{ header }}
+
+<div class="main-desk">
+	<div class="body">
+
+		<div class="item sale">
+			<div class="flex_wrap">
+				<div class="sale_count">
+					<span>-50%</span>
+					<p>скидка</p>
+				</div>
+				<div class="text">
+					<div class="h1">
+						<span>на </span> <h1>межкомнатные и входные двери</h1>
+					</div>
+					<a href="/specials/?no_cards=1">смотреть двери</a>
+				</div>
+			</div>
+		</div>
+
+		<a href="/mezhkomnatnye-dveri/" class="item mezh">
+			<div class="shadow"></div>
+			<h2>Межкомнатные двери</h2>
+			<p>от {{ min_mezh_price }} ₽</p>
+		</a>
+
+		<a href="/dveri-vhodnye/" class="item vhod">
+			<div class="shadow"></div>
+			<h2>Входные двери</h2>
+			<p>от {{ min_vhod_price }} ₽</p>
+		</a>
+
+	</div>
+</div>
+
+<div class="counter">
+	<div class="wrapper">
+		<div class="body">
+			<p>Мы уже сделали</p>
+			<div class="numbers">
+				<div class="number">
+					<div class="top_rear">-</div>
+					<div class="top">-</div>
+					<div class="bottom">-</div>
+				</div>
+
+				<div class="number">
+					<div class="top_rear">-</div>
+					<div class="top">-</div>
+					<div class="bottom">-</div>
+				</div>
+
+				<div class="number">
+					<div class="top_rear">-</div>
+					<div class="top">-</div>
+					<div class="bottom">-</div>
+				</div>
+
+				<div class="number">
+					<div class="top_rear">-</div>
+					<div class="top">-</div>
+					<div class="bottom">-</div>
+				</div>
+
+				<div class="number">
+					<div class="top_rear">-</div>
+					<div class="top">-</div>
+					<div class="bottom">-</div>
+				</div>
+			</div>
+			<p>бесплатных замеров</p>
+		</div>
+		<button data-fancybox data-src="#modal">Заказать бесплатный замер</button>
+	</div>
+</div>
+
+{% if mobile %}
+	{% if products %}
+		<div class="hit_slider">
+			<h2 class="title">Акционные двери</h2>
+			<div class="body">
+				{% for product in products %}
+
+					<div class="item" data-id="{{ product.product_id }}">
+
+						<a href="{{ product.href }}">
+							<div class="image">
+								<img loading="lazy" src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" onerror='this.onerror = null; this.src="{{ product.reserve_img }}"'>
+								{% if product.special %}
+									<span class="sale">
+										-{{ product.sale_percent }}%
+									</span>
+								{% endif %}
+							</div>
+
+							<p class="name">{{ product.name }}</p>
+
+							<p class="old_price">
+								{{ product.price }}
+							</p>
+
+							<p class="price">
+								{{ product.special }}
+							</p>
+						</a>
+						<input type="hidden" name="product_id" value="{{ product.product_id }}">
+						<div class="button_block">
+							<button class="cart_btn" onclick="addToCart(this)"></button>
+							<button type="button" class="one_click">Купить в 1 клик</button>
+						</div>
+						<button class="wishlist" onclick="wishlist($(this).parents('.item'))">
+							<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M11.5 21L9.9775 19.5668C4.57 14.4714 1 11.109 1 6.99455C1 3.63215 3.53575 1 6.775 1C8.602 1 10.3555 1.88283 11.5 3.27248C12.6445 1.88283 14.398 1 16.225 1C19.4642 1 22 3.63215 22 6.99455C22 11.109 18.43 14.4714 13.0225 19.5668L11.5 21Z" fill="#ffffff" stroke="#989898"/>
+							</svg>											
+						</button>	
+						<!-- <button onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}')"></button> -->
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+
+	<div class="leave_request">
+		<div class="wrapper body">
+			<form method="POST" action="/telegram.php">
+				<div class="title">Оставьте заявку на замер дверей<br>и мы выполним его <span>БЕСПЛАТНО!</span></div>
+				<p>Напишите или позвоните нам:</p>
+				<div class="calls">
+					<a href="tel:{{ telephone }}" class="phone">{{ telephone }}</a>
+					<a href="{{ whatsapp }}" class="whatsapp">
+						<img src="/catalog/view/theme/custom/image/whatsapp1.svg" alt="Оставить заявку на замер двери whatsapp">
+					</a>
+				</div>
+
+				<div class="inputs">
+					<input type="tel" name="phone" placeholder="Ваш телефон" required>
+					<button>Отправить</button>
+					<input type="hidden" name="spam_check" value="{{ spam_check }}">
+				</div>
+			</form>
+		</div>
+	</div>
+{% endif %}
+
+{% if mobile %}
+	<div class="offers">
+		<h2 class="main_title">
+			Воспользуйтесь акциями на двери
+		</h2>
+
+		<div class="body swiper">
+			<div class="swiper-wrapper">
+
+			<div class="item img swiper-slide" data-fancybox data-src="#modal">
+				<img src="/catalog/view/theme/custom/image/sber_banner.webp" alt="Рассрочка на двери и компектующие от сбербанка">
+			</div>
+
+			<div class="swiper-slide">
+				<a href="/rasprodazha/" class="item half_price">
+					<p class="date">До конца месяца!</p>
+					<p class="title">Двери со скидкой <span>50%</span></p>
+					<div class="img_plus_text">
+						<img src="/catalog/view/theme/custom/image/half_price.webp" alt="Двери за пол цены!">
+						<span>за дверь!</span>
+					</div>
+					<img src="/catalog/view/theme/custom/image/half_price2.webp" alt="Двери за пол цены полотна!" class="bottom_img">
+				</a>
+			</div>
+
+			<div class="swiper-slide">
+				<a href="/mezhkomnatnye-dveri/?sort=p.price&order=ASC" class="item gost">
+					<p class="date">До конца месяца!</p>
+					<p class="title">Межкомнатные двери <span>ГОСТ</span></p>
+					<p class="bold_text">{{ gost_price }} ₽</p>
+					<img src="/catalog/view/theme/custom/image/gost.webp" alt="Акция на двери ГОСТ!" class="bottom_img">
+				</a>
+			</div>
+
+			<div class="swiper-slide">
+				<a href="/furnitura/ruchki/?rdrf[man][0]=34" class="item archie">
+					<p class="date">До конца месяца!</p>
+					<p class="title">Дверные ручки <span>ARCHIE</span> <img src="/catalog/view/theme/custom/image/archie2.svg" alt="флаг испании"></p>
+					<p class="bold_text">- 15% НА ВСЕ МОДЕЛИ</p>
+					<img src="/catalog/view/theme/custom/image/archie.webp" alt="Скидка -15% на все ручки ARCHIE" class="bottom_img">
+				</a>
+			</div>
+
+			{# <div class="swiper-slide">
+				<a href="/search/?search=Мастер" class="item master">
+					<p class="date">До конца месяца</p>
+					<p class="title">В каждый дом нужен <span>МАСТЕР!</span></p>
+					<p class="master_price">
+						<strong>{{ master_price }} ₽ </strong> на все двери серии МАСТЕР
+						<span>{{ master_special }} ₽</span>
+					</p>
+					<img src="/catalog/view/theme/custom/image/master.webp" alt="Скидка -15% на все ручки ARCHIE" class="bottom_img">
+				</a>
+			</div> #}
+
+			<div class="swiper-slide">
+				<div class="item img" data-fancybox data-src="#modal">
+					<img src="/catalog/view/theme/custom/image/new_settlers_vhod.webp" alt="Скидка на входные двери 7% новоселам.">
+				</div>
+			</div>
+
+			<div class="swiper-slide">
+				<div class="item img" data-fancybox data-src="#modal">
+					<img src="/catalog/view/theme/custom/image/new_settlers_mezh.webp" alt="Скидка на межкомнатные двери 15% новоселам.">
+				</div>
+			</div>
+
+			<div class="swiper-slide">
+				<a href="dvernoj-dom_brend" class="item img">
+					<img src="/catalog/view/theme/custom/image/dvernoy-dom.webp" alt="Акция на двери производителя дверной дом">
+				</a>
+			</div>
+
+		</div>
+		</div>
+	</div>
+
+	<div class="choice_doubts">
+		<p class="title">Сомневаетесь в выборе двери?</p>
+		<p class="info">Наш специалист расскажет об особенностях, плюсах <br> и минусах каждого варианта, чтобы вы сделали свой выбор</p>
+		<button data-fancybox data-src="#modal">Вызвать специалиста</button>
+	</div>
+
+	<div class="mounting">
+		<a href="/mezhkomnatnye-dveri-nedorogo-s-ustanovkoi-pod-klyuch" class="item mezh_install">
+			<div class="shadow"></div>
+			<div class="content">
+				<h2>Установка <br> межкомнатных дверей</h2>
+				<p class="price">от 2 660 ₽</p>
+			</div>
+		</a>
+		<a href="/vhodnye-dveri-s-ustanovkoy" class="item vhod_install">
+			<div class="shadow"></div>
+			<div class="content">
+				<h2>Установка <br> входных дверей</h2>
+				<p class="price">от 4 240 ₽</p>
+			</div>
+		</a>
+	</div>
+
+	<div class="popular-questions">
+		<div class="wrapper">
+			<p class="popular-questions-title">Популярные вопросы</p>
+			<div class="popular-questions-body">
+
+				<div class="popular-questions-body-item">
+					<div class="question">
+						<img src="/catalog/view/theme/custom/image/zamer.svg" alt="Бесплатный замер двери">
+						<p>Бесплатный замер</p>
+						<img src="/catalog/view/theme/custom/image/answer.svg" alt="стрелка">
+					</div>
+					<div class="answer">
+						<ul>
+							<li>Замер осуществляется БЕСПЛАТНО!</li>
+							<br>
+							<li>Замерщик выезжает на адрес с образцами цветов и каталогами. Производит точный замер и четко просчитывает всю сумму под ключ с установкой.</li>
+							<br>
+							<li>{{ zamer_text }}</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="popular-questions-body-item">
+					<div class="question">
+						<img src="/catalog/view/theme/custom/image/installment.svg" alt="Установка входных и межкомнатных дверей">
+						<p>Установка входных и межкомнатных дверей</p>
+						<img src="/catalog/view/theme/custom/image/answer.svg" alt="стрелка">
+					</div>
+					<div class="answer">
+						<ul>
+							<li>Для установки дверей мы подготавливаем дверной проём, зачищаем стены и торец. Проводим сбор добора, исходя из соразмерности портала и полотна. Фиксируем стойки, порожки и петли.
+								Выполняем сборку комплекта на импровизированной подложке, вставку коробки с проверкой по уровню и установку всего набора вместе с наличниками.</li>
+							<br>
+							<li>На работу требуется около двух часов.</li>
+							<br>
+							<li>Цены на установку межкомнатных дверей начинается от 2 310 рублей.</li>
+							<br>
+							<li>Цены на установку межкомнатных дверей начинается от 3 680 рублей.</li>
+							<br>
+							<li>Более подробная информация о установке <a href="/vhodnye-dveri-s-ustanovkoy">входных</a> и <a href="/mezhkomnatnye-dveri-nedorogo-s-ustanovkoi-pod-klyuch">межкомнатных</a> дверей.</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="popular-questions-body-item">
+					<div class="question">
+						<img src="/catalog/view/theme/custom/image/delivery.svg" alt="Доставка и самовывоз дверей">
+						<p>Доставка и самовывоз</p>
+						<img src="/catalog/view/theme/custom/image/answer.svg" alt="стрелка">
+					</div>
+					<div class="answer">
+						<ul>
+							<li>{{ delivery_text }}</li>
+							<li>{{ delivery_plus_text }}</li>
+							<br>
+							<li>Подъем межкомнатных дверей на лифте 200 руб — 1 дверь.</li>
+							<li>Подъем межкомнатных дверей вручную (по лестнице) 100 руб/1 этаж — 1 дверь.</li>
+							<li>Подъем входных дверей на лифте 250-300 руб — 1 дверь.</li>
+							<li>Подъем входных дверей вручную (по лестнице) 250-300 руб/1 этаж — 1 дверь.</li>
+							<li>Подъем металлической коробки по лестнице 150 руб — 1 этаж.</li>
+							<br>
+							<li>Самовывоз с нашего магазина осуществляется БЕСПЛАТНО.</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="application-accept">
+		<div class="wrapper">
+			<a href="tel:{{ telephone }}">{{ telephone }}</a>
+			<p>Прием заявок круглосуточно</p>
+		</div>
+	</div>
+
+{% else %}
+
+	<div class="catalog" id="catalog">
+		<div class="wrapper">
+
+			<h2>Межкомнатные двери</h2>
+			<div class="catalog-body">
+
+				<a href="/mezhkomnatnye-dveri/ekoshpon/" class="catalog-body-item" title="Экошпон">
+					<div class="category-top">
+						<p>Экошпон</p>
+						<div class="category-price">
+							{% if ekoshpon %}
+								от <span>{{ ekoshpon }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/elporta-min.png" alt="ДвМежкомнатные двери elporta">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/luxor-min.png" alt="Межкомнатные двери luxor">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/uberture-min.png" alt="Межкомнатные двери uberture">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/vfd-min.png" alt="Межкомнатные двери vfd">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/milyana-min.png" alt="Межкомнатные двери milyana">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/velldoris-min.png" alt="Межкомнатные двери velldoris">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/zadoor-min.png" alt="Межкомнатные двери zadoor">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/verda-min.png" alt="Межкомнатные двери verda">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/neva-min.png" alt="Межкомнатные двери neva">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/bravo-min.png" alt="Межкомнатные двери bravo">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/ekoshpon-min.png" alt="Межкомнатные двери Экошпон">
+						</div>
+					</div>
+				</a>
+
+				<a href="/mezhkomnatnye-dveri/ekoshpon-3d/" class="catalog-body-item" title="Экошпон 3Д">
+					<div class="category-top">
+						<p>Экошпон 3Д</p>
+						<div class="category-price">
+							{% if ekoshpon3d %}
+								от <span>{{ ekoshpon3d }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/velldoris-min.png" alt="Межкомнатные двери velldoris">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/zadoor-min.png" alt="Межкомнатные двери zadoor">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/verda-min.png" alt="Межкомнатные двери verda">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/bravo-min.png" alt="Межкомнатные двери bravo">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/ekoshpon3d-min.png" alt="Межкомнатные двери Экошпон3Д">
+						</div>
+					</div>
+				</a>
+
+				<a href="/mezhkomnatnye-dveri/shponirovannye/" class="catalog-body-item" title="Шпонированные">
+					<div class="category-top">
+						<p>Шпонированные</p>
+						<div class="category-price">
+							{% if shponirovannie %}
+								от <span>{{ shponirovannie }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/luxor-min.png" alt="Межкомнатные двери luxor">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/regidoors-min.png" alt="Межкомнатные двери regidoors">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/bravo-min.png" alt="Межкомнатные двери bravo">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/verda-min.png" alt="Межкомнатные двери verda">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/shponirovannie-min.png" alt="Межкомнатные двери шпонированные">
+						</div>
+					</div>
+				</a>
+
+				{% if language == "ru-ru" %}
+					<a href="/mezhkomnatnye-dveri/shpon-ekonom/" class="catalog-body-item" title="Шпон Эконом">
+						<div class="category-top">
+							<p>Шпон Эконом</p>
+							<div class="category-price">
+								{% if shpon_ekonom %}
+									от <span>{{ shpon_ekonom }}</span> ₽
+								{% else %}
+									Нет в наличии
+								{% endif %}
+							</div>
+						</div>
+						<div class="category-bottom">
+							<div class="manufacturers">
+								<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/bravo-min.png" alt="Межкомнатные двери bravo">
+							</div>
+							<div class="category-image">
+								<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/shpon-ekonom-min.png" alt="Межкомнатные двери шпон Эконом">
+							</div>
+						</div>
+					</a>
+				{% endif %}
+
+				<a href="/mezhkomnatnye-dveri/shpon-duba-belorusskie/" class="catalog-body-item" title="Шпон дуба">
+					<div class="category-top">
+						<p>Шпон дуба</p>
+						<div class="category-price">
+							{% if shpon_duba %}
+								от <span>{{ shpon_duba }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/porte-vista-min.png" alt="Межкомнатные двери porte-vista">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/shpon-duba-min.png" alt="Межкомнатные двери шпон дуба">
+						</div>
+					</div>
+				</a>
+
+				<a href="/mezhkomnatnye-dveri/krashenye-emal/" class="catalog-body-item" title="Крашеные (Эмаль)">
+					<div class="category-top">
+						<p>Крашеные (Эмаль)</p>
+						<div class="category-price">
+							{% if krashennie %}
+								от <span>{{ krashennie }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/luxor-min.png" alt="Межкомнатные двери luxor">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/regidoors-min.png" alt="Межкомнатные двери regidoors">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/vfd-min.png" alt="Межкомнатные двери vfd">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/velldoris-min.png" alt="Межкомнатные двери velldoris">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/zadoor-min.png" alt="Межкомнатные двери zadoor">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/bravo-min.png" alt="Межкомнатные двери bravo">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/verda-min.png" alt="Межкомнатные двери verda">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/milyana-min.png" alt="Межкомнатные двери milyana">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/rosdver-min.png" alt="Межкомнатные двери rosdver">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/krashennie-min.png" alt="Межкомнатные двери крашенные">
+						</div>
+					</div>
+				</a>
+
+				<a href="/mezhkomnatnye-dveri/glyancevye/" class="catalog-body-item" title="Глянцевые">
+					<div class="category-top">
+						<p>Глянцевые</p>
+						<div class="category-price">
+							{% if glyancevie %}
+								от <span>{{ glyancevie }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/line-doors-min.png" alt="Межкомнатные двери line-doors">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/verda-min.png" alt="Межкомнатные двери verda">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/neva-min.png" alt="Межкомнатные двери neva">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/glyancevie-min.png" alt="Межкомнатные двери глянцевые">
+						</div>
+					</div>
+				</a>
+
+				<a href="/mezhkomnatnye-dveri/laminirovannye/" class="catalog-body-item" title="Ламинированные и ПВХ">
+					<div class="category-top">
+						<p>Ламинированные и ПВХ</p>
+						<div class="category-price">
+							{% if pvh %}
+								от <span>{{ pvh }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/regidoors-min.png" alt="Межкомнатные двери regidoors">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/verda-min.png" alt="Межкомнатные двери verda">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/neva-min.png" alt="Межкомнатные двери neva">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/bravo-min.png" alt="Межкомнатные двери bravo">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/pvh-min.png" alt="Межкомнатные двери ПВХ">
+						</div>
+					</div>
+				</a>
+
+				<a href="/mezhkomnatnye-dveri/steklyannye/" class="catalog-body-item" title="Стеклянные">
+					<div class="category-top">
+						<p>Стеклянные</p>
+						<div class="category-price">
+							{% if steklyanie %}
+								от <span>{{ steklyanie }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/elporta-min.png" alt="Межкомнатные двери elporta">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/bravo-min.png" alt="Межкомнатные двери bravo">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/steklyannie-min.png" alt="Межкомнатные двери стеклянные">
+						</div>
+					</div>
+				</a>
+
+				<a href="/mezhkomnatnye-dveri/massiv-100/" class="catalog-body-item" title="Массив 100%">
+					<div class="category-top">
+						<p>Массив 100%</p>
+						<div class="category-price">
+							{% if massiv100 %}
+								от <span>{{ massiv100 }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/regidoors-min.png" alt="Межкомнатные двери regidoors">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/massiv100-min.png" alt="Межкомнатные двери массив 100%">
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<h2>Входные двери</h2>
+			<div class="catalog-body">
+
+				<a href="/dveri-vhodnye/dlya-kvartiry/" class="catalog-body-item" title="для квартиры">
+					<div class="category-top">
+						<p>Для квартиры</p>
+						<div class="category-price">
+							{% if dlya_kvartiri %}
+								от <span>{{ dlya_kvartiri }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/dlya-kvartiry-min.png" alt="Входные двери в квартиру">
+						</div>
+					</div>
+				</a>
+
+				<a href="/dveri-vhodnye/dlya-doma/" class="catalog-body-item" title="для дома">
+					<div class="category-top">
+						<p>Для дома</p>
+						<div class="category-price">
+							{% if dlya_doma %}
+								от <span>{{ dlya_doma }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/dlya-doma-min.png" alt="Входные двери для дома">
+						</div>
+					</div>
+				</a>
+
+				<a href="/dveri-vhodnye/s-termorazryvom/" class="catalog-body-item" title="с терморазрывом">
+					<div class="category-top">
+						<p>С терморазрывом</p>
+						<div class="category-price">
+							{% if s_termorazrivom %}
+								от <span>{{ s_termorazrivom }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/termorazriv-min.png" alt="Входные двери с терморазрывом">
+						</div>
+					</div>
+				</a>
+
+				<a href="/dveri-vhodnye/ulichnye/" class="catalog-body-item" title="Уличные">
+					<div class="category-top">
+						<p>Уличные</p>
+						<div class="category-price">
+							{% if ulichnie %}
+								от <span>{{ ulichnie }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/ulichnie-min.png" alt="Входные двери уличные">
+						</div>
+					</div>
+				</a>
+
+				<a href="/dveri-vhodnye/tamburnye/" class="catalog-body-item" title="Тамбурные">
+					<div class="category-top">
+						<p>Тамбурные</p>
+						<div class="category-price">
+							{% if tamburnie %}
+								от <span>{{ tamburnie }}</span> ₽
+							{% else %}
+								Нет в наличии
+							{% endif %}
+						</div>
+					</div>
+					<div class="category-bottom">
+						<div class="manufacturers">
+						</div>
+						<div class="category-image">
+							<img loading="lazy" src="/catalog/view/theme/custom/image/catalog/tamburnie-min.png" alt="Входные двери тамбурные">
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="choice_doubts">
+		<p class="title">Сомневаетесь в выборе двери?</p>
+		<p class="info">Наш специалист расскажет об особенностях, плюсах <br> и минусах каждого варианта, чтобы вы сделали свой выбор</p>
+		<button data-fancybox data-src="#modal">Вызвать специалиста</button>
+	</div>
+
+	<div class="offers">
+		<h2 class="main_title">
+			Воспользуйтесь акциями на двери
+		</h2>
+
+		<div class="body swiper">
+			<div class="swiper-wrapper">
+
+			<div class="item img swiper-slide" data-fancybox data-src="#modal">
+				<img src="/catalog/view/theme/custom/image/sber_banner.webp" alt="Рассрочка на двери и компектующие от сбербанка">
+			</div>
+
+			<div class="swiper-slide">
+				<a href="/rasprodazha/" class="item half_price">
+					<p class="date">До конца месяца!</p>
+					<p class="title">Двери со скидкой <span>50%</span></p>
+					<div class="img_plus_text">
+						<img src="/catalog/view/theme/custom/image/half_price.webp" alt="Двери за пол цены!">
+						<span>за дверь!</span>
+					</div>
+					<img src="/catalog/view/theme/custom/image/half_price2.webp" alt="Двери за пол цены полотна!" class="bottom_img">
+				</a>
+			</div>
+
+			<div class="swiper-slide">
+				<a href="/mezhkomnatnye-dveri/?sort=p.price&order=ASC" class="item gost">
+					<p class="date">До конца месяца!</p>
+					<p class="title">Межкомнатные двери <span>ГОСТ</span></p>
+					<p class="bold_text">{{ gost_price }} ₽</p>
+					<img src="/catalog/view/theme/custom/image/gost.webp" alt="Акция на двери ГОСТ!" class="bottom_img">
+				</a>
+			</div>
+
+			<div class="swiper-slide">
+				<a href="/furnitura/ruchki/?rdrf[man][0]=34" class="item archie">
+					<p class="date">До конца месяца!</p>
+					<p class="title">Дверные ручки <span>ARCHIE</span> <img src="/catalog/view/theme/custom/image/archie2.svg" alt="флаг испании"></p>
+					<p class="bold_text">- 15% НА ВСЕ МОДЕЛИ</p>
+					<img src="/catalog/view/theme/custom/image/archie.webp" alt="Скидка -15% на все ручки ARCHIE" class="bottom_img">
+				</a>
+			</div>
+
+			{# <div class="swiper-slide">
+				<a href="/search/?search=Мастер" class="item master">
+					<p class="date">До конца месяца</p>
+					<p class="title">В каждый дом нужен <span>МАСТЕР!</span></p>
+					<p class="master_price">
+						<strong>{{ master_price }} ₽ </strong> на все двери серии МАСТЕР
+						<span>{{ master_special }} ₽</span>
+					</p>
+					<img src="/catalog/view/theme/custom/image/master.webp" alt="Скидка -15% на все ручки ARCHIE" class="bottom_img">
+				</a>
+			</div> #}
+
+			<div class="swiper-slide">
+				<div class="item img" data-fancybox data-src="#modal">
+					<img src="/catalog/view/theme/custom/image/new_settlers_vhod.webp" alt="Скидка на входные двери 7% новоселам.">
+				</div>
+			</div>
+
+
+			<div class="swiper-slide">
+				<div class="item img" data-fancybox data-src="#modal">
+					<img src="/catalog/view/theme/custom/image/new_settlers_mezh.webp" alt="Скидка на межкомнатные двери 15% новоселам.">
+				</div>
+			</div>
+
+			<div class="swiper-slide">
+				<a href="dvernoj-dom_brend" class="item img">
+					<img src="/catalog/view/theme/custom/image/dvernoy-dom.webp" alt="Акция на двери производителя дверной дом">
+				</a>
+			</div>
+
+		</div>
+		</div>
+	</div>
+
+{% endif %}
+
+{% if mobile != true %}
+	<div class="mounting">
+		<a href="/mezhkomnatnye-dveri-nedorogo-s-ustanovkoi-pod-klyuch" class="item mezh_install">
+			<div class="shadow"></div>
+			<div class="content">
+				<h2>Установка <br> межкомнатных дверей</h2>
+				<p class="price">от 2 660 ₽</p>
+			</div>
+		</a>
+		<a href="/vhodnye-dveri-s-ustanovkoy" class="item vhod_install">
+			<div class="shadow"></div>
+			<div class="content">
+				<h2>Установка <br> входных дверей</h2>
+				<p class="price">от 4 240 ₽</p>
+			</div>
+		</a>
+	</div>
+
+	{% if products %}
+		<div class="hit_slider">
+			<h2 class="title">Акционные двери</h2>
+			<div class="body">
+				{% for product in products %}
+
+					<div class="item" data-id="{{ product.product_id }}">
+
+						<a href="{{ product.href }}">
+							<div class="image">
+								<img loading="lazy" src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" onerror='this.onerror = null; this.src="{{ product.reserve_img }}"'>
+								{% if product.special %}
+									<span class="sale">
+										-{{ product.sale_percent }}%
+									</span>
+								{% endif %}
+								<button class="quick_view">Быстрый просмотр</button>
+							</div>
+
+							<p class="name">{{ product.name }}</p>
+
+							<p class="old_price">
+								{{ product.price }}
+							</p>
+
+							<p class="price">
+								{{ product.special }}
+							</p>
+						</a>
+						<input type="hidden" name="product_id" value="{{ product.product_id }}">
+						<div class="button_block">
+							<button class="cart_btn" onclick="addToCart(this)"></button>
+							<button type="button" class="one_click">Купить в 1 клик</button>
+						</div>
+						<button class="wishlist" onclick="wishlist($(this).parent())">
+							<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M11.5 21L9.9775 19.5668C4.57 14.4714 1 11.109 1 6.99455C1 3.63215 3.53575 1 6.775 1C8.602 1 10.3555 1.88283 11.5 3.27248C12.6445 1.88283 14.398 1 16.225 1C19.4642 1 22 3.63215 22 6.99455C22 11.109 18.43 14.4714 13.0225 19.5668L11.5 21Z" fill="#ffffff" stroke="#989898"/>
+							</svg>											
+						</button>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+    {% endif %}
+
+	<div class="oneClick">
+		<h2 class="oneClick__title">До новой двери - один клик</h2>
+		<div class="container">
+			<div class="oneClick__body">
+				<div class="oneClick__item">
+					<div class="oneClick__number">
+						<img src="catalog/view/theme/custom/image/number1.svg" alt="Подбор двери">
+					</div>
+					<h3 class="oneClick__headline">Подбор двери</h3>
+					<p class="oneClick__subHeadline">Вы можете подобрать модель
+						на нашем сайте или проконсультироваться у&nbsp;нашего менеджера
+					</p>
+				</div>
+				<div class="oneClick__item">
+					<div class="oneClick__number">
+						<img src="catalog/view/theme/custom/image/number2.svg" alt="Бесплатный замер дверного проема">
+					</div>
+					<h3 class="oneClick__headline">Бесплатный замер</h3>
+					<p class="oneClick__subHeadline">Наш специалист приедет
+						к&nbsp;вам на&nbsp;дом с&nbsp;каталогами и образцами для замера ваших дверей
+					</p>
+				</div>
+				<div class="oneClick__item">
+					<div class="oneClick__number">
+						<img src="catalog/view/theme/custom/image/number3.svg" alt="Просчет стоимости двери">
+					</div>
+					<h3 class="oneClick__headline">Просчет</h3>
+					<p class="oneClick__subHeadline">Просчитаем стоимость комплектации и установки, зафиксируем
+						стоимость в&nbsp;договоре
+					</p>
+				</div>
+				<div class="oneClick__item">
+					<div class="oneClick__number">
+						<img src="catalog/view/theme/custom/image/number4.svg" alt="Монтаж дверей">
+					</div>
+					<h3 class="oneClick__headline">Монтаж</h3>
+					<p class="oneClick__subHeadline">В течении 3 дней после оформления заказа мы установим ваши двери
+					</p>
+				</div>
+			</div>
+			<div class="oneClick__bottomTitle">
+				И все это не выходя из дома
+			</div>
+			<button data-src="#modal" data-fancybox class="oneClick__button">Вызвать замерщика</button>
+		</div>
+	</div>
+
+	<div class="happy_client">
+		<div class="wrapper">
+			<p class="title">Клиенты довольные результатом </p>
+			<div class="body swiper">
+				<div class="item swiper-slide">
+					<div class="image" data-video="4ASRH6IY5G8">
+						<img src="/image/happy_client/happy-client-1.webp" alt="Установка межкомнатной двери Экошпон 21" loading="lazy">
+						<div class="time">00:30</div>
+					</div>
+					<p>Установка межкомнатной двери Экошпон 21</p>
+				</div>
+
+				<div class="item swiper-slide">
+					<div class="image" data-video="6SqQvS1Xp4g">
+						<img src="/image/happy_client/happy-client-2.webp" alt="Установка межкомнатной двери L2" loading="lazy">
+						<div class="time">00:26</div>
+					</div>
+					<p>Установка межкомнатной двери L2</p>
+				</div>
+
+				<div class="item swiper-slide">
+					<div class="image" data-video="Y4YlJPkhOb8">
+						<img src="/image/happy_client/happy-client-3.webp" alt="Установка входной двери под заказ" loading="lazy">
+						<div class="time">00:36</div>
+					</div>
+					<p>Установка входной двери под заказ</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="doors_accessories">
+		<a href="/furnitura/ruchki/" class="item ruchki">
+			<div class="shadow"></div>
+			<div class="content">
+				<h2>Дверные ручки</h2>
+				<p class="price">от {{ min_ruchk_price }} ₽</p>
+			</div>
+		</a>
+		<a href="/furnitura/" class="item furnitura">
+			<div class="shadow"></div>
+			<div class="content">
+				<h2>Фурнитура</h2>
+				<p class="price">от {{ min_furn_price }} ₽</p>
+			</div>
+		</a>
+	</div>
+
+	<div class="text-block">
+		<div class="container">
+			<h2>Интернет-магазин входных и межкомнатных дверей</h2>
+			<p>В каталоге более 1 500 моделей входных и межкомнатных дверей, только качественная продукция.
+				В интернет-магазине представлены разные модели по цвету, дизайну, покрытию. У каждого товара имеется карточка,
+				в которой указаны все характеристики и прочая информация для покупателя. </p>
+			<p>Навигация с удобной сортировкой позволит сэкономить время на поиске продукции. Цены указаны точные, фотографии соответствуют артикулу.
+				Везде есть описание. Можно выбрать дверь определённого размера, приобрести её с комплектом или без него. </p>
+			<p>Товары разделены по определённым признакам, свойствам, производителю, системе открывания.
+				Есть разделы с категориями и более мелкие подкатегории. Оформить заказ можно через корзину.
+				Доставка осуществляется в кратчайшее время.</p>
+			<p>Все дверные вопросы можно обсудить с нашим менеджером. Специалист расскажет о технических особенностях, различиях, подберёт товары.
+				Наши консультанты хорошо разбираются в дверях.</p>
+			<p>Мы предлагаем приобрести входные и межкомнатные двери с доставкой, установкой. Услуги с привлекательными условиями для покупателя.
+				Магазин контролирует выполнение каждого заказа. Мы открыли собственный отдел логистики, чтобы бережно доставлять товары.
+				Установка проводится также собственным монтажным отделом. Выполняем установку дверей любого уровня сложности.
+				Все подробности о стоимости услуги узнавайте в разделе: "установка" и "доставка", либо по телефону.
+				Монтаж идёт следующим днём после привоза заказа на объект. Устанавливаем двери только от нашего магазина, так мы полностью уверены,
+				что всё будет сделано хорошо, а покупатель останется доволен полученным результатом.</p>
+			<p>Предоставляем возможность дополнительной экономии. Для этого перейдите в раздел "акции", там представлен полный ассортимент акционных товаров.
+				Скидки до - 50%, имеется вся информация о действующих акциях и подарках. Дарим сертификаты, снижаем цены на популярные модели.</p>
+			<h3>Как купить входную и межкомнатную дверь?</h3>
+			<p>Сначала выберите двери, определитесь с размерами, стороной открывания. Положите товары в корзину.
+				Если сомневаетесь, что сделали всё правильно, обратитесь к менеджеру магазина. Завершить заказ нужно по телефону, определив дату привоза и монтажа.
+				Оплата принимается наличным или безналичным платежом. Мы работаем без выходных. Следим за качеством, всегда рады обратной связи с клиентами.</p>
+		</div>
+	</div>
+
+{% endif %}
+
+{{ footer }}

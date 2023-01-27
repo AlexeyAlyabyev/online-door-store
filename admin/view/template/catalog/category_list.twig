@@ -1,0 +1,189 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+				<a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+				<button type="button" data-toggle="tooltip" title="Применить все изменения" class="save_all_categories"><i class="fa fa-save"></i></button>
+				<a href="{{ repair }}" data-toggle="tooltip" title="{{ button_rebuild }}" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-category').submit() : false;"><i class="fa fa-trash-o"></i></button>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+		<div class="row">
+			<div id="filter-category" class="col-md-3 col-md-push-9 col-sm-12 hidden-sm hidden-xs">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-filter"></i> Фильтр</h3>
+          </div>
+          <div id="category_filter" class="panel-body">
+						<input name="route" type="hidden" value="catalog/category">
+						<input name="user_token" type="hidden" value="{{ user_token }}">
+            <div class="form-group">
+              <label class="control-label" for="input-name">Название категории</label>
+              <input name="filter_name" class="form-control" type="text" value="{{ filter_name }}" placeholder="Название категории">
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="input-model">Уровень категории</label>
+							<input name="nesting_level" class="form-control" type="number" value="{{ nesting_level }}" placeholder="Уровень категории">
+            </div>
+            <div class="form-group text-right">
+              <button id="button-filter" class="btn btn-default"><i class="fa fa-filter"></i> Фильтр</button>
+            </div>
+          </div>
+        </div>
+      </div>
+			<div class="col-md-9 col-md-pull-3 col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
+					</div>
+					<div class="panel-body">
+						<form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-category">
+							<div class="table-responsive">
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+											<td class="text-left">{% if sort %}
+												<a href="{{ sort_name }}" class="{{ order|lower }}">{{ column_name }}</a>
+												{% else %}
+												<a href="{{ sort_name }}">{{ column_name }}</a>
+												{% endif %}</td>
+											<td class="text-right">{% if sort == 'sort_order' %}
+												<a href="{{ sort_sort_order }}" class="{{ order|lower }}">{{ column_sort_order }}</a>
+												{% else %}
+												<a href="{{ sort_sort_order }}">{{ column_sort_order }}</a>
+												{% endif %}</td>
+											<td class="text-right">
+												<div class="thead_checkbox_flex">
+													<input type="checkbox" onclick="$('input[name*=\'top\']').prop('checked', this.checked);">
+													<p>В меню</p>
+												</div>
+											</td>
+											<td class="text-right">
+												<div class="thead_checkbox_flex">
+													<input type="checkbox" onclick="$('input[name*=\'tag\']').prop('checked', this.checked);">
+													<p>Теговая</p>
+												</div>
+											</td>
+											<td class="text-right">{{ column_action }}</td>
+										</tr>
+									</thead>
+									<tbody>
+										{% if categories %}
+										{% for category in categories %}
+										<tr>
+											<td class="text-center">{% if category.category_id in selected %}
+												<input type="checkbox" name="selected[]" value="{{ category.category_id }}" checked="checked" />
+												{% else %}
+												<input type="checkbox" name="selected[]" value="{{ category.category_id }}" />
+												{% endif %}</td>
+											<td class="text-left href_name"><a href="{{ category.edit }}">{{ category.name }}</a></td>
+											<td class="text-right">{{ category.sort_order }}</td>
+											<td>
+												<div class="checkbox">
+													<label>
+														{% if category.top %}
+															<input type="checkbox" name="top" value="1" checked="checked" data-checked="1" id="input-top" />
+														{% else %}
+															<input type="checkbox" name="top" value="1" data-checked="0" id="input-top" />
+														{% endif %}
+													</label>
+												</div>
+											</td>
+											<td>
+												<div class="checkbox">
+													<label>
+														{% if category.tag %}
+															<input type="checkbox" name="tag" value="1" checked="checked" data-checked="1" id="input-tag" />
+														{% else %}
+															<input type="checkbox" name="tag" value="1" data-checked="0" id="input-tag" />
+														{% endif %}
+													</label>
+												</div>
+											</td>
+											<td class="text-right">
+												<a target="_blank" href="{{ category.href_shop }}" data-toggle="tooltip" title="{{ button_shop }}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+												<a href="{{ category.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+											</td>
+										</tr>
+										{% endfor %}
+										{% else %}
+										<tr>
+											<td class="text-center" colspan="4">{{ text_no_results }}</td>
+										</tr>
+										{% endif %}
+									</tbody>
+								</table>
+							</div>
+						</form>
+						<div class="row">
+							<div class="col-sm-6 text-left">{{ pagination }}</div>
+							<div class="col-sm-6 text-right">{{ results }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    
+  </div>
+</div>
+<script>
+	$("#category_filter button").click(filterCategories);
+	$("#category_filter input").keydown(function(e){
+		e.keyCode == 13 ? filterCategories() : "";
+	});
+	function filterCategories(){
+		let url = "/admin/index.php?";
+		$("#category_filter input").each(function(index, item){
+			if ($(item).val() != "")
+				url += $(item).attr("name") + "=" + $(item).val() + "&";
+		})
+		location = url.slice(0, -1);
+	}
+
+	$(".save_all_categories").click(function(){
+		$("#form-category tbody tr").each(function(index, item){
+			if ($(item).find("input[name='top']").prop("checked") != +$(item).find("input[name='top']").attr("data-checked") ||
+					$(item).find("input[name='tag']").prop("checked") != +$(item).find("input[name='tag']").attr("data-checked")
+			) {
+				let category_data = {
+					category_id: $(item).find("input[name='selected[]']").val(),
+					top: $(item).find("input[name='top']").val(),
+					tag: $(item).find("input[name='tag']").val()
+				};
+				$.ajax({
+					url: 'index.php?route=catalog/category/editFast&user_token={{ user_token }}',
+					type: 'POST',
+					data: category_data,
+					success: function(json) {
+						let success_message = '<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i>Обновление категорий прошло успешно!<button type="button" class="close" data-dismiss="alert">&times;</button> </div>'
+						$(success_message).prependTo($("#content .container-fluid").eq(1));
+						setTimeout(function(){
+							$(".alert.alert-success").remove();
+						}, 1500);
+					}
+				});
+			}
+		});
+	});
+</script>
+{{ footer }}

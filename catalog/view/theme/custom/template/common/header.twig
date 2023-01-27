@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head itemscope itemtype="http://schema.org/WPHeader">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title itemprop="headline">{{ title }}</title>
+	<base href="{{ base }}" />
+	{% if description %}
+		<meta itemprop="description" name="description" content="{{ description }}" />
+		<meta property="og:description" content="{{ description }}"/> 
+	{% endif %}
+
+	{% if noindex %}
+		<meta name="robots" content="noindex, nofollow" />
+	{% endif %}
+
+	<meta property="og:title" content="{{ title }}"/> 
+	<meta property="og:url" content="{{ current_url }}"/> 
+	<meta property="og:image" content="catalog/view/theme/custom/image/ogimage.png" />
+	<meta property="og:locale" content="ru_RU"/>
+	<meta property="og:site_name" content="100 Дверей"/>
+	<meta property="og:type" content="website"/>
+
+	{% if googletag and not noindex %}
+		<script async src="https://www.googletagmanager.com/gtag/js?id={{ googletag }}"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+	
+			gtag('config', '{{ googletag }}');
+		</script>
+
+		<!-- <script async src="https://www.googleoptimize.com/optimize.js?id=GTM-WJB97JR"></script> -->
+		<meta name="google-site-verification" content="Iip3PkYy-AhIdMExGgxx__HiVhNueeP1MHc8LpKhUUI" />
+	{% endif %}
+
+	{% if ym_counter and not noindex %}
+		<script type="text/javascript" >
+			var fired = false;
+
+			window.addEventListener('scroll', () => {
+					if (fired === false) {
+							fired = true;
+							
+							setTimeout(() => {
+								(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+								m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+								(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+								ym('{{ ym_counter }}', "init", {
+										clickmap:true,
+										trackLinks:true,
+										accurateTrackBounce:true,
+										webvisor:true
+								});
+							}, 1000);
+					}
+			});
+		</script>
+	{% endif %}
+
+
+	<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+
+	{% if mobile %}
+		{% for style in styles %}
+			<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="lazy" onload="this.media = '{{ style.media }}'" />
+		{% endfor %}
+	{% else %}
+		{% for style in styles %}
+				<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}"/>
+		{% endfor %}
+	{% endif %}
+
+	<link rel="stylesheet" href="catalog/view/theme/custom/stylesheet/fancybox.min.css" media="lazy" onload="this.media = '{{ style.media }}'" />
+
+	<link href="catalog/view/theme/custom/stylesheet/style12.css?{{ random() }}" rel="stylesheet" />
+	
+	{% for link in links %}
+		<link href="{{ link.href }}" rel="{{ link.rel }}" />
+	{% endfor %}
+
+	<!-- {% if canonical_url %}
+		<link rel="canonical" href="{{ canonical_url }}">
+	{% endif %} -->
+
+	<script src="catalog/view/javascript/jquery.min.js"></script>
+	<script src="catalog/view/javascript/common.js" type="text/javascript"></script>
+
+	{% for script in scripts %}
+		<script src="{{ script }}" defer></script>
+	{% endfor %}
+
+	{% if not noindex %}
+		<meta name="wmail-verification" content="ffb11975f103fc33c8d12cfa8f502159" />
+
+		<script>
+			(function (d) {
+				var xhr = new XMLHttpRequest(),
+					s = d.createElement("script"),
+					f = d.head.firstChild;
+				s.type = "text/javascript";
+				s.async = true;
+				s.setAttribute("id", "75513549b4fb25f0dd69d56bad5ce2b0");
+				f.parentNode.insertBefore(s, f);
+				xhr.onreadystatechange = function () {
+					if (this.readyState === 4 && this.status === 200) {
+						d.getElementById(
+							"75513549b4fb25f0dd69d56bad5ce2b0"
+						).innerHTML = this.responseText;
+					}
+				};
+				xhr.open(
+					"GET",
+					"https://sovetnik-off.ru/block/75513549b4fb25f0dd69d56bad5ce2b0",
+					false
+				);
+				xhr.send();
+			})(document);
+		</script>
+	{% endif %}
+
+	{% if comagic and not noindex %}
+		<script type="text/javascript">
+			var __cs = __cs || [];
+			__cs.push(["setCsAccount", "{{ comagic }}"]);
+		</script>
+		<script type="text/javascript" async src="https://app.comagic.ru/static/cs.min.js"></script>
+	{% endif %}
+
+	{% if language == "ru-ru" and not noindex %}
+		<script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1292428-9OnxH"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1292428-9OnxH" style="position:fixed; left:-999px;" alt=""/></noscript>
+	{% endif %}
+
+	{% if refresh %}
+		<script>
+			document.addEventListener('keydown', function(event) {
+				if (event.code == 'F5' && (event.ctrlKey || event.metaKey)) {
+					event.preventDefault();
+					let refresh_url = "{{ refresh }}".replace("amp;", "");
+					$.ajax({
+						method: "GET",
+						url: refresh_url,
+						success: function(){
+							location.reload(true);
+						},
+					});
+				}
+			});
+		</script>
+	{% endif %}
+</head>
+
+<body>
+	{% if ym_counter %}
+		<noscript><div><img src="https://mc.yandex.ru/watch/{{ ym_counter }}" style="position:absolute; left:-9999px;" alt="mc" /></div></noscript>
+	{% endif %}
+
+	<div class="top_menu">
+		<div class="wrapper body">
+			<a href="{{ home }}" class="logo">
+				<img src="/catalog/view/theme/custom/image/logo.svg" alt="{{ name }}" />
+			</a>
+
+			<div class="location_and_email">
+				<div class="location">
+					<img src="/catalog/view/theme/custom/image/location.svg" alt="100 Дверей в Москве и МО" />
+					<span>Москва и МО</span>
+				</div>
+				<a href="mailto:{{ email }}" class="email">
+					{{ email }}
+				</a>
+			</div>
+
+			<div class="buttons">
+				<button class="payment" data-fancybox data-src="#kassa">Оплата онлайн</button>
+				<button class="callback" data-fancybox data-src="#modal">Бесплатный замер</button>
+			</div>
+
+			<div class="contants_and_worktime">
+				<div class="contacts">
+					<!--noindex-->
+						<a href="tel:{{ telephone }}" rel="nofollow" target="_blank">
+							<img src="/catalog/view/theme/custom/image/phone1.svg" alt="Позвонить в 100 Дверей">
+						</a>
+						{% if telegram %}
+							<a href="{{ telegram }}" rel="nofollow" target="_blank">
+								<img src="/catalog/view/theme/custom/image/telegram1.svg" alt="Заказать дверь в telegram">
+							</a>
+						{% endif %}
+						<a href="{{ whatsapp }}" rel="nofollow" target="_blank">
+							<img src="/catalog/view/theme/custom/image/whatsapp1.svg" alt="Заказать дверь в whatsapp">
+						</a>
+						<a href="tel:{{ telephone }}" rel="nofollow">
+							<span>{{ telephone }}</span>
+						</a>
+					<!--/noindex-->
+				</div>
+				<p class="worktime">Ежедневно с 9:00 до 22:00</p>
+			</div>
+
+			<div class="cart_and_search">
+				<img src="catalog/view/theme/custom/image/search.svg" alt="Поиск дверей">
+				<a href="wishlist/" class="header_wishlist">
+					<svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M11.9871 21L10.394 19.5668C4.73562 14.4714 1 11.109 1 6.99455C1 3.63215 3.65339 1 7.04291 1C8.95467 1 10.7895 1.88283 11.9871 3.27248C13.1847 1.88283 15.0195 1 16.9313 1C20.3208 1 22.9742 3.63215 22.9742 6.99455C22.9742 11.109 19.2386 14.4714 13.5802 19.5668L11.9871 21Z" fill="white" stroke="#2C2B3F" stroke-width="2"/>
+					</svg>
+					<span>0</span>
+				</a>				
+				{{ cart }}
+			</div>
+
+		</div>
+	</div>
+
+	<div class="search_modal">
+		{{search}}
+	</div>
+
+	{{ menu }}
+
+<nav class="mobile_menu">
+	<div class="navigation">
+		<div class="wrap">
+			<div class="item catalog_opener">
+				<svg width="24" height="19" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M22.7926 18.3397H7.01656C6.36635 18.3397 5.83936 17.8055 5.83936 17.1465C5.83936 16.4874 6.36635 15.9532 7.01656 15.9532H22.7923C23.4425 15.9532 23.9695 16.4874 23.9695 17.1465C23.9695 17.8055 23.4429 18.3397 22.7926 18.3397Z" fill="#535353"/>
+					<path d="M22.7926 10.8499H7.01656C6.36635 10.8499 5.83936 10.3158 5.83936 9.65672C5.83936 8.99766 6.36635 8.4635 7.01656 8.4635H22.7923C23.4425 8.4635 23.9695 8.99766 23.9695 9.65672C23.9699 10.3158 23.4429 10.8499 22.7926 10.8499Z" fill="#535353"/>
+					<path d="M22.777 3.76594H7.00093C6.35072 3.76594 5.82373 3.23178 5.82373 2.57273C5.82373 1.91368 6.35072 1.37952 7.00093 1.37952H22.7766C23.4268 1.37952 23.9538 1.91368 23.9538 2.57273C23.9538 3.23178 23.4272 3.76594 22.777 3.76594Z" fill="#535353"/>
+					<path d="M1.9594 3.86158C2.83255 3.86158 3.54038 3.14413 3.54038 2.2591C3.54038 1.37407 2.83255 0.656616 1.9594 0.656616C1.08625 0.656616 0.378418 1.37407 0.378418 2.2591C0.378418 3.14413 1.08625 3.86158 1.9594 3.86158Z" fill="#535353"/>
+					<path d="M1.9594 11.2588C2.83255 11.2588 3.54038 10.5413 3.54038 9.65631C3.54038 8.77129 2.83255 8.05383 1.9594 8.05383C1.08625 8.05383 0.378418 8.77129 0.378418 9.65631C0.378418 10.5413 1.08625 11.2588 1.9594 11.2588Z" fill="#535353"/>
+					<path d="M1.9594 18.6568C2.83255 18.6568 3.54038 17.9393 3.54038 17.0543C3.54038 16.1692 2.83255 15.4518 1.9594 15.4518C1.08625 15.4518 0.378418 16.1692 0.378418 17.0543C0.378418 17.9393 1.08625 18.6568 1.9594 18.6568Z" fill="#535353"/>
+				</svg>								
+				<span>Каталог</span>
+			</div>
+			<a class="item" href="{{ whatsapp }}">
+				<svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M3.35564 15.3772L3.48062 15.0076L3.24976 14.6931C2.25341 13.3358 1.66797 11.6655 1.66797 9.86182C1.66797 5.31802 5.3946 1.61182 9.98831 1.61182H9.99284C14.5865 1.61182 18.3132 5.31908 18.3132 9.86182C18.3132 14.4046 14.5865 18.1118 9.99284 18.1118C8.29786 18.1118 6.72913 17.6123 5.41366 16.7478L5.11534 16.5517L4.77506 16.6597L2.69936 17.3179L3.35564 15.3772Z" stroke="#535353" stroke-width="1.5"/>
+					<path d="M14.164 12.7892C13.9875 13.2835 13.2871 13.6935 12.7285 13.8132C12.3463 13.894 11.8471 13.9583 10.1666 13.2672C8.01701 12.3838 6.63274 10.217 6.52485 10.0764C6.42153 9.93581 5.65625 8.92904 5.65625 7.88781C5.65625 6.84657 6.1893 6.33956 6.40416 6.12188C6.58062 5.9432 6.87229 5.86157 7.15207 5.86157C7.24259 5.86157 7.32396 5.86611 7.39711 5.86974C7.61197 5.87881 7.71986 5.8915 7.86158 6.228C8.03804 6.64975 8.46777 7.69099 8.51897 7.79801C8.57109 7.90504 8.6232 8.05016 8.55006 8.19074C8.48148 8.33586 8.42114 8.40026 8.31325 8.52361C8.20536 8.64696 8.10296 8.74129 7.99507 8.87371C7.89632 8.9889 7.78478 9.11226 7.90912 9.3254C8.03347 9.53401 8.4632 10.2297 9.0959 10.7884C9.91239 11.5095 10.5744 11.7398 10.8112 11.8378C10.9876 11.9103 11.1979 11.8931 11.3268 11.7571C11.4905 11.582 11.6926 11.2918 11.8983 11.0061C12.0446 10.8011 12.2293 10.7757 12.4231 10.8482C12.6206 10.9163 13.6657 11.4287 13.8805 11.5348C14.0954 11.6419 14.2371 11.6927 14.2892 11.7825C14.3404 11.8723 14.3404 12.294 14.164 12.7892Z" fill="#535353"/>
+				</svg>				
+				<span>Написать</span>
+			</a>
+			<div class="item search">
+				<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M17.7263 17.2575L13.289 12.8018C14.4299 11.4924 15.055 9.84493 15.055 8.1298C15.055 4.12257 11.6781 0.862305 7.52752 0.862305C3.37691 0.862305 0 4.12257 0 8.1298C0 12.137 3.37691 15.3973 7.52752 15.3973C9.08571 15.3973 10.5706 14.9435 11.8401 14.0822L16.3111 18.5716C16.498 18.759 16.7494 18.8623 17.0187 18.8623C17.2737 18.8623 17.5156 18.7685 17.6992 18.5978C18.0893 18.2354 18.1017 17.6344 17.7263 17.2575ZM7.52752 2.75817C10.5955 2.75817 13.0913 5.16782 13.0913 8.1298C13.0913 11.0918 10.5955 13.5014 7.52752 13.5014C4.45956 13.5014 1.9637 11.0918 1.9637 8.1298C1.9637 5.16782 4.45956 2.75817 7.52752 2.75817Z" fill="#535353"/>
+				</svg>				
+				<span>Поиск</span>
+			</div>
+			<a href="/checkout1/" class="item cart">
+				<svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<g clip-path="url(#clip0_547_11958)">
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M6.32539 5.37748L11.896 4.22704C11.9845 4.20877 12.0767 4.22624 12.1524 4.27563C12.228 4.32501 12.2811 4.40232 12.3001 4.49069L13.4539 10.0613C13.4629 10.1054 13.4631 10.1508 13.4546 10.195C13.446 10.2391 13.4289 10.2812 13.4041 10.3187C13.3793 10.3562 13.3473 10.3884 13.31 10.4136C13.2728 10.4388 13.2309 10.4564 13.1868 10.4654L7.61619 11.6192C7.57213 11.6282 7.52672 11.6284 7.48257 11.6199C7.43842 11.6113 7.39638 11.5942 7.35886 11.5694C7.32134 11.5446 7.28908 11.5126 7.26391 11.4753C7.23874 11.4381 7.22116 11.3962 7.21218 11.3521L6.06176 5.78149C6.04349 5.69299 6.06095 5.60085 6.11034 5.52516C6.15972 5.44948 6.23702 5.3964 6.32539 5.37748Z" fill="#535353" stroke="#535353" stroke-miterlimit="10"/>
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M2.95434 1.44695C2.92909 1.32165 2.95456 1.19146 3.02516 1.08492C3.09576 0.978373 3.20574 0.904178 3.33097 0.878595C3.39325 0.865593 3.45749 0.865032 3.52 0.876944C3.5825 0.888857 3.64204 0.912995 3.69518 0.947996C3.74832 0.982998 3.79401 1.02816 3.82964 1.08088C3.86526 1.13361 3.89011 1.19285 3.90276 1.25521L6.45697 13.6154C6.48221 13.7407 6.45675 13.8709 6.38614 13.9774C6.31554 14.084 6.20557 14.1582 6.08034 14.1838C5.95504 14.209 5.82485 14.1836 5.71831 14.1129C5.61176 14.0423 5.53756 13.9324 5.51197 13.8072L2.95434 1.44695Z" fill="#535353"/>
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M6.08246 14.1837C5.95716 14.2089 5.82697 14.1835 5.72043 14.1129C5.61388 14.0423 5.53968 13.9323 5.51409 13.8071C5.50109 13.7448 5.50053 13.6805 5.51244 13.618C5.52435 13.5555 5.5485 13.496 5.5835 13.4429C5.61851 13.3897 5.66367 13.344 5.71639 13.3084C5.76912 13.2728 5.82836 13.2479 5.89072 13.2353L13.5979 11.6432C13.6599 11.6302 13.724 11.6297 13.7863 11.6416C13.8485 11.6536 13.9078 11.6778 13.9607 11.7128C14.0136 11.7479 14.0589 11.793 14.0942 11.8457C14.1295 11.8984 14.154 11.9576 14.1662 12.0198C14.1792 12.0819 14.1797 12.1459 14.1678 12.2082C14.1558 12.2705 14.1316 12.3298 14.0966 12.3826C14.0616 12.4355 14.0164 12.4809 13.9637 12.5162C13.911 12.5515 13.8518 12.5759 13.7896 12.5882L6.08246 14.1837Z" fill="#535353"/>
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M1.42056 2.26181C1.29436 2.28704 1.1633 2.2612 1.05611 2.18996C0.94893 2.11872 0.874365 2.00789 0.848766 1.88176C0.824447 1.75656 0.850296 1.62682 0.920748 1.5205C0.9912 1.41418 1.10061 1.33979 1.22539 1.31339L3.36189 0.871714C3.48709 0.847395 3.61684 0.873254 3.72316 0.943706C3.82948 1.01416 3.90385 1.12355 3.93025 1.24833C3.95557 1.37405 3.9302 1.50469 3.85966 1.61178C3.78912 1.71888 3.67912 1.79376 3.55363 1.82013L1.42056 2.26181Z" fill="#535353"/>
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M5.58637 11.6055C6.14483 11.4902 6.72623 11.6014 7.20266 11.9148C7.67909 12.2281 8.01155 12.7179 8.12689 13.2763C8.18449 13.5526 8.18704 13.8376 8.13438 14.1149C8.08173 14.3922 7.97491 14.6564 7.82003 14.8924C7.66515 15.1283 7.46527 15.3315 7.2318 15.4901C6.99834 15.6487 6.73589 15.7598 6.45947 15.8168C5.90101 15.9321 5.31961 15.8209 4.84318 15.5075C4.36674 15.1942 4.03429 14.7044 3.91894 14.146C3.8045 13.5881 3.91568 13.0076 4.22817 12.5315C4.54066 12.0554 5.02901 11.7224 5.58637 11.6055Z" fill="#535353"/>
+					</g>
+					<defs>
+					<clipPath id="clip0_547_11958">
+					<rect width="13.3326" height="15" fill="white" transform="translate(0.84375 0.861572)"/>
+					</clipPath>
+					</defs>
+				</svg>
+				<p class="quantity">{{ total_products }}</p>
+				<span>Корзина</span>
+			</a>
+		</div>
+	</div>
+
+	<div itemscope itemtype="http://schema.org/SiteNavigationElement" class="catalog">
+		<div class="body">
+			<a href="tel:{{ telephone }}" class="phone">{{ telephone }}</a>
+
+			<div class="socials">
+				<a href="tel:{{ telephone }}">
+					<img src="/catalog/view/theme/custom/image/phone1.svg" alt="Телефон 100 дверей">
+				</a>
+				{% if telegram %}
+					<a href="{{ telegram }}">
+						<img src="/catalog/view/theme/custom/image/telegram1.svg" alt="telegram 100 дверей">
+					</a>
+				{% endif %}
+				<a href="{{ whatsapp }}">
+					<img src="/catalog/view/theme/custom/image/whatsapp1.svg" alt="whatsapp 100 дверей">
+				</a>
+			</div>
+
+			<button data-fancybox data-src="#modal">Бесплатный замер</button>
+
+			{{ search }}
+
+			<div class="links_list">
+				<a itemprop="url" href="/mezhkomnatnye-dveri/" class="item">
+					<img src="/catalog/view/theme/custom/image/mobile-menu/links-icons/doorm.svg" alt="Межкомнатные двери">
+					<p><strong>Межкомнатные двери</strong></p>
+					<button></button>
+				</a>
+				<div class="subcategories">
+					<a itemprop="url" href="/mezhkomnatnye-dveri/ekoshpon/"><span>Экошпон</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/ekoshpon-3d/"><span>Экошпон 3Д</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/shponirovannye/"><span>Шпонированные</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/shpon-ekonom/"><span>Шпон Эконом</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/shpon-duba-belorusskie/"><span>Шпон дуба (Белорусские)</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/matovye-unilak/"><span>Матовые (унилак)</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/evroshpon/"><span>Евро Шпон</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/krashenye-emal/"><span>Крашеные (Эмаль)</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/glyancevye/"><span>Глянцевые</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/laminirovannye/"><span>Ламинированные и ПВХ</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/steklyannye/"><span>Стеклянные</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/massiv-100/"><span>Массив 100%</span></a>
+				</div>
+
+				<a itemprop="url" href="/dveri-vhodnye/" class="item">
+					<img src="/catalog/view/theme/custom/image/mobile-menu/links-icons/doorvh.svg" alt="Входные двери">
+					<p><strong>Входные двери</strong></p>
+					<button></button>
+				</a>
+				<div class="subcategories">
+					<a itemprop="url" href="/dveri-vhodnye/dlya-doma/"><span>Для дома</span></a>	
+					<a itemprop="url" href="/dveri-vhodnye/dlya-kvartiry/"><span>Для квартиры</span></a>
+					<a itemprop="url" href="/dveri-vhodnye/s-zerkalom/"><span>С зеркалом</span></a>
+					<a itemprop="url" href="/dveri-vhodnye/s-kovkoi/"><span>С ковкой</span></a>
+					<a itemprop="url" href="/dveri-vhodnye/s-termorazryvom/"><span>С терморазрывом</span></a>
+					<a itemprop="url" href="/dveri-vhodnye/so-steklom-steklopaket/"><span>Со стеклом (стеклопакет)</span></a>
+					<a itemprop="url" href="/dveri-vhodnye/tamburnye/"><span>Тамбурные</span></a>
+					<a itemprop="url" href="/dveri-vhodnye/ulichnye/"><span>Уличные</span></a>
+					<a itemprop="url" href="/dveri-vhodnye/uteplennye/"><span>Утепленные</span></a>
+					<a itemprop="url" href="/dveri-vhodnye/shumoizolyacionnye/"><span>Шумоизоляционные</span></a>
+					<a itemprop="url" href="/dveri-vhodnye/protivopozharnye/"><span>Противопожарные</span></a>
+					<a itemprop="url" href="/dveri-vhodnye/antivandalnye/"><span>Антивандальные</span></a>
+				</div>
+
+				<a itemprop="url" href="/systems/" class="item">
+					<img src="/catalog/view/theme/custom/image/mobile-menu/links-icons/doorm.svg" alt="Системы открывания">
+					<p>Системы открывания</p>
+					<button></button>
+				</a>
+				<div class="subcategories">
+					<a itemprop="url" href="/mezhkomnatnye-dveri/invisible/"><span>INVISIBLE</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/kupe-system/"><span>Купе</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/knizhka/"><span>Книжка</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/invisible-reverce/"><span>INVISIBLE REVERCE</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/infinity/"><span>INFINITY</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/kupe-dvojnaya/"><span>Купе двойная</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/dvustvorchatye-dveri/"><span>Двустворчатые</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/compack/"><span>Compack</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/povorotnaya-sistema/"><span>Поворотная система</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-dveri/magic/"><span>MAGIC</span></a>
+					<a itemprop="url" href="/mezhkomnatnye-razdvizhnye-peregorodki/"><span>Раздвижные перегородки</span></a>
+				</div>
+
+				<a itemprop="url" href="/furnitura/" class="item">
+					<img src="/catalog/view/theme/custom/image/mobile-menu/links-icons/furnitura.svg" alt="Фурнитура">
+					<p>Фурнитура</p>
+					<button></button>
+				</a>
+				<div class="subcategories">
+					<a itemprop="url" href="/furnitura/ruchki/"><span>Дверные ручки</span></a>
+					<a itemprop="url" href="/furnitura/zamki/"><span>Замки и механизмы</span></a>
+					<a itemprop="url" href="/furnitura/zaschelki/"><span>Защелки</span></a>
+					<a itemprop="url" href="/furnitura/fiksatory-i-nakladki/"><span>Фиксаторы и накладки</span></a>
+					<a itemprop="url" href="/furnitura/petli/"><span>Петли</span></a>
+					<a itemprop="url" href="/furnitura/ogranichiteli/"><span>Ограничители</span></a>
+					<a itemprop="url" href="/furnitura/dovodchiki/"><span>Доводчики</span></a>
+				</div>
+
+				<a itemprop="url" href="/plintusy/" class="item">
+					<img src="/catalog/view/theme/custom/image/mobile-menu/links-icons/plintus.svg" alt="Плинтусы">
+					<p>Плинтусы</p>
+				</a>
+				<a itemprop="url" href="/rejka-dekorativnaya/" class="item">
+					<img src="/catalog/view/theme/custom/image/mobile-menu/links-icons/plintus.svg" alt="Плинтусы">
+					<p>Рейка декоративная</p>
+				</a>
+
+				<a itemprop="url" href="/specials/" class="item">
+					<img src="/catalog/view/theme/custom/image/mobile-menu/links-icons/sale.svg" alt="Акции">
+					<p>Акции</p>
+				</a>
+
+				<a itemprop="url" href="/wishlist/" class="item">
+					<img src="/catalog/view/theme/custom/image/mobile-menu/links-icons/wishlist.svg" alt="Акции">
+					<p>Избранное</p>
+				</a>
+			</div>
+
+			<p class="to_customers">Покупателям</p>
+
+			<div class="links_list info_list">
+				<a itemprop="url" href="/zamer" class="item">
+					<p>Замер</p>
+				</a>
+
+				<a class="item">
+					<p>Установка</p>
+					<button></button>
+				</a>
+				<div class="subcategories">
+					<a itemprop="url" href="/mezhkomnatnye-dveri-nedorogo-s-ustanovkoi-pod-klyuch"><span>Установка межкомнатных дверей</span></a>
+					<a itemprop="url" href="/vhodnye-dveri-s-ustanovkoy"><span>Установка входных дверей</span></a>
+				</div>
+
+				<a href="/delivery" class="item">
+					<p>Доставка</p>
+				</a>
+
+				<a itemprop="url" href="/foto-ustanovlennyh-dverei" class="item">
+					<p>Наши работы</p>
+				</a>
+
+				<a itemprop="url" href="/o-kompanii" class="item">
+					<p>О компании</p>
+				</a>
+
+				<a itemprop="url" href="/contact/" class="item">
+					<p>Контакты</p>
+				</a>
+
+				<a itemprop="url" href="/garantiya-i-vozvrat" class="item">
+					<p>Гарантия и возврат</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,67 @@
+<div class="body">
+	<div class="cross"></div>
+	<div class="top">
+		<p class="title">Товар добавлен в корзину</p>
+		<p class="disclamer"><b>Внимание!</b> Изображения и цвета могут отличаться от реальных, в зависимости от цветопередачи и разрешения монитора.</p>
+	</div>
+	<div class="product">
+		<div class="info">
+			<div class="img">
+				<img src="{{ thumb }}" alt="{{ heading_title }}">
+			</div>
+			<div class="properties">
+				<p class="name">{{ heading_title }}</p>
+				{% if product_color %}
+					<p class="color">{{ product_color }}</p>
+				{% endif %}
+				<div class="quantity">
+					<div class="minus" onclick="updateProductQuantityAddedToCart('{{ cart_id }}', +$('.added_to_cart input[name=\'quantity\']').val() - 1)">
+						<svg width="12" height="6" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M7.5927 8.11905C7.98322 8.50958 8.61639 8.50958 9.00691 8.11905L15.3709 1.75509C15.7614 1.36457 15.7614 0.731403 15.3709 0.340878C14.9803 -0.0496454 14.3472 -0.0496454 13.9567 0.340878L8.2998 5.99773L2.64295 0.340878C2.25243 -0.0496454 1.61926 -0.0496454 1.22874 0.340878C0.838212 0.731403 0.838212 1.36457 1.22874 1.75509L7.5927 8.11905ZM7.2998 6.07861V7.41195H9.2998V6.07861H7.2998Z" fill="#2C2B3F"></path>
+						</svg>
+					</div>
+					<input type="number" min="0" max="999" name="quantity" value="{{ quantity }}" onkeyup="updateProductQuantityInputAddedToCart('{{ cart_id }}', this.value)">
+					<div class="plus" onclick="updateProductQuantityAddedToCart('{{ cart_id }}', +$('.added_to_cart input[name=\'quantity\']').val() + 1)">
+						<svg width="12" height="6" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M7.5927 8.11905C7.98322 8.50958 8.61639 8.50958 9.00691 8.11905L15.3709 1.75509C15.7614 1.36457 15.7614 0.731403 15.3709 0.340878C14.9803 -0.0496454 14.3472 -0.0496454 13.9567 0.340878L8.2998 5.99773L2.64295 0.340878C2.25243 -0.0496454 1.61926 -0.0496454 1.22874 0.340878C0.838212 0.731403 0.838212 1.36457 1.22874 1.75509L7.5927 8.11905ZM7.2998 6.07861V7.41195H9.2998V6.07861H7.2998Z" fill="#2C2B3F"></path>
+						</svg>
+					</div>
+				</div>
+				<div class="price"><span>{{ total }}</span> ₽</div>
+			</div>
+		</div>
+		<div class="buttons">
+			<a href="cart">Перейти в корзину</a>
+			<button onclick="closeAddedToCart()">Продолжить покупки</button>
+			<p>В вашей корзине <b class="cart_quantity">{{ cart_quantity }}</b> на сумму <b class="cart_total">{{ cart_total }} ₽</b></p>
+		</div>
+	</div>
+	{% if related %}
+		<div class="related">
+			<p class="title">Вам также могут пригодиться</p>
+			<div class="items">
+
+				{% for product in related %}
+					<div class="item">
+						<p class="name">{{ product.name }}</p>
+						<div class="interactions">
+							<a href="{{ product.href }}">
+								<img src="{{ product.thumb }}" alt="{{ product.name }}">
+							</a>
+							{% if product.special %}
+								<div class="old_price">{{ product.price }} ₽</div>
+								<div class="price">{{ product.special }} ₽</div>
+							{% else %}
+								<div class="old_price empty"> </div>
+								<div class="price">{{ product.price }} ₽</div>
+							{% endif %}
+							<input type="hidden" name="product_id" value="{{ product.product_id }}">
+							<button onclick="addToCart(this)">В корзину</button>
+						</div>
+					</div>
+				{% endfor %}
+
+			</div>
+		</div>
+	{% endif %}
+</div>

@@ -1,0 +1,56 @@
+<div class="body">
+	<p class="headline">Покупка в 1 клик</p>
+	<form>
+		<img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}">
+		<div class="info">
+			<p class="item_name">{{ heading_title }}</p>
+			{% if product_color %}
+				<p class="item_color">{{ product_color }}</p>
+			{% endif %}
+
+			<div class="price-option {% if stock_status_id == 5 %}disabled{% endif %}">
+				<div class="checkbox {% if stock_status_id != 5 %}border-yellow{% endif %} {% if main_category != 59 and is_options_with_checkboxes == 0 %}single_option{% endif %}" onclick="setConfig(this)">
+					<div class="checkbox_name">
+						{% if main_category == 59 %} Цена полотна: {% else %} Цена: {% endif %} 
+					</div>
+					<div class="checkbox_price">
+						{% if special %}{{ special }}{% else %}{{ price }}{% endif %} ₽
+					</div>
+				</div>
+
+				{% if main_category == 59 and is_options_with_checkboxes != 0 %}
+					<div {% if not mobile %} data-toggle="tooltip" data-placement="top" title="{{ tooltip_to_option_price }}" {% endif %} class="checkbox" onclick="setConfig(this)">
+						<div class="checkbox_name">
+							Цена комплекта: 
+							{% if not mobile %} 
+								<img src="/catalog/view/theme/custom/image/info-discription.svg" alt="информация о комплекте">
+							{% endif %}
+						</div>
+						<div class="checkbox_price">{{ price_with_options }} ₽</div>
+					</div>
+				{% endif %}
+			</div>
+
+			<label for="one_click_phone">Телефон*</label>
+			<input id="one_click_phone" type="tel" name="telephone" placeholder="+7 (999) 999-99-99">
+
+			{% if options and is_options_with_checkboxes != 0 %}
+				{% for option in options %} 
+					{% if option.type =='checkbox' %}
+						{% for key,option_value in option.product_option_value %}
+								{% if key < 2 %}
+									<input type="checkbox" id="option[{{ option.product_option_id }}][]{{ loop.index }}" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}" data-kopmlekt="{{ option_value.price }}" checked />
+								{% endif %}
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+
+			<input type="hidden" name="quantity" value="1">
+			<input type="hidden" name="product_id" value="{{ product_id }}">
+
+			<button type="button" onclick="oneClickBuy()">Оформить заказ</button>
+		</div>
+	</form>
+	<button class="cross" onclick="closeOneClickBuy()"></button>
+</div>

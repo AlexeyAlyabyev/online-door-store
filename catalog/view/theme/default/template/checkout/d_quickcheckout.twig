@@ -1,0 +1,45 @@
+{{ header }} 
+<div class="container" id="container">
+	<ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb qc-breadcrumb">
+		{% for key,breadcrumb in breadcrumbs %}
+			<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+				{% if loop.last %}
+					<p itemprop="item">
+						<span itemprop="name">
+							{{ breadcrumb.text }}
+						</span>
+					</p>
+				{% else %}
+					<a itemprop="item" href="{{ breadcrumb.href }}">
+						<span itemprop="name">
+							{{ breadcrumb.text }}
+						</span>
+					</a>				
+				{% endif %}
+				{% set position = key + 1 %}
+				<meta itemprop="position" content="{{ position }}" />
+			</li>
+		{% endfor %}
+	</ul>
+  {% if error_warning %} 
+  <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %} 
+  <div class="row">{{ column_left }} 
+    {% if column_left  and  column_right %} 
+    {% set class = 'col-sm-6' %}
+    {% elseif  column_left  or  column_right %} 
+    {% set class = 'col-sm-9' %}
+     {% else %}   
+    {% set class = 'col-sm-12' %}
+      {% endif %}
+    <div id="content" class="{{ class }} ">{{ content_top }} 
+
+<!-- Quick Checkout v4.0 by Dreamvention.com checkout/quickcheckout -->
+  {{ d_quickcheckout }} 
+
+      {{ content_bottom }} </div>
+    {{ column_right }} </div>
+</div>
+{{ footer }} 

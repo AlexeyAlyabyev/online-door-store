@@ -1,0 +1,1591 @@
+Reading from STDIN ...
+
+# 37.1s user time, 3.6s system time, 31.37M rss, 111.94M vsz
+# Current date: Sat Apr  3 21:09:33 2021
+# Hostname: vpul.beget.ru
+# Files: STDIN
+# Overall: 2.52k total, 71 unique, 0.18 QPS, 0.06x concurrency ___________
+# Time range: 2021-04-03T17:09:34 to 2021-04-03T21:08:02
+# Attribute          total     min     max     avg     95%  stddev  median
+# ============     ======= ======= ======= ======= ======= ======= =======
+# Exec time           789s   100ms      4s   313ms      1s   394ms   100ms
+# Lock time              0       0       0       0       0       0       0
+# Query size         2.11M      25   1.80k  878.22   1.78k  538.03  874.75
+# id               100.25G  40.52M  41.07M  40.80M  40.19M       0  40.19M
+
+# Profile
+# Rank Query ID           Response time  Calls R/Call V/M   Item
+# ==== ================== ============== ===== ====== ===== ==============
+#    1 0xE0E1B643713229E2 356.8659 45.2%   459 0.7775  0.41 SELECT oc_bf_product_attribute_value oc_product oc_product_to_category oc_bf_attribute_value oc_attribute oc_attribute_description oc_attribute_group oc_attribute_group_description oc_product_to_store
+#    2 0x4BE48B56A66D773F 226.6733 28.7%   366 0.6193  0.18 SELECT oc_product oc_product_to_store oc_product_option_value oc_option_description oc_option_value_description oc_option oc_option_value oc_product_to_category
+#    3 0xCD9D15345B1508B3  35.9657  4.6%   287 0.1253  0.09 CREATE TABLE oc_product oc_product_to_store oc_bf_filter oc_product_to_category oc_product_discount oc_product_special oc_bf_tmp_product
+#    4 0xC147C0DB8F6F746A  28.4980  3.6%   283 0.1007  0.00 SELECT oc_product_discount oc_product_special oc_product_reward oc_stock_status oc_weight_class_description oc_length_class_description oc_review oc_product oc_product_description oc_product_to_store oc_manufacturer
+#    5 0x80EA3BACD1A152AE  22.7932  2.9%    96 0.2374  0.10 CREATE TABLE oc_product oc_product_to_store oc_bf_filter oc_product_to_category oc_product_discount oc_product_special oc_bf_tmp_product
+#    6 0xAE9578E2F37F962F  21.4516  2.7%   213 0.1007  0.00 SELECT oc_product_customtext
+#    7 0xE33B92F2C4B99C24  15.0559  1.9%    96 0.1568  0.30 SELECT oc_product oc_product_to_store oc_bf_filter oc_product_to_category oc_product_description oc_product
+#    8 0x1C0B26EE9871B3FA  11.3940  1.4%    92 0.1238  0.08 SELECT oc_bf_tmp_product oc_bf_filter
+#    9 0x528FE7EDE09AF3F8   9.1376  1.2%    80 0.1142  0.09 SELECT oc_product oc_product_to_store oc_bf_filter oc_product_to_category
+#   10 0x4186679BB3141E41   8.9585  1.1%    58 0.1545  0.25 SELECT oc_bf_tmp_product oc_bf_filter
+#   11 0x270EA830AC8D7EE7   6.4444  0.8%    64 0.1007  0.00 SELECT oc_category oc_category_description oc_category_to_store
+#   12 0x17BBEA48FEBF1758   4.6367  0.6%    32 0.1449  0.17 SELECT oc_bf_tmp_product oc_bf_filter
+#   13 0xBEB5454CE18270B7   3.4145  0.4%    34 0.1004  0.00 SELECT oc_setting
+# MISC 0xMISC              37.4219  4.7%   356 0.1051   0.0 <58 ITEMS>
+
+# Query 1: 0.03 QPS, 0.03x concurrency, ID 0xE0E1B643713229E2 at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.41
+# Time range: 2021-04-03T17:10:20 to 2021-04-03T21:07:59
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         18     459
+# Exec time     45    357s   100ms      4s   777ms      2s   561ms   900ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size    24 523.65k   1.14k   1.14k   1.14k   1.09k       0   1.09k
+# id            18  18.29G  40.52M  41.07M  40.80M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  ###############################################################
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_product_attribute_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_product_attribute_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_attribute_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_attribute_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_group'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_group`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_group_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_group_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT a.attribute_group_id AS group_id, av.attribute_id AS attr_id, av.attribute_value_id AS val_id, agd.name AS group_name, ad.name AS attr_name, av.sort_order AS val_sort, av.value FROM `oc_bf_product_attribute_value` AS af INNER JOIN ( SELECT p.* FROM `oc_product` AS p INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) WHERE p2c.category_id = '59') AS p ON (af.product_id = p.product_id) INNER JOIN `oc_bf_attribute_value` AS av ON (af.attribute_value_id = av.attribute_value_id) INNER JOIN `oc_attribute` AS a ON (a.attribute_id = av.attribute_id) INNER JOIN `oc_attribute_description` AS ad ON (ad.attribute_id = a.attribute_id) INNER JOIN `oc_attribute_group` AS ag ON (ag.attribute_group_id = a.attribute_group_id) INNER JOIN `oc_attribute_group_description` AS agd ON (agd.attribute_group_id = a.attribute_group_id) INNER JOIN `oc_product_to_store` AS ps ON (p.product_id = ps.product_id) WHERE agd.language_id = '1' AND ad.language_id = '1' AND av.language_id = '1' AND ps.store_id = '0' AND p.status = 1 GROUP BY av.attribute_value_id ORDER BY ag.sort_order, ag.attribute_group_id, a.sort_order, ad.name, av.sort_order, av.value\G
+
+# Query 2: 0.03 QPS, 0.02x concurrency, ID 0x4BE48B56A66D773F at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.18
+# Time range: 2021-04-03T17:10:39 to 2021-04-03T21:05:26
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         14     366
+# Exec time     28    227s   100ms      3s   619ms   992ms   337ms   580ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size    14 321.73k     900     901  900.13  874.75    0.00  874.75
+# id            14  14.58G  40.52M  41.07M  40.80M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  #########
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_option_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_option_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option_value_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option_value_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT od.name AS namegroup, ovd.name, ovd.option_value_id, pov.option_id, ov.image, ov.sort_order FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p.product_id = p2s.product_id) INNER JOIN `oc_product_option_value` AS pov ON (p.product_id = pov.product_id) INNER JOIN `oc_option_description` AS od ON (pov.option_id = od.option_id) INNER JOIN `oc_option_value_description` AS ovd ON (pov.option_value_id = ovd.option_value_id) INNER JOIN `oc_option` AS o ON (pov.option_id = o.option_id) INNER JOIN `oc_option_value` AS ov ON (pov.option_value_id = ov.option_value_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) WHERE p.status = 1 AND p.date_available <= NOW() AND ovd.language_id = '1' AND od.language_id = '1' AND p2s.store_id = '0' AND p2c.category_id = '59' GROUP BY pov.option_value_id ORDER BY o.sort_order, ov.sort_order, od.name, ovd.name\G
+
+# Query 3: 0.02 QPS, 0.00x concurrency, ID 0xCD9D15345B1508B3 at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.09
+# Time range: 2021-04-03T17:09:57 to 2021-04-03T21:08:02
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         11     287
+# Exec time      4     36s   100ms      1s   125ms   198ms   108ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size    15 344.25k   1.20k   1.20k   1.20k   1.14k       0   1.14k
+# id            11  11.43G  40.52M  41.07M  40.78M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  #
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_discount'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_discount`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_special'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_special`\G
+CREATE TEMPORARY TABLE oc_bf_tmp_product (PRIMARY KEY (`product_id`))  SELECT p.product_id, p.sort_order, "1" AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '59' GROUP BY p.product_id\G
+# Converted for EXPLAIN
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT p.product_id, p.sort_order, "1" AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '59' GROUP BY p.product_id\G
+
+# Query 4: 0.02 QPS, 0.00x concurrency, ID 0xC147C0DB8F6F746A at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-04-03T17:10:24 to 2021-04-03T21:07:59
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         11     283
+# Exec time      3     28s   100ms   102ms   101ms   100ms       0   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size    23 509.85k   1.80k   1.80k   1.80k   1.78k       0   1.78k
+# id            11  11.27G  40.52M  41.07M  40.80M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_discount'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_discount`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_special'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_special`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_reward'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_reward`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_stock_status'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_stock_status`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_weight_class_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_weight_class_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_length_class_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_length_class_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_review'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_review`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_manufacturer'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_manufacturer`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT DISTINCT *, pd.name AS name, p.image, m.name AS manufacturer, (SELECT price FROM oc_product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = '1' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM oc_product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '1' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special, (SELECT points FROM oc_product_reward pr WHERE pr.product_id = p.product_id AND pr.customer_group_id = '1') AS reward, (SELECT ss.name FROM oc_stock_status ss WHERE ss.stock_status_id = p.stock_status_id AND ss.language_id = '1') AS stock_status, (SELECT wcd.unit FROM oc_weight_class_description wcd WHERE p.weight_class_id = wcd.weight_class_id AND wcd.language_id = '1') AS weight_class, (SELECT lcd.unit FROM oc_length_class_description lcd WHERE p.length_class_id = lcd.length_class_id AND lcd.language_id = '1') AS length_class, (SELECT AVG(rating) AS total FROM oc_review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, (SELECT COUNT(*) AS total FROM oc_review r2 WHERE r2.product_id = p.product_id AND r2.status = '1' GROUP BY r2.product_id) AS reviews, p.sort_order FROM oc_product p LEFT JOIN oc_product_description pd ON (p.product_id = pd.product_id) LEFT JOIN oc_product_to_store p2s ON (p.product_id = p2s.product_id) LEFT JOIN oc_manufacturer m ON (p.manufacturer_id = m.manufacturer_id) WHERE p.product_id = '2249' AND pd.language_id = '1' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '0'\G
+
+# Query 5: 0.01 QPS, 0.00x concurrency, ID 0x80EA3BACD1A152AE at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.10
+# Time range: 2021-04-03T17:10:37 to 2021-04-03T21:07:16
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          3      96
+# Exec time      2     23s   100ms      1s   237ms   293ms   154ms   198ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     5 122.09k   1.27k   1.29k   1.27k   1.26k       0   1.26k
+# id             3   3.83G  40.52M  41.07M  40.84M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  ##
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_discount'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_discount`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_special'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_special`\G
+CREATE TEMPORARY TABLE oc_bf_tmp_product (PRIMARY KEY (`product_id`))  SELECT p.product_id, p.sort_order, if (SUM(if((f.filter_group = "a47" AND filter_id IN (2027)), 1, 0)) > 0, 1, 0) AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '59' GROUP BY p.product_id\G
+# Converted for EXPLAIN
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT p.product_id, p.sort_order, if (SUM(if((f.filter_group = "a47" AND filter_id IN (2027)), 1, 0)) > 0, 1, 0) AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '59' GROUP BY p.product_id\G
+
+# Query 6: 0.02 QPS, 0.00x concurrency, ID 0xAE9578E2F37F962F at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-04-03T17:10:20 to 2021-04-03T21:06:20
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          8     213
+# Exec time      2     21s   100ms   102ms   101ms   100ms       0   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0  17.23k      81      83   82.82   80.10       0   80.10
+# id             8   8.49G  40.52M  41.07M  40.80M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_customtext'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_customtext`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM oc_product_customtext WHERE product_id = '2884' AND language_id = '1'\G
+
+# Query 7: 0.01 QPS, 0.00x concurrency, ID 0xE33B92F2C4B99C24 at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.30
+# Time range: 2021-04-03T17:11:13 to 2021-04-03T21:06:19
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          3      96
+# Exec time      1     15s   100ms      1s   157ms   992ms   216ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     2  61.55k     656     659  656.54  652.75       0  652.75
+# id             3   3.82G  40.52M  41.07M  40.79M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  ####
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_description`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT p.product_id, p.sort_order, "1" AS match_filters, pp.sort_order FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) INNER JOIN `oc_product_description` AS pd ON (pd.product_id = p.product_id) INNER JOIN `oc_product` AS pp ON (pp.product_id = p.product_id) WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '59' AND pd.language_id = '1' GROUP BY p.product_id HAVING match_filters = 1 ORDER BY pp.sort_order ASC, pd.name ASC LIMIT 48, 48\G
+
+# Query 8: 0.01 QPS, 0.00x concurrency, ID 0x1C0B26EE9871B3FA at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.08
+# Time range: 2021-04-03T17:11:18 to 2021-04-03T21:04:35
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          3      92
+# Exec time      1     11s   100ms      1s   124ms   198ms    98ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0  19.95k     222     222     222     222       0     222
+# id             3   3.66G  40.52M  41.06M  40.77M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  #
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_tmp_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_tmp_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT COUNT(*) AS val, filter_group, filter_id FROM `oc_bf_tmp_product` AS p INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) WHERE match_filters = 1 AND f.language_id = '1' GROUP BY filter_group, filter_id\G
+
+# Query 9: 0.01 QPS, 0.00x concurrency, ID 0x528FE7EDE09AF3F8 at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.09
+# Time range: 2021-04-03T17:16:35 to 2021-04-03T21:03:44
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          3      80
+# Exec time      1      9s   100ms      1s   114ms   100ms   101ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     1  36.11k     462     463  462.18  441.81    0.00  441.81
+# id             3   3.19G  40.54M  41.06M  40.82M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  #
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT COUNT(*) AS total FROM ( SELECT p.product_id, p.sort_order, "1" AS match_filters FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '60' GROUP BY p.product_id HAVING match_filters = 1) AS t\G
+
+# Query 10: 0.00 QPS, 0.00x concurrency, ID 0x4186679BB3141E41 at byte 0 _
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.25
+# Time range: 2021-04-03T17:10:39 to 2021-04-03T21:04:31
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          2      58
+# Exec time      1      9s   100ms      1s   154ms   198ms   198ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0  14.50k     255     256  255.98  246.02       0  246.02
+# id             2   2.31G  40.52M  41.06M  40.85M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  ###
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_tmp_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_tmp_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT COUNT(*) AS val, filter_group, filter_id FROM `oc_bf_tmp_product` AS p INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) WHERE match_filters = 1 AND f.language_id = '1' AND f.filter_group NOT IN ('o14') GROUP BY filter_group, filter_id\G
+
+# Query 11: 0.00 QPS, 0.00x concurrency, ID 0x270EA830AC8D7EE7 at byte 0 _
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-04-03T17:09:50 to 2021-04-03T20:53:07
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          2      64
+# Exec time      0      6s   100ms   102ms   101ms   100ms       0   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0  18.93k     302     304  302.86  299.03       0  299.03
+# id             2   2.55G  40.52M  41.03M  40.80M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_category_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_category_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_category_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_category_to_store`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM oc_category c LEFT JOIN oc_category_description cd ON (c.category_id = cd.category_id) LEFT JOIN oc_category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '59' AND cd.language_id = '1' AND c2s.store_id = '0'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)\G
+
+# Query 12: 0.00 QPS, 0.00x concurrency, ID 0x17BBEA48FEBF1758 at byte 0 _
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.17
+# Time range: 2021-04-03T17:17:53 to 2021-04-03T21:04:15
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          1      32
+# Exec time      0      5s   100ms      1s   145ms   198ms   157ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0   8.65k     276     277  276.94  271.23       0  271.23
+# id             1   1.28G  40.54M  41.06M  40.82M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  ##
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_tmp_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_tmp_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT COUNT(*) AS val, filter_group, filter_id FROM `oc_bf_tmp_product` AS p INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) WHERE match_filters = 1 AND actual_price >= '1300' AND actual_price <= '25220' AND f.language_id = '1' GROUP BY filter_group, filter_id\G
+
+# Query 13: 0.00 QPS, 0.00x concurrency, ID 0xBEB5454CE18270B7 at byte 0 _
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-04-03T17:09:34 to 2021-04-03T20:50:41
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          1      34
+# Exec time      0      3s   100ms   101ms   100ms   100ms       0   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0   2.89k      87      87      87      87       0      87
+# id             1   1.35G  40.52M  41.03M  40.77M  40.19M       0  40.19M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_setting'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_setting`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM `oc_setting` WHERE store_id = '0' OR store_id = '0' ORDER BY store_id ASC\G
+Reading from STDIN ...
+
+# 37.4s user time, 3.7s system time, 32.45M rss, 113.14M vsz
+# Current date: Fri Jun  4 15:24:36 2021
+# Hostname: vpul.beget.ru
+# Files: STDIN
+# Overall: 7.38k total, 133 unique, 0.51 QPS, 0.27x concurrency __________
+# Time range: 2021-06-04T11:24:36 to 2021-06-04T15:24:30
+# Attribute          total     min     max     avg     95%  stddev  median
+# ============     ======= ======= ======= ======= ======= ======= =======
+# Exec time          3872s   100ms     64s   525ms      2s      4s   100ms
+# Lock time              0       0       0       0       0       0       0
+# Query size         5.74M      14  56.97k  816.53   1.78k  900.15  874.75
+# id               308.84G  42.61M  43.14M  42.88M  42.20M       0  42.20M
+
+# Profile
+# Rank Query ID           Response time   Calls R/Call V/M   Item
+# ==== ================== =============== ===== ====== ===== =============
+#    1 0xE0E1B643713229E2 2827.8826 73.0%   849 3.3308 31.15 SELECT oc_bf_product_attribute_value oc_product oc_product_to_category oc_bf_attribute_value oc_attribute oc_attribute_description oc_attribute_group oc_attribute_group_description oc_product_to_store
+#    2 0x4BE48B56A66D773F  361.7066  9.3%   661 0.5472  0.18 SELECT oc_product oc_product_to_store oc_product_option_value oc_option_description oc_option_value_description oc_option oc_option_value oc_product_to_category
+#    3 0xCD9D15345B1508B3  171.7117  4.4%  1102 0.1558  0.21 CREATE TABLE oc_product oc_product_to_store oc_bf_filter oc_product_to_category oc_product_discount oc_product_special oc_bf_tmp_product
+#    4 0xC147C0DB8F6F746A   96.3827  2.5%   953 0.1011  0.00 SELECT oc_product_discount oc_product_special oc_product_reward oc_stock_status oc_weight_class_description oc_length_class_description oc_review oc_product oc_product_description oc_product_to_store oc_manufacturer
+#    5 0xAE9578E2F37F962F   77.0937  2.0%   764 0.1009  0.00 SELECT oc_product_customtext
+#    6 0xF75E926F33E20E3D   50.6049  1.3%   492 0.1029  0.02 SELECT oc_product_attribute oc_attribute oc_attribute_description
+#    7 0x51A9CCA928B1D4F1   45.1422  1.2%   447 0.1010  0.00 SELECT oc_product_attribute oc_attribute oc_attribute_group oc_attribute_group_description
+#    8 0x9063A7D30B136D17   39.5656  1.0%   365 0.1084  0.06 SELECT oc_manufacturer oc_product oc_manufacturer_to_store oc_product_to_category
+#    9 0x80EA3BACD1A152AE   26.3996  0.7%   109 0.2422  0.13 CREATE TABLE oc_product oc_product_to_store oc_bf_filter oc_product_to_category oc_product_discount oc_product_special oc_bf_tmp_product
+# MISC 0xMISC              175.1851  4.5%  1634 0.1072   0.0 <124 ITEMS>
+
+# Query 1: 0.06 QPS, 0.20x concurrency, ID 0xE0E1B643713229E2 at byte 0 __
+# Scores: V/M = 31.15
+# Time range: 2021-06-04T11:24:54 to 2021-06-04T15:24:01
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         11     849
+# Exec time     73   2828s   100ms     64s      3s      9s     10s      2s
+# Lock time      0       0       0       0       0       0       0       0
+# Query size    16 968.58k   1.14k   1.14k   1.14k   1.09k       0   1.09k
+# id            11  35.58G  42.61M  43.14M  42.91M  42.20M       0  42.20M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################
+#    1s  ################################################################
+#  10s+  #####
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_product_attribute_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_product_attribute_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_attribute_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_attribute_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_group'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_group`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_group_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_group_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT a.attribute_group_id AS group_id, av.attribute_id AS attr_id, av.attribute_value_id AS val_id, agd.name AS group_name, ad.name AS attr_name, av.sort_order AS val_sort, av.value FROM `oc_bf_product_attribute_value` AS af INNER JOIN ( SELECT p.* FROM `oc_product` AS p INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) WHERE p2c.category_id = '59') AS p ON (af.product_id = p.product_id) INNER JOIN `oc_bf_attribute_value` AS av ON (af.attribute_value_id = av.attribute_value_id) INNER JOIN `oc_attribute` AS a ON (a.attribute_id = av.attribute_id) INNER JOIN `oc_attribute_description` AS ad ON (ad.attribute_id = a.attribute_id) INNER JOIN `oc_attribute_group` AS ag ON (ag.attribute_group_id = a.attribute_group_id) INNER JOIN `oc_attribute_group_description` AS agd ON (agd.attribute_group_id = a.attribute_group_id) INNER JOIN `oc_product_to_store` AS ps ON (p.product_id = ps.product_id) WHERE agd.language_id = '1' AND ad.language_id = '1' AND av.language_id = '1' AND ps.store_id = '0' AND p.status = 1 GROUP BY av.attribute_value_id ORDER BY ag.sort_order, ag.attribute_group_id, a.sort_order, ad.name, av.sort_order, av.value\G
+
+# Query 2: 0.05 QPS, 0.03x concurrency, ID 0x4BE48B56A66D773F at byte 0 __
+# Scores: V/M = 0.18
+# Time range: 2021-06-04T11:24:55 to 2021-06-04T15:24:03
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          8     661
+# Exec time      9    362s   100ms      2s   547ms   992ms   311ms   580ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     9 581.05k     900     901  900.15  874.75       0  874.75
+# id             8  27.70G  42.61M  43.14M  42.91M  42.20M    0.50  42.20M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  #######
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_option_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_option_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option_value_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option_value_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT od.name AS namegroup, ovd.name, ovd.option_value_id, pov.option_id, ov.image, ov.sort_order FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p.product_id = p2s.product_id) INNER JOIN `oc_product_option_value` AS pov ON (p.product_id = pov.product_id) INNER JOIN `oc_option_description` AS od ON (pov.option_id = od.option_id) INNER JOIN `oc_option_value_description` AS ovd ON (pov.option_value_id = ovd.option_value_id) INNER JOIN `oc_option` AS o ON (pov.option_id = o.option_id) INNER JOIN `oc_option_value` AS ov ON (pov.option_value_id = ov.option_value_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) WHERE p.status = 1 AND p.date_available <= NOW() AND ovd.language_id = '1' AND od.language_id = '1' AND p2s.store_id = '0' AND p2c.category_id = '59' GROUP BY pov.option_value_id ORDER BY o.sort_order, ov.sort_order, od.name, ovd.name\G
+
+# Query 3: 0.08 QPS, 0.01x concurrency, ID 0xCD9D15345B1508B3 at byte 0 __
+# Scores: V/M = 0.21
+# Time range: 2021-06-04T11:24:40 to 2021-06-04T15:24:30
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         14    1102
+# Exec time      4    172s   100ms      1s   156ms   580ms   180ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size    22   1.29M   1.20k   1.20k   1.20k   1.14k       0   1.14k
+# id            14  46.12G  42.61M  43.14M  42.86M  42.20M       0  42.20M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  ##
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_discount'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_discount`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_special'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_special`\G
+CREATE TEMPORARY TABLE oc_bf_tmp_product (PRIMARY KEY (`product_id`))  SELECT p.product_id, p.sort_order, "1" AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '72' GROUP BY p.product_id\G
+# Converted for EXPLAIN
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT p.product_id, p.sort_order, "1" AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '72' GROUP BY p.product_id\G
+
+# Query 4: 0.07 QPS, 0.01x concurrency, ID 0xC147C0DB8F6F746A at byte 0 __
+# Scores: V/M = 0.00
+# Time range: 2021-06-04T11:24:38 to 2021-06-04T15:23:42
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         12     953
+# Exec time      2     96s   100ms   201ms   101ms   100ms     4ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size    29   1.68M   1.80k   1.80k   1.80k   1.78k       0   1.78k
+# id            12  39.89G  42.61M  43.14M  42.86M  42.20M       0  42.20M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_discount'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_discount`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_special'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_special`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_reward'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_reward`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_stock_status'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_stock_status`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_weight_class_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_weight_class_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_length_class_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_length_class_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_review'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_review`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_manufacturer'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_manufacturer`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT DISTINCT *, pd.name AS name, p.image, m.name AS manufacturer, (SELECT price FROM oc_product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = '1' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM oc_product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '1' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special, (SELECT points FROM oc_product_reward pr WHERE pr.product_id = p.product_id AND pr.customer_group_id = '1') AS reward, (SELECT ss.name FROM oc_stock_status ss WHERE ss.stock_status_id = p.stock_status_id AND ss.language_id = '1') AS stock_status, (SELECT wcd.unit FROM oc_weight_class_description wcd WHERE p.weight_class_id = wcd.weight_class_id AND wcd.language_id = '1') AS weight_class, (SELECT lcd.unit FROM oc_length_class_description lcd WHERE p.length_class_id = lcd.length_class_id AND lcd.language_id = '1') AS length_class, (SELECT AVG(rating) AS total FROM oc_review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, (SELECT COUNT(*) AS total FROM oc_review r2 WHERE r2.product_id = p.product_id AND r2.status = '1' GROUP BY r2.product_id) AS reviews, p.sort_order FROM oc_product p LEFT JOIN oc_product_description pd ON (p.product_id = pd.product_id) LEFT JOIN oc_product_to_store p2s ON (p.product_id = p2s.product_id) LEFT JOIN oc_manufacturer m ON (p.manufacturer_id = m.manufacturer_id) WHERE p.product_id = '1195' AND pd.language_id = '1' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '0'\G
+
+# Query 5: 0.05 QPS, 0.01x concurrency, ID 0xAE9578E2F37F962F at byte 0 __
+# Scores: V/M = 0.00
+# Time range: 2021-06-04T11:24:41 to 2021-06-04T15:23:09
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         10     764
+# Exec time      1     77s   100ms   107ms   101ms   100ms   255us   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     1  61.87k      81      83   82.92   80.10       0   80.10
+# id            10  31.98G  42.61M  43.14M  42.87M  42.20M       0  42.20M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_customtext'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_customtext`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM oc_product_customtext WHERE product_id = '1516' AND language_id = '1'\G
+
+# Query 6: 0.03 QPS, 0.00x concurrency, ID 0xF75E926F33E20E3D at byte 0 __
+# Scores: V/M = 0.02
+# Time range: 2021-06-04T11:24:36 to 2021-06-04T15:24:30
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          6     492
+# Exec time      1     51s   100ms      1s   103ms   100ms    40ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     2 167.18k     346     349  347.95  346.17    0.74  346.17
+# id             6  20.60G  42.61M  43.14M  42.87M  42.20M       0  42.20M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  #
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_attribute'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_attribute`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_description`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT a.attribute_id, ad.name, pa.text FROM oc_product_attribute pa LEFT JOIN oc_attribute a ON (pa.attribute_id = a.attribute_id) LEFT JOIN oc_attribute_description ad ON (a.attribute_id = ad.attribute_id) WHERE pa.product_id = '3108' AND a.attribute_group_id = '7' AND ad.language_id = '1' AND pa.language_id = '1' ORDER BY a.sort_order, ad.name\G
+
+# Query 7: 0.03 QPS, 0.00x concurrency, ID 0x51A9CCA928B1D4F1 at byte 0 __
+# Scores: V/M = 0.00
+# Time range: 2021-06-04T11:24:40 to 2021-06-04T15:23:14
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          6     447
+# Exec time      1     45s   100ms   106ms   101ms   100ms   236us   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     3 186.79k     426     428  427.91  420.77       0  420.77
+# id             6  18.71G  42.61M  43.14M  42.86M  42.20M       0  42.20M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_attribute'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_attribute`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_group'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_group`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_group_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_group_description`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT ag.attribute_group_id, agd.name FROM oc_product_attribute pa LEFT JOIN oc_attribute a ON (pa.attribute_id = a.attribute_id) LEFT JOIN oc_attribute_group ag ON (a.attribute_group_id = ag.attribute_group_id) LEFT JOIN oc_attribute_group_description agd ON (ag.attribute_group_id = agd.attribute_group_id) WHERE pa.product_id = '1193' AND agd.language_id = '1' GROUP BY ag.attribute_group_id ORDER BY ag.sort_order, agd.name\G
+
+# Query 8: 0.03 QPS, 0.00x concurrency, ID 0x9063A7D30B136D17 at byte 0 __
+# Scores: V/M = 0.06
+# Time range: 2021-06-04T11:24:40 to 2021-06-04T15:22:28
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          4     365
+# Exec time      1     40s   100ms      1s   108ms   100ms    81ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     2 158.28k     444     445  444.06  441.81       0  441.81
+# id             4  15.26G  42.61M  43.13M  42.82M  42.20M    0.50  42.20M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  #
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_manufacturer'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_manufacturer`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_manufacturer_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_manufacturer_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT DISTINCT m.manufacturer_id AS id, m.name FROM `oc_manufacturer` AS m INNER JOIN `oc_product` AS p ON (m.manufacturer_id = p.manufacturer_id) INNER JOIN `oc_manufacturer_to_store` AS m2s ON (m.manufacturer_id = m2s.manufacturer_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) WHERE p.status = 1 AND p.date_available <= NOW() AND m2s.store_id = '0' AND p2c.category_id = '60' ORDER BY m.sort_order, m.name\G
+
+# Query 9: 0.01 QPS, 0.00x concurrency, ID 0x80EA3BACD1A152AE at byte 0 __
+# Scores: V/M = 0.13
+# Time range: 2021-06-04T11:31:03 to 2021-06-04T15:16:44
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          1     109
+# Exec time      0     26s   100ms      1s   242ms   393ms   178ms   198ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     2 138.70k   1.27k   1.29k   1.27k   1.26k       0   1.26k
+# id             1   4.56G  42.63M  43.12M  42.88M  42.20M       0  42.20M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  ###
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_discount'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_discount`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_special'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_special`\G
+CREATE TEMPORARY TABLE oc_bf_tmp_product (PRIMARY KEY (`product_id`))  SELECT p.product_id, p.sort_order, if (SUM(if((f.filter_group = "m0" AND filter_id IN (7)), 1, 0)) > 0, 1, 0) AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '59' GROUP BY p.product_id\G
+# Converted for EXPLAIN
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT p.product_id, p.sort_order, if (SUM(if((f.filter_group = "m0" AND filter_id IN (7)), 1, 0)) > 0, 1, 0) AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '59' GROUP BY p.product_id\G
+Reading from STDIN ...
+
+# 39.2s user time, 3.9s system time, 31.84M rss, 112.51M vsz
+# Current date: Thu Jun 24 12:35:39 2021
+# Hostname: vpul.beget.ru
+# Files: STDIN
+# Overall: 6.16k total, 97 unique, 0.43 QPS, 0.10x concurrency ___________
+# Time range: 2021-06-24T08:35:40 to 2021-06-24T12:35:34
+# Attribute          total     min     max     avg     95%  stddev  median
+# ============     ======= ======= ======= ======= ======= ======= =======
+# Exec time          1449s   100ms      8s   235ms   992ms   579ms   100ms
+# Lock time              0       0       0       0       0       0       0
+# Query size         4.83M      14   3.47k  822.22   1.78k  586.34  874.75
+# id                90.82G  14.89M  15.69M  15.10M  15.15M 333.02k  14.43M
+
+# Profile
+# Rank Query ID           Response time  Calls R/Call V/M   Item
+# ==== ================== ============== ===== ====== ===== ==============
+#    1 0xE0E1B643713229E2 730.1380 50.4%   374 1.9522  1.18 SELECT oc_bf_product_attribute_value oc_product oc_product_to_category oc_bf_attribute_value oc_attribute oc_attribute_description oc_attribute_group oc_attribute_group_description oc_product_to_store
+#    2 0xCD9D15345B1508B3 233.5223 16.1%  1544 0.1512  0.19 CREATE TABLE oc_product oc_product_to_store oc_bf_filter oc_product_to_category oc_product_discount oc_product_special oc_bf_tmp_product
+#    3 0xC147C0DB8F6F746A  80.7951  5.6%   799 0.1011  0.00 SELECT oc_product_discount oc_product_special oc_product_reward oc_stock_status oc_weight_class_description oc_length_class_description oc_review oc_product oc_product_description oc_product_to_store oc_manufacturer
+#    4 0x9063A7D30B136D17  72.7265  5.0%   578 0.1258  0.17 SELECT oc_manufacturer oc_product oc_manufacturer_to_store oc_product_to_category
+#    5 0xAE9578E2F37F962F  71.6257  4.9%   708 0.1012  0.00 SELECT oc_product_customtext
+#    6 0x4BE48B56A66D773F  47.6436  3.3%   234 0.2036  0.14 SELECT oc_product oc_product_to_store oc_product_option_value oc_option_description oc_option_value_description oc_option oc_option_value oc_product_to_category
+#    7 0xF75E926F33E20E3D  47.4757  3.3%   461 0.1030  0.02 SELECT oc_product_attribute oc_attribute oc_attribute_description
+#    8 0x51A9CCA928B1D4F1  43.0595  3.0%   426 0.1011  0.00 SELECT oc_product_attribute oc_attribute oc_attribute_group oc_attribute_group_description
+#    9 0x270EA830AC8D7EE7  11.8885  0.8%   118 0.1007  0.00 SELECT oc_category oc_category_description oc_category_to_store
+#   10 0x80EA3BACD1A152AE   8.4358  0.6%    30 0.2812  0.09 CREATE TABLE oc_product oc_product_to_store oc_bf_filter oc_product_to_category oc_product_discount oc_product_special oc_bf_tmp_product
+#   11 0xEF876CC899ED450B   8.0798  0.6%    80 0.1010  0.00 SELECT oc_bf_tmp_product oc_product_description oc_product
+#   12 0xBEB5454CE18270B7   7.3349  0.5%    73 0.1005  0.00 SELECT oc_setting
+#   13 0x27E53545A394E066   5.8426  0.4%    58 0.1007  0.00 SELECT oc_theme
+#   14 0xD80558C4FEC06EB6   4.7104  0.3%    17 0.2771  0.40 CREATE TABLE oc_product oc_product_to_store oc_bf_filter oc_product_description oc_product_discount oc_product_special oc_bf_tmp_product
+#   15 0x77B2FF13569179E4   4.5371  0.3%    45 0.1008  0.00 SELECT oc_translation
+# MISC 0xMISC              71.3116  4.9%   616 0.1158   0.0 <82 ITEMS>
+
+# Query 1: 0.06 QPS, 0.12x concurrency, ID 0xE0E1B643713229E2 at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 1.18
+# Time range: 2021-06-24T08:35:48 to 2021-06-24T10:18:31
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          6     374
+# Exec time     50    730s   100ms      8s      2s      4s      2s      2s
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     8 426.69k   1.14k   1.14k   1.14k   1.09k       0   1.09k
+# id             6   5.49G  14.89M  15.22M  15.02M  15.15M 166.76k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ##################################
+#    1s  ################################################################
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_product_attribute_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_product_attribute_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_attribute_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_attribute_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_group'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_group`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_group_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_group_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT a.attribute_group_id AS group_id, av.attribute_id AS attr_id, av.attribute_value_id AS val_id, agd.name AS group_name, ad.name AS attr_name, av.sort_order AS val_sort, av.value FROM `oc_bf_product_attribute_value` AS af INNER JOIN ( SELECT p.* FROM `oc_product` AS p INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) WHERE p2c.category_id = '59') AS p ON (af.product_id = p.product_id) INNER JOIN `oc_bf_attribute_value` AS av ON (af.attribute_value_id = av.attribute_value_id) INNER JOIN `oc_attribute` AS a ON (a.attribute_id = av.attribute_id) INNER JOIN `oc_attribute_description` AS ad ON (ad.attribute_id = a.attribute_id) INNER JOIN `oc_attribute_group` AS ag ON (ag.attribute_group_id = a.attribute_group_id) INNER JOIN `oc_attribute_group_description` AS agd ON (agd.attribute_group_id = a.attribute_group_id) INNER JOIN `oc_product_to_store` AS ps ON (p.product_id = ps.product_id) WHERE agd.language_id = '1' AND ad.language_id = '1' AND av.language_id = '1' AND ps.store_id = '0' AND p.status = 1 GROUP BY av.attribute_value_id ORDER BY ag.sort_order, ag.attribute_group_id, a.sort_order, ad.name, av.sort_order, av.value\G
+
+# Query 2: 0.11 QPS, 0.02x concurrency, ID 0xCD9D15345B1508B3 at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.19
+# Time range: 2021-06-24T08:35:40 to 2021-06-24T12:35:01
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         25    1544
+# Exec time     16    234s   100ms      1s   151ms   293ms   170ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size    37   1.81M   1.20k   1.20k   1.20k   1.14k       0   1.14k
+# id            25  22.76G  14.89M  15.69M  15.09M  15.15M 328.68k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  ##
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_discount'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_discount`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_special'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_special`\G
+CREATE TEMPORARY TABLE oc_bf_tmp_product (PRIMARY KEY (`product_id`))  SELECT p.product_id, p.sort_order, "1" AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '59' GROUP BY p.product_id\G
+# Converted for EXPLAIN
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT p.product_id, p.sort_order, "1" AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '59' GROUP BY p.product_id\G
+
+# Query 3: 0.06 QPS, 0.01x concurrency, ID 0xC147C0DB8F6F746A at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-06-24T08:35:40 to 2021-06-24T12:35:34
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         12     799
+# Exec time      5     81s   100ms   196ms   101ms   100ms     3ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size    29   1.41M   1.80k   1.80k   1.80k   1.78k       0   1.78k
+# id            12  11.80G  14.89M  15.69M  15.13M  15.15M 352.40k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_discount'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_discount`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_special'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_special`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_reward'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_reward`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_stock_status'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_stock_status`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_weight_class_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_weight_class_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_length_class_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_length_class_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_review'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_review`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_manufacturer'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_manufacturer`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT DISTINCT *, pd.name AS name, p.image, m.name AS manufacturer, (SELECT price FROM oc_product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = '1' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM oc_product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '1' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special, (SELECT points FROM oc_product_reward pr WHERE pr.product_id = p.product_id AND pr.customer_group_id = '1') AS reward, (SELECT ss.name FROM oc_stock_status ss WHERE ss.stock_status_id = p.stock_status_id AND ss.language_id = '1') AS stock_status, (SELECT wcd.unit FROM oc_weight_class_description wcd WHERE p.weight_class_id = wcd.weight_class_id AND wcd.language_id = '1') AS weight_class, (SELECT lcd.unit FROM oc_length_class_description lcd WHERE p.length_class_id = lcd.length_class_id AND lcd.language_id = '1') AS length_class, (SELECT AVG(rating) AS total FROM oc_review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, (SELECT COUNT(*) AS total FROM oc_review r2 WHERE r2.product_id = p.product_id AND r2.status = '1' GROUP BY r2.product_id) AS reviews, p.sort_order FROM oc_product p LEFT JOIN oc_product_description pd ON (p.product_id = pd.product_id) LEFT JOIN oc_product_to_store p2s ON (p.product_id = p2s.product_id) LEFT JOIN oc_manufacturer m ON (p.manufacturer_id = m.manufacturer_id) WHERE p.product_id = '3429' AND pd.language_id = '1' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '0'\G
+
+# Query 4: 0.09 QPS, 0.01x concurrency, ID 0x9063A7D30B136D17 at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.17
+# Time range: 2021-06-24T08:35:40 to 2021-06-24T10:17:32
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          9     578
+# Exec time      5     73s   100ms      1s   126ms   100ms   146ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     5 250.63k     444     445  444.02  441.81       0  441.81
+# id             9   8.47G  14.89M  15.21M  15.00M  14.43M 155.86k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  #
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_manufacturer'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_manufacturer`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_manufacturer_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_manufacturer_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT DISTINCT m.manufacturer_id AS id, m.name FROM `oc_manufacturer` AS m INNER JOIN `oc_product` AS p ON (m.manufacturer_id = p.manufacturer_id) INNER JOIN `oc_manufacturer_to_store` AS m2s ON (m.manufacturer_id = m2s.manufacturer_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) WHERE p.status = 1 AND p.date_available <= NOW() AND m2s.store_id = '0' AND p2c.category_id = '60' ORDER BY m.sort_order, m.name\G
+
+# Query 5: 0.05 QPS, 0.00x concurrency, ID 0xAE9578E2F37F962F at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-06-24T08:35:41 to 2021-06-24T12:34:34
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         11     708
+# Exec time      4     72s   100ms   201ms   101ms   100ms     4ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     1  57.36k      81      83   82.96   80.10       0   80.10
+# id            11  10.46G  14.89M  15.69M  15.12M  15.15M 346.68k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_customtext'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_customtext`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM oc_product_customtext WHERE product_id = '1517' AND language_id = '1'\G
+
+# Query 6: 0.04 QPS, 0.01x concurrency, ID 0x4BE48B56A66D773F at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.14
+# Time range: 2021-06-24T08:35:51 to 2021-06-24T10:18:35
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          3     234
+# Exec time      3     48s   100ms      1s   204ms   293ms   169ms   198ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     4 205.68k     900     901  900.06  874.75       0  874.75
+# id             3   3.43G  14.89M  15.22M  15.01M  15.15M 166.76k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  ##
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_option_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_option_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option_value_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option_value_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_option_value'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_option_value`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT od.name AS namegroup, ovd.name, ovd.option_value_id, pov.option_id, ov.image, ov.sort_order FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p.product_id = p2s.product_id) INNER JOIN `oc_product_option_value` AS pov ON (p.product_id = pov.product_id) INNER JOIN `oc_option_description` AS od ON (pov.option_id = od.option_id) INNER JOIN `oc_option_value_description` AS ovd ON (pov.option_value_id = ovd.option_value_id) INNER JOIN `oc_option` AS o ON (pov.option_id = o.option_id) INNER JOIN `oc_option_value` AS ov ON (pov.option_value_id = ov.option_value_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) WHERE p.status = 1 AND p.date_available <= NOW() AND ovd.language_id = '1' AND od.language_id = '1' AND p2s.store_id = '0' AND p2c.category_id = '59' GROUP BY pov.option_value_id ORDER BY o.sort_order, ov.sort_order, od.name, ovd.name\G
+
+# Query 7: 0.03 QPS, 0.00x concurrency, ID 0xF75E926F33E20E3D at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.02
+# Time range: 2021-06-24T08:35:45 to 2021-06-24T12:31:50
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          7     461
+# Exec time      3     47s   100ms      1s   103ms   100ms    41ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     3 156.65k     346     349  347.96  346.17    1.08  346.17
+# id             7   6.80G  14.89M  15.68M  15.11M  15.15M 341.66k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  #
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_attribute'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_attribute`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_description`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT a.attribute_id, ad.name, pa.text FROM oc_product_attribute pa LEFT JOIN oc_attribute a ON (pa.attribute_id = a.attribute_id) LEFT JOIN oc_attribute_description ad ON (a.attribute_id = ad.attribute_id) WHERE pa.product_id = '2379' AND a.attribute_group_id = '9' AND ad.language_id = '1' AND pa.language_id = '1' ORDER BY a.sort_order, ad.name\G
+
+# Query 8: 0.03 QPS, 0.00x concurrency, ID 0x51A9CCA928B1D4F1 at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-06-24T08:35:41 to 2021-06-24T12:35:02
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          6     426
+# Exec time      2     43s   100ms   104ms   101ms   100ms       0   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     3 178.03k     427     428  427.95  420.77       0  420.77
+# id             6   6.28G  14.89M  15.69M  15.10M  15.15M 325.15k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_attribute'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_attribute`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_group'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_group`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_attribute_group_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_attribute_group_description`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT ag.attribute_group_id, agd.name FROM oc_product_attribute pa LEFT JOIN oc_attribute a ON (pa.attribute_id = a.attribute_id) LEFT JOIN oc_attribute_group ag ON (a.attribute_group_id = ag.attribute_group_id) LEFT JOIN oc_attribute_group_description agd ON (ag.attribute_group_id = agd.attribute_group_id) WHERE pa.product_id = '2750' AND agd.language_id = '1' GROUP BY ag.attribute_group_id ORDER BY ag.sort_order, agd.name\G
+
+# Query 9: 0.01 QPS, 0.00x concurrency, ID 0x270EA830AC8D7EE7 at byte 0 __
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-06-24T08:35:57 to 2021-06-24T12:35:15
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          1     118
+# Exec time      0     12s   100ms   102ms   101ms   100ms       0   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0  34.88k     302     304  302.72  299.03       0  299.03
+# id             1   1.74G  14.89M  15.69M  15.13M  15.15M 347.44k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_category_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_category_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_category_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_category_to_store`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM oc_category c LEFT JOIN oc_category_description cd ON (c.category_id = cd.category_id) LEFT JOIN oc_category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '0' AND cd.language_id = '1' AND c2s.store_id = '0'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)\G
+
+# Query 10: 0.00 QPS, 0.00x concurrency, ID 0x80EA3BACD1A152AE at byte 0 _
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.09
+# Time range: 2021-06-24T08:37:12 to 2021-06-24T12:18:55
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0      30
+# Exec time      0      8s   100ms      1s   281ms   393ms   156ms   293ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0  38.28k   1.27k   1.29k   1.28k   1.26k       0   1.26k
+# id             0 453.00M  14.90M  15.63M  15.10M  15.15M 361.84k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  ##
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_category'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_category`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_discount'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_discount`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_special'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_special`\G
+CREATE TEMPORARY TABLE oc_bf_tmp_product (PRIMARY KEY (`product_id`))  SELECT p.product_id, p.sort_order, if (SUM(if((f.filter_group = "a44" AND filter_id IN (1486)), 1, 0)) > 0, 1, 0) AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '59' GROUP BY p.product_id\G
+# Converted for EXPLAIN
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT p.product_id, p.sort_order, if (SUM(if((f.filter_group = "a44" AND filter_id IN (1486)), 1, 0)) > 0, 1, 0) AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_to_category` AS p2c ON (p.product_id = p2c.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND p2c.category_id = '59' GROUP BY p.product_id\G
+
+# Query 11: 0.01 QPS, 0.00x concurrency, ID 0xEF876CC899ED450B at byte 0 _
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-06-24T08:36:26 to 2021-06-24T12:21:48
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          1      80
+# Exec time      0      8s   100ms   102ms   101ms   100ms       0   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0  23.13k     296     298  296.12  284.79       0  284.79
+# id             1   1.18G  14.89M  15.64M  15.12M  15.15M 355.07k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_tmp_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_tmp_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT p.*, pp.sort_order FROM `oc_bf_tmp_product` AS p INNER JOIN `oc_product_description` AS pd ON (pd.product_id = p.product_id) INNER JOIN `oc_product` AS pp ON (pp.product_id = p.product_id) WHERE match_filters = 1 AND pd.language_id = '1' ORDER BY pp.sort_order ASC, pd.name ASC LIMIT 0, 48\G
+
+# Query 12: 0.01 QPS, 0.00x concurrency, ID 0xBEB5454CE18270B7 at byte 0 _
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-06-24T08:38:24 to 2021-06-24T12:33:08
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          1      73
+# Exec time      0      7s   100ms   101ms   100ms   100ms       0   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0   6.20k      87      87      87      87       0      87
+# id             1   1.08G  14.90M  15.68M  15.11M  15.15M 338.91k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_setting'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_setting`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM `oc_setting` WHERE store_id = '0' OR store_id = '0' ORDER BY store_id ASC\G
+
+# Query 13: 0.00 QPS, 0.00x concurrency, ID 0x27E53545A394E066 at byte 0 _
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-06-24T08:36:49 to 2021-06-24T12:35:15
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0      58
+# Exec time      0      6s   100ms   102ms   101ms   100ms       0   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0   5.97k      90     125  105.33  124.25   14.05   97.36
+# id             0 878.24M  14.90M  15.69M  15.14M  15.15M 367.32k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_theme'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_theme`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM oc_theme WHERE store_id = '0' AND theme = 'custom' AND route = 'extension/module/brainyfilter'\G
+
+# Query 14: 0.00 QPS, 0.00x concurrency, ID 0xD80558C4FEC06EB6 at byte 0 _
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.40
+# Time range: 2021-06-24T09:01:24 to 2021-06-24T11:52:46
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0      17
+# Exec time      0      5s   100ms      1s   277ms   992ms   334ms   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0  25.97k   1.50k   1.54k   1.53k   1.53k      20   1.46k
+# id             0 261.83M  14.97M  15.54M  15.40M  15.15M 281.57k  15.15M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s  #############
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_to_store'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_to_store`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_bf_filter'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_bf_filter`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_description'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_description`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_discount'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_discount`\G
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_product_special'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_product_special`\G
+CREATE TEMPORARY TABLE oc_bf_tmp_product (PRIMARY KEY (`product_id`))  SELECT p.product_id, p.sort_order, "1" AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_description` AS pd ON (pd.product_id = p.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND ((pd.name LIKE '%????%' AND pd.name LIKE '%??????%') OR LCASE(p.model) = '???? ??????' OR LCASE(p.sku) = '???? ??????' OR LCASE(p.upc) = '???? ??????' OR LCASE(p.ean) = '???? ??????' OR LCASE(p.jan) = '???? ??????' OR LCASE(p.isbn) = '???? ??????' OR LCASE(p.mpn) = '???? ??????' OR pd.tag LIKE "%???? ??????%" OR pd.description LIKE "%???? ??????%") AND pd.language_id = '1' GROUP BY p.product_id\G
+# Converted for EXPLAIN
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT p.product_id, p.sort_order, "1" AS match_filters, (IF(MIN(ps.price) IS NOT NULL, MIN(ps.price), IF(MIN(pd2.price) IS NOT NULL, MIN(pd2.price), p.price))) AS actual_price FROM `oc_product` AS p INNER JOIN `oc_product_to_store` AS p2s ON (p2s.product_id = p.product_id) INNER JOIN `oc_bf_filter` AS f ON (p.product_id = f.product_id) INNER JOIN `oc_product_description` AS pd ON (pd.product_id = p.product_id) LEFT JOIN `oc_product_discount` AS pd2 ON (pd2.product_id = p.product_id 
+                        AND pd2.quantity = '1'
+                        AND (pd2.date_start = '0000-00-00' OR pd2.date_start < NOW())
+                        AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())
+                        AND pd2.customer_group_id = '1') LEFT JOIN `oc_product_special` AS ps ON (ps.product_id = p.product_id 
+                        AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())
+                        AND (ps.date_start = '0000-00-00' OR ps.date_start < NOW())
+                        AND ps.customer_group_id = '1') WHERE p2s.store_id = '0' AND p.date_available <= NOW() AND ((pd.name LIKE '%????%' AND pd.name LIKE '%??????%') OR LCASE(p.model) = '???? ??????' OR LCASE(p.sku) = '???? ??????' OR LCASE(p.upc) = '???? ??????' OR LCASE(p.ean) = '???? ??????' OR LCASE(p.jan) = '???? ??????' OR LCASE(p.isbn) = '???? ??????' OR LCASE(p.mpn) = '???? ??????' OR pd.tag LIKE "%???? ??????%" OR pd.description LIKE "%???? ??????%") AND pd.language_id = '1' GROUP BY p.product_id\G
+
+# Query 15: 0.00 QPS, 0.00x concurrency, ID 0x77B2FF13569179E4 at byte 0 _
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: 2021-06-24T08:37:06 to 2021-06-24T12:08:30
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0      45
+# Exec time      0      5s   100ms   106ms   101ms   100ms   738us   100ms
+# Lock time      0       0       0       0       0       0       0       0
+# Query size     0   5.33k     106     144  121.18  130.47    7.77  118.34
+# id             0 680.36M  14.90M  15.60M  15.12M  15.15M 358.10k  14.43M
+# String:
+# Databases    rumluxsq_ocar1
+# Hosts        localhost
+# Users        rumluxsq_ocar1
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `rumluxsq_ocar1` LIKE 'oc_translation'\G
+#    SHOW CREATE TABLE `rumluxsq_ocar1`.`oc_translation`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM oc_translation WHERE store_id = '0' AND language_id = '1' AND (route = 'common/header' OR route = 'ru-ru')\G

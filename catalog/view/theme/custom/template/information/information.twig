@@ -1,0 +1,46 @@
+{{ header }}
+{% if edit %}
+	<noindex><a class="admin_product_edit" target="_blank" href="{{ edit }}" rel="nofollow">Редактировать</a></noindex>
+{% endif %}
+{{ content_top }}
+<div id="information-information" class="container">
+	<ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+		{% for key,breadcrumb in breadcrumbs %}
+			<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+				{% if loop.last %}
+					<p itemprop="item">
+						<span itemprop="name">
+							{{ breadcrumb.text }}
+						</span>
+					</p>
+				{% else %}
+					<a itemprop="item" href="{{ breadcrumb.href }}">
+						<span itemprop="name">
+							{{ breadcrumb.text }}
+						</span>
+					</a>				
+				{% endif %}
+				{% set position = key + 1 %}
+				<meta itemprop="position" content="{{ position }}" />
+			</li>
+		{% endfor %}
+	</ul>
+	{% if column_left or column_right %}
+	{% set class = 'row flex' %}
+	{% else %}
+	{% set class = 'row' %}
+	{% endif %}
+	<div class="{{ class }}">{{ column_left }}
+		{% if column_left and column_right %}
+		{% set class = 'col-sm-6' %}
+		{% elseif column_left or column_right %}
+		{% set class = 'col-sm-9' %}
+		{% else %}
+		{% set class = 'col-sm-12' %}
+		{% endif %}
+		<div id="content" class="{{ class }}">
+			{{ description }}</div>
+		{{ column_right }}</div>
+</div>
+{{ content_bottom }}
+{{ footer }}

@@ -1,0 +1,104 @@
+<div class="feedback">
+	<div class="wrapper">
+		<h1>Оставьте отзыв</h1>
+		<div class="feedback-body">
+			<form id="feedback" method="post">
+				<input type="text" name="title" value="Оценка работы" hidden>
+				<input name="request_id" type="text" value="{{ deal_id }}" hidden>
+				<div class="fieldset">
+					<div class="h2">Оцените качество нашей работы </div>
+					<div class="half-width">
+						<label>Общяя оценка</label>
+						<input type="text" name="qual-all" value="Общяя оценка" hidden>
+					</div>
+					<div class="rating-area">
+						<input type="radio" id="star-5" name="rating-all" value="5" required>
+						<label for="star-5" title="Оценка «5»"></label>
+						<input type="radio" id="star-4" name="rating-all" value="4" required>
+						<label for="star-4" title="Оценка «4»"></label>
+						<input type="radio" id="star-3" name="rating-all" value="3" required>
+						<label for="star-3" title="Оценка «3»"></label>
+						<input type="radio" id="star-2" name="rating-all" value="2" required>
+						<label for="star-2" title="Оценка «2»"></label>
+						<input type="radio" id="star-1" name="rating-all" value="1" required>
+						<label for="star-1" title="Оценка «1»"></label>
+					</div>
+
+					<div class="half-width">
+						<label>Оценка менеджера</label>
+						<input type="text" name="qual-manager" value="Оценка менеджера" hidden>
+					</div>
+					<div class="rating-area">
+						<input type="radio" id="star-10" name="rating-manager" value="5" required>
+						<label for="star-10" title="Оценка «5»"></label>
+						<input type="radio" id="star-9" name="rating-manager" value="4" required>
+						<label for="star-9" title="Оценка «4»"></label>
+						<input type="radio" id="star-8" name="rating-manager" value="3" required>
+						<label for="star-8" title="Оценка «3»"></label>
+						<input type="radio" id="star-7" name="rating-manager" value="2" required>
+						<label for="star-7" title="Оценка «2»"></label>
+						<input type="radio" id="star-6" name="rating-manager" value="1" required>
+						<label for="star-6" title="Оценка «1»"></label>
+					</div>
+
+					<div class="half-width">
+						<label>Оценка замерщика</label>
+						<input type="text" name="qual-zamer" value="Оценка замерщика" hidden>
+					</div>
+					<div class="rating-area">
+						<input type="radio" id="star-15" name="rating-zamer" value="5" required>
+						<label for="star-15" title="Оценка «5»"></label>
+						<input type="radio" id="star-14" name="rating-zamer" value="4" required>
+						<label for="star-14" title="Оценка «4»"></label>
+						<input type="radio" id="star-13" name="rating-zamer" value="3" required>
+						<label for="star-13" title="Оценка «3»"></label>
+						<input type="radio" id="star-12" name="rating-zamer" value="2" required>
+						<label for="star-12" title="Оценка «2»"></label>
+						<input type="radio" id="star-11" name="rating-zamer" value="1" required>
+						<label for="star-11" title="Оценка «1»"></label>
+					</div>
+
+					<div class="half-width">
+						<label>Оценка монтажа</label>
+						<input type="text" name="qual-montaj" value="Оценка монтажа" hidden>
+					</div>
+					<div class="rating-area">
+						<input type="radio" id="star-20" name="rating-montaj" value="5" required>
+						<label for="star-20" title="Оценка «5»"></label>
+						<input type="radio" id="star-19" name="rating-montaj" value="4" required>
+						<label for="star-19" title="Оценка «4»"></label>
+						<input type="radio" id="star-18" name="rating-montaj" value="3" required>
+						<label for="star-18" title="Оценка «3»"></label>
+						<input type="radio" id="star-17" name="rating-montaj" value="2" required>
+						<label for="star-17" title="Оценка «2»"></label>
+						<input type="radio" id="star-16" name="rating-montaj" value="1" required>
+						<label for="star-16" title="Оценка «1»"></label>
+					</div>
+				</div>
+				<div class="buttons">
+					<input class="btn-submit" type="reset" value="Сбросить">
+					
+					<button id="start" class="btn-submit" type="submit">Отправить</button>
+				</div>
+			</form>
+
+			<div class="bonus-modal hidden">
+				<div id="text-5-stars" class="request">
+					<p class="thanq-text">Спасибо!</p>
+					<p class="subtitle">Поставьте Нам отзыв 5 звезд на Яндекс
+						И получите 500 рублей на мобильный телефон</p>
+					<div class="buttons">
+						<a class="btn-feedback" href="/">На главную</a>
+						<a class="btn-feedback" href="https://market.yandex.ru/shop--100-dverei/464897/reviews/add?retpath=https%253A%252F%252Fmarket.yandex.ru%252Fshop--100-dverei%252F464897%252Freviews&track=rev_sh">Оставить отзыв</a>
+					</div>
+				</div>
+				<div id="text-all" class="request">
+					<p class="thanq-text">Спасибо!</p>
+					<p class="subtitle">За Ваш отзыв</p>
+					<a class="btn-feedback" href="">На главную</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

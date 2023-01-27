@@ -1,0 +1,103 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">{% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-list"></i> <b>{{ text_list }}</b></h3>
+          </div>
+					{% if attribute_groups %}
+						{% for attribute_group in attribute_groups %}
+							<div class="panel-heading attributes_seo_list">
+								<h3 class="panel-title">{{ attribute_group.name }}</h3>
+								<button type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+							</div>
+							<div class="panel-body attributes_seo_list">
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<td class="text-left">Название</td>
+												<td class="text-right">{{ column_action }}</td>
+											</tr>
+										</thead>
+										<tbody>
+											{% for attribute in attribute_group.attributes %}
+											<tr>
+												<td class="text-left">{{ attribute.name }}</td>
+												<td class="text-right"><a href="index.php?route=design/seo_filter/edit&user_token={{ user_token }}&attribute_id={{ attribute.attribute_id }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						{% endfor %}
+					{% endif %}
+
+					{% if options %}
+						<div class="panel-heading attributes_seo_list">
+							<h3 class="panel-title">Опции</h3>
+							<button type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+						</div>
+						<div class="panel-body attributes_seo_list">
+							<div class="table-responsive">
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<td class="text-left">Название</td>
+											<td class="text-right">{{ column_action }}</td>
+										</tr>
+									</thead>
+									<tbody>
+										{% for option in options %}
+										<tr>
+											<td class="text-left">{{ option.name }}</td>
+											<td class="text-right"><a href="index.php?route=design/seo_filter/edit&user_token={{ user_token }}&option_id={{ option.option_id }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					{% endif %}
+
+					{% if manufacturers_list %}
+						<div class="panel-heading attributes_seo_list">
+							<h3 class="panel-title">Производители</h3>
+							<a href="index.php?route=design/seo_filter/edit&user_token={{ user_token }}&seo_filter=manufacturers" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></button>
+						</div>
+					{% endif %}
+        </div>
+      </div>
+			
+    </div>
+  </div>
+	<script type="text/javascript"><!--
+		$(".attributes_seo_list.panel-heading button").click(function(){
+			$(this).parent().next().toggleClass("active");
+			$(this).find("i").toggleClass("fa-minus")
+		});
+//--></script> 
+</div>
+{{ footer }}

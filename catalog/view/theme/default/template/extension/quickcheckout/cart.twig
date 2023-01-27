@@ -1,0 +1,127 @@
+<div id="stock_warning">
+{% if error_warning_stock %}
+	<div class="alert alert-danger" style=""><i class="fa fa-exclamation-circle"></i> {{ error_stock }}</div>
+{% endif %}
+</div>
+<table class="table quickcheckout-cart">
+ {# <thead>
+	<tr>
+	  <td class="image">{{ column_image }}</td>
+	  <td class="name">{{ column_name }}</td>
+	  <td class="quantity">{{ column_quantity }}</td>
+	  <td class="price1">{{ column_price }}</td>
+	  <td class="total">{{ column_total }}</td>
+	</tr>
+ </thead> #}
+  {% if products or vouchers %}
+	<tbody>
+      {% for product in products %}
+        <tr  {% if not product.stock %} class="warning" {% endif %}>
+          <td class="image">{% if product.thumb %}
+            <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" /></a>
+            {% endif %}</td>
+          <td class="name"><a href="{{ product.href }}">{{ product.name }}</a> {% if not product.stock %} <span class="text-danger">***</span> {% endif %}
+            <div>
+              {% for option in product.option %}
+              <small>{{ option.name }}: {{ option.value }}</small><br />
+			  {% endfor %}
+			  {% if product.reward %}
+			  <br />
+			  <small>{{ product.reward }}</small>
+			  {% endif %}
+			  {% if product.recurring %}
+			  <br />
+			  <span class="label label-info">{{ text_recurring_item }}</span> <small>{{ product.recurring }}</small>
+			  {% endif %}
+            </div></td>
+			<td class="price1">{{ product.price }}</td>
+          <td class="quantity">{% if edit_cart %}
+		    <div class="input-group input-group-sm">
+				<span class="input-group-btn">
+					<button class="btn btn-primary button-update" data-type="decrease" data-product="{{ product.key }}"><svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.22174 0.964326C5.92884 0.671433 5.45397 0.671433 5.16108 0.964326L0.388105 5.7373C0.0952122 6.03019 0.0952122 6.50506 0.388105 6.79796C0.680999 7.09085 1.15587 7.09085 1.44877 6.79796L5.69141 2.55532L9.93405 6.79796C10.2269 7.09085 10.7018 7.09085 10.9947 6.79796C11.2876 6.50506 11.2876 6.03019 10.9947 5.7373L6.22174 0.964326ZM6.44141 2.38354L6.44141 1.49466L4.94141 1.49466L4.94141 2.38354L6.44141 2.38354Z" fill="#2C2B3F"/>
+</svg>
+</button>
+				</span>
+				<input type="text" data-mask="9?999999999999999" value="{{ product.quantity }}" class="qc-product-qantity form-control text-center" name="quantity[{{ product.key }}]">
+				<span class="input-group-btn">
+					<button class="btn btn-primary button-update" data-type="increase" data-product="{{ product.key }}"><svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.22174 0.964326C5.92884 0.671433 5.45397 0.671433 5.16108 0.964326L0.388105 5.7373C0.0952122 6.03019 0.0952122 6.50506 0.388105 6.79796C0.680999 7.09085 1.15587 7.09085 1.44877 6.79796L5.69141 2.55532L9.93405 6.79796C10.2269 7.09085 10.7018 7.09085 10.9947 6.79796C11.2876 6.50506 11.2876 6.03019 10.9947 5.7373L6.22174 0.964326ZM6.44141 2.38354L6.44141 1.49466L4.94141 1.49466L4.94141 2.38354L6.44141 2.38354Z" fill="#2C2B3F"/>
+</svg>
+</button>
+				</span>
+			</div>
+
+			{% else %}
+			x&nbsp;{{ product.quantity }}
+			{% endif %}</td>
+
+          <td class="total">{{ product.total }}</td>
+			<td><button class="btn btn-danger button-remove hidden-xs" data-product="{{ product.key }}" data-remove="{{ product.key }}" title="{{ button_remove }}""><svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M12.0485 9.05029C11.7898 9.05029 11.5801 9.25997 11.5801 9.51868V18.3711C11.5801 18.6297 11.7898 18.8395 12.0485 18.8395C12.3072 18.8395 12.5168 18.6297 12.5168 18.3711V9.51868C12.5168 9.25997 12.3072 9.05029 12.0485 9.05029Z" fill="#FBD239" stroke="#FBD239"/>
+					<path d="M6.58167 9.05029C6.32296 9.05029 6.11328 9.25997 6.11328 9.51868V18.3711C6.11328 18.6297 6.32296 18.8395 6.58167 18.8395C6.84037 18.8395 7.05005 18.6297 7.05005 18.3711V9.51868C7.05005 9.25997 6.84037 9.05029 6.58167 9.05029Z" fill="#FBD239" stroke="#FBD239"/>
+					<path d="M2.52364 7.33774V18.8777C2.52364 19.5598 2.77375 20.2003 3.21066 20.6599C3.64557 21.1208 4.2508 21.3824 4.88422 21.3835H13.7462C14.3798 21.3824 14.985 21.1208 15.4197 20.6599C15.8566 20.2003 16.1067 19.5598 16.1067 18.8777V7.33774C16.9753 7.10721 17.538 6.26814 17.4219 5.37693C17.3055 4.48591 16.5464 3.81938 15.6477 3.8192H13.2496V3.23372C13.2523 2.74137 13.0577 2.26859 12.7091 1.92078C12.3606 1.57316 11.8871 1.37958 11.3947 1.38361H7.23564C6.74329 1.37958 6.26979 1.57316 5.92125 1.92078C5.5727 2.26859 5.37803 2.74137 5.38078 3.23372V3.8192H2.98269C2.08398 3.81938 1.32488 4.48591 1.20851 5.37693C1.09233 6.26814 1.65512 7.10721 2.52364 7.33774ZM13.7462 20.4468H4.88422C4.08339 20.4468 3.46041 19.7588 3.46041 18.8777V7.3789H15.17V18.8777C15.17 19.7588 14.547 20.4468 13.7462 20.4468ZM6.31754 3.23372C6.31443 2.98983 6.4103 2.75509 6.58339 2.58292C6.75628 2.41076 6.99157 2.31616 7.23564 2.32037H11.3947C11.6388 2.31616 11.8741 2.41076 12.047 2.58292C12.2201 2.75491 12.3159 2.98983 12.3128 3.23372V3.8192H6.31754V3.23372ZM2.98269 4.75596H15.6477C16.1133 4.75596 16.4908 5.13341 16.4908 5.59905C16.4908 6.06469 16.1133 6.44214 15.6477 6.44214H2.98269C2.51706 6.44214 2.13961 6.06469 2.13961 5.59905C2.13961 5.13341 2.51706 4.75596 2.98269 4.75596Z" fill="#FBD239" stroke="#FBD239"/>
+				</svg>
+				</button>
+			</td>
+		</tr>
+
+	  {% endfor %}
+
+	  {% for voucher in vouchers %}
+        <tr>
+          <td class="image"></td>
+          <td class="name">{{ voucher.description }}</td>
+          <td class="quantity">x&nbsp;1</td>
+		  <td class="price1">{{ voucher.amount }}</td>
+          <td class="total">{{ voucher.amount }}</td>
+        </tr>
+        {% endfor %}
+{#		{% for total in totals %}#}
+{#		<tr>#}
+{#		  <td class="text-right" colspan="4"><b>{{ total.title }}:</b></td>#}
+{#		  <td class="text-right">{{ total.text }}</td>#}
+{#		</tr>#}
+{#        {% endfor %}#}
+	</tbody>
+
+  {% endif %}
+</table>
+
+{# <section class="check-out">
+	<div class="check-out-top">
+		<span class="check-out-item__headline">Ваш заказ: </span>
+		<span class="check-out-item__headline">Способы доставки</span>
+	</div>
+
+	<div class="check-out__body">
+		<div class="check-out-row">
+
+			<div class="check-out-item">
+				<div class="check-out-item__price-item"> <span>Сумма товаров:</span>	{% for total in totals %}
+						{% if loop.index == 2 %}
+							{{ total.text }}
+						{% endif %}
+						{% endfor %}</div>
+				<div class="check-out-item__price-item"> <span>Доставка:</span>	{% for total in totals %}
+						{% if loop.index == 1 %}
+							{{ total.text }}
+						{% endif %}
+					{% endfor %}</div>
+				<div class="check-out-item__price-item">Итого:{% for total in totals %}
+						{% if loop.index == 3 %}
+							{{ total.text }}
+						{% endif %}
+					{% endfor %}</div>
+			</div>
+		</div>
+
+		<div class="check-out-row">
+
+			<div id="gg" class="check-out-item">
+				<div class="quickcheckout-content"></div>
+			</div>
+			<div class="check-out-item"></div>
+		</div>
+	</div>
+</section> #}

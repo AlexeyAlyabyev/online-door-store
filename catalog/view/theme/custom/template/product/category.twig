@@ -1,0 +1,295 @@
+{{ header }}
+{% if edit %}
+	<noindex><a class="admin_product_edit" target="_blank" href="{{ edit }}" rel="nofollow">Редактировать</a></noindex>
+{% endif %}
+<div id="product-category" class="wrapper">
+	<ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+		{% for key,breadcrumb in breadcrumbs %}
+			<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+				{% if loop.last %}
+					<p itemprop="item">
+						<span itemprop="name">
+							{{ breadcrumb.text }}
+						</span>
+					</p>
+				{% else %}
+					<a itemprop="item" href="{{ breadcrumb.href }}">
+						<span itemprop="name">
+							{{ breadcrumb.text }}
+						</span>
+					</a>				
+				{% endif %}
+				{% set position = key + 1 %}
+				<meta itemprop="position" content="{{ position }}" />
+			</li>
+		{% endfor %}
+	</ul>
+
+		{% if not next_page %}
+			{{ content_top }}
+		{% endif %}
+
+		<div class="title-and-filters">
+			<h1 class="headline">
+				{{ heading_title }}
+			</h1>
+
+			<div class="sort-options">
+				<div class="wrapper">
+					<div class="sort-options-body">
+
+						<div class="filter">
+							<button class="filter-toggle"><img src="/catalog/view/theme/custom/image/filter.png" alt="фильтр">Фильтр</button>
+						</div>
+
+						<div class="sort">
+							<button><img src="/catalog/view/theme/custom/image/sort.svg" alt="сортировка">Сортировка</button>
+							<ul>
+								<li onclick="location = location.origin + location.pathname">
+									<img src="image/category/popular.svg" alt="Популярные">
+									<span>Популярные</span>
+								</li>
+								{% for sort in sorts %} 
+										<li data-href="{{ sort.href }}" onclick="location = this.getAttribute('data-href');">
+											<img src="{{ sort.img }}" alt="{{ sort.text }}">
+											<span>{{ sort.text }}</span>
+										</li>
+								{% endfor %}
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="sum-up-result">{{ results }}</div>
+		</div>
+
+		{{ column_left }}
+
+		{% if column_left and column_right %} 
+			{% set class = 'col-sm-6' %} 
+		{% elseif column_left or column_right %} 
+			{% set class = 'col-sm-9' %} 
+		{% else %} 
+			{% set class = 'col-sm-12' %} 
+		{% endif %}
+		
+		<div id="content" class="{{ class }}">
+
+			{# <!-- -------------------------------------		CATEGORY BANNER		-------------------------------------- --> #}
+			{% if not next_page %}
+				{% if thumb and banner_text %}
+					<div class="banner">
+						<img src="{{ thumb }}" class="img-responsive img-category" alt="{{ heading_title }}" />
+						<div class="banner-info">
+							<div class="banner-info-text">{{ banner_text }}</div>
+							<div class="banner-info-price_block">
+								<div class="banner-info-price_block-text">
+									<p>{{ main_category_name }}</p>
+									<div class="title">{{ banner_title}}</div>
+								</div>
+								<div class="price">от <span>{{ lowest_category_price }}</span> руб.</div>
+							</div>
+						</div>
+					</div>
+				{% elseif thumb %} 
+					<img src="{{ thumb }}" class="img-responsive img-category" alt="{{ heading_title }}" />
+				{% endif %}
+			{% endif %}
+			{#  <!-- -------------------------------------		CATEGORY BANNER		-------------------------------------- --> #}
+
+
+			{% if categories %}
+				<ul class="subcategory-list">
+					{% for category in categories %}
+					<li>
+						<a href="{{ category.href }}">{{ category.name }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			{% endif %} 
+
+			{% if tag_categories %}
+				<ul class="subcategory-list tag_categories">
+					{% for category in tag_categories %}
+					<li>
+						<a href="{{ category.href }}">{{ category.name }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			{% endif %} 
+
+			{% if main_category_id == 59 %}
+				{% set crutch = 'mezh-crutch' %} 
+			{% elseif main_category_id == 60 %}
+				{% set crutch = 'vhod-crutch' %} 
+			{% else %}
+				{% set crutch = '' %} 
+			{% endif %} 
+
+			{% if products %}
+				{% if mobile %}
+					<div class="products-list">
+						<div class="products-list-body">
+							{% for key,product in products %}
+								<div class="product {{ crutch }}" data-id="{{ product.product_id }}">
+									{% if product.special_label != '' %}
+										<div class="product-special">-{{ product.special_label }}%</div>
+									{% endif %}
+
+									<div class="product-top">
+										<div class="product-image">
+											<a href="{{ product.href }}" title="{% if product.product_color %}{{ product.name }}, цвет: {{ product.product_color }}{% else %}{{ product.name }}{% endif %}">
+												{% if key > 5 %}
+													<img class="{{ crutch }}" height="220px" width="100%" loading="lazy" src="{{ product.thumb }}" alt="{{ product.name }}"  />
+												{% else %}
+													<img class="{{ crutch }}" height="220px" width="100%" src="{{ product.thumb }}" alt="{{ product.name }}"  />
+												{% endif %}
+											</a>
+											<button class="wishlist" onclick="wishlist($(this).parents('.product'))">
+												<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M11.5 21L9.9775 19.5668C4.57 14.4714 1 11.109 1 6.99455C1 3.63215 3.53575 1 6.775 1C8.602 1 10.3555 1.88283 11.5 3.27248C12.6445 1.88283 14.398 1 16.225 1C19.4642 1 22 3.63215 22 6.99455C22 11.109 18.43 14.4714 13.0225 19.5668L11.5 21Z" fill="#ffffff" stroke="#989898"/>
+												</svg>											
+											</button>	
+										</div>
+										<p class="product-name">{{ product.name }}</p>
+									</div>								
+
+									<div class="product-caption">
+										<div class="product-caption-price">
+											{% if not product.special %}
+												<p class="new">{{ product.price }}</p>
+											{% else %}
+												<p class="old line-through">{{ product.price }}</p>
+												<p class="new">{{ product.special }}</p>
+											{% endif %}
+										</div>
+										<div class="button-wrapper">
+											<input type="hidden" name="product_id" value="{{ product.product_id }}">
+											<button type="button" data-loading-text="Загрузка..." onclick="addToCart(this)">{# Добавить в корзину #}</button>
+										</div>
+										<button type="button" class="one_click">Купить в 1 клик</button>
+									</div>			
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% else %}
+					<div class="products-list">
+						<div class="products-list-body">
+							{% for product in products %}
+								<div class="product {{ crutch }}" data-id="{{ product.product_id }}">
+
+									<div class="product-top">
+										<p class="product-name">{{ product.name }}</p>
+										{% if product.product_color %}
+											<p class="product-color">{{ product.product_color }}</p>
+										{% else %}
+											<p class="product-color"> </p>
+										{% endif %}
+									</div>			
+									
+									<div class="product-image">
+										<a href="{{ product.href }}" title="{% if product.product_color %}{{ product.name }}, цвет: {{ product.product_color }}{% else %}{{ product.name }}{% endif %}">
+											<img class="{{ crutch }}" height="266px" width="100%" loading="lazy" src="{{ product.thumb }}" alt="{{ product.name }}" onerror='this.onerror = null; this.src="{{ product.reserve_img }}"' />
+										</a>
+										{% if product.special_label != '' %}
+											<div class="product-special">-{{ product.special_label }}%</div>
+										{% endif %}
+										<button class="wishlist" onclick="wishlist($(this).parents('.product'))">
+											<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M11.5 21L9.9775 19.5668C4.57 14.4714 1 11.109 1 6.99455C1 3.63215 3.53575 1 6.775 1C8.602 1 10.3555 1.88283 11.5 3.27248C12.6445 1.88283 14.398 1 16.225 1C19.4642 1 22 3.63215 22 6.99455C22 11.109 18.43 14.4714 13.0225 19.5668L11.5 21Z" fill="#ffffff" stroke="#989898"/>
+											</svg>											
+										</button>
+										<button class="quick_view">Быстрый просмотр</button>
+									</div>
+
+									<div class="product-caption">
+										<div class="button-wrapper">
+											<input type="hidden" name="product_id" value="{{ product.product_id }}">
+											<button type="button" data-loading-text="Загрузка..." onclick="addToCart(this)">{# Добавить в корзину #}</button>
+										</div>
+										<div class="product-caption-price">
+											{% if not product.special %}
+											<p class="old"> </p>
+												<p class="new">{{ product.price }}</p>
+											{% else %}
+												<p class="old line-through">{{ product.price }}</p>
+												<p class="new">{{ product.special }}</p>
+											{% endif %}
+										</div>
+										<button type="button" class="one_click">Купить в 1 клик</button>
+									</div>					
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %} 
+
+				<div class="row">
+					<div class="col-sm-12 text-left">
+						{{ pagination }}
+					</div>
+				</div>
+			{% endif %} 
+
+			{% if not categories and not products %}
+				<p>{{ text_empty }}</p>
+				<div class="buttons">
+					<div class="pull-right">
+						<a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+
+		{{ column_right }}
+		
+		{% if description %}
+			<div class="content-description">
+				{{ description }}
+			</div>
+		{% endif %} 
+
+</div>
+
+<div class="our-benefits">
+	<a href="/#catalog" class="our-benefits__item">
+		<img src="catalog/view/theme/custom/image/benefits_door_choise.svg" alt="benefits_zamer">
+
+		<div class="our-benefits__headline">Выбор дверей</div>
+		<div class="our-benefits__sub-headline">
+			Задавайте вопросы менеджерам. Выбирайте продукцию в нашем интернет-магазине.
+		</div>
+	</a>
+	<a href="/zamer" class="our-benefits__item">
+		<img src="catalog/view/theme/custom/image/benefits_zamer.svg" alt="benefits_delivery">
+
+		<div class="our-benefits__headline">Бесплатный замер</div>
+		<div class="our-benefits__sub-headline">
+			Замерщик приедет в удобное время. Замер проводится бесплатно при покупке товаров от 9 000 рублей. 
+		</div>
+	</a>
+	<a data-src="#modal" class="our-benefits__item" data-fancybox style="cursor: pointer;">
+		<img src="catalog/view/theme/custom/image/benefits_calculating.svg" alt="benefits_installment">
+
+		<div class="our-benefits__headline">Точный расчёт</div>
+		<div class="our-benefits__sub-headline">
+			Рассчитаем стоимость полной комплектации и установки. Зафиксируем цену в договоре.
+		</div>
+	</a>
+	<a 	{% if main_category_id == 59 %} href="/mezhkomnatnye-dveri-nedorogo-s-ustanovkoi-pod-klyuch" {% else %}
+			{% if main_category_id == 60 %} href="/vhodnye-dveri-s-ustanovkoy" {% endif %} {% endif %} 
+		class="our-benefits__item">
+		<img src="catalog/view/theme/custom/image/benefits_installment.svg" alt="benefits_garanty">
+
+		<div class="our-benefits__headline">Монтаж дверей</div>
+		<div class="our-benefits__sub-headline">
+			Установим двери в течение трёх дней с момента обращения или на следующий день после доставки товаров.
+		</div>
+	</a>
+</div>
+
+{{ content_bottom }}
+
+{{ footer }}

@@ -1,0 +1,28 @@
+<section class="check-out">
+	<div class="check-out-top">
+		<span class="check-out-item__headline">Ваш заказ: </span>
+	</div>
+
+	<div class="check-out__body">
+		<div class="check-out-row">
+
+			<div class="check-out-item">
+				<div class="check-out-item__price-item"> <span>Сумма товаров:</span>	{% for total in totals %}
+						{% if loop.index == 2 %}
+							{{ total.text }}
+						{% endif %}
+						{% endfor %}</div>
+				<div class="check-out-item__price-item"> <span>Доставка:</span>	{% for total in totals %}
+						{% if loop.index == 1 %}
+							{{ total.text }}
+						{% endif %}
+					{% endfor %}</div>
+				<div class="check-out-item__price-item">Итого:{% for total in totals %}
+						{% if loop.index == 3 %}
+							{{ total.text }}
+						{% endif %}
+					{% endfor %}</div>
+			</div>
+		</div>
+	</div>
+</section>

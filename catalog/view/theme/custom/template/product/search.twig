@@ -1,0 +1,285 @@
+{{ header }}
+<div id="product-search" class="wrapper">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }} search_page">{{ content_top }}
+      <h1>{{ heading_title }}</h1>
+      <div class="row">
+        <div class="col-xs-8 col-sm-6">
+          <input type="text" name="search" value="{{ search }}" placeholder="{{ text_keyword }}" id="input-search" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+					<input type="button" value="{{ button_search }}" id="button-search" class="btn btn-primary" />
+        </div>
+      </div>
+			<div id="search_content">
+				<h2>{{ text_search }} {% if product_total != 0 %}, найденных товаров: {{ product_total }} {% endif %}</h2>
+				{% if products %}
+					<div class="title-and-filters">			
+						<div class="sort-options">
+							<div class="sort-options-body">
+		
+								<div class="filter">
+									<button class="filter-toggle"><img src="/catalog/view/theme/custom/image/filter.png" alt="фильтр">Фильтр</button>
+								</div>
+		
+								<div class="sort">
+									<button><img src="/catalog/view/theme/custom/image/sort.svg" alt="сортировка">Сортировка</button>
+									<ul>
+										<li onclick="location = location.origin + location.pathname">
+											<img src="image/category/popular.svg" alt="Популярные">
+											<span>Популярные</span>
+										</li>
+										{% for sort in sorts %} 
+												<li data-href="{{ sort.href }}" onclick="location = this.getAttribute('data-href');">
+													<img src="{{ sort.img }}" alt="{{ sort.text }}">
+													<span>{{ sort.text }}</span>
+												</li>
+										{% endfor %}
+									</ul>
+								</div>
+		
+							</div>
+						</div>
+					</div>
+
+					{% if mobile %}
+						<div class="products-list">
+							<div class="products-list-body">
+								{% for key,product in products %}
+									<div class="product {{ crutch }}" data-id="{{ product.product_id }}">
+										{% if product.special_label != '' %}
+											<div class="product-special">-{{ product.special_label }}%</div>
+										{% endif %}
+
+										<div class="product-top">
+											<div class="product-image">
+												<a href="{{ product.href }}" title="{% if product.product_color %}{{ product.name }}, цвет: {{ product.product_color }}{% else %}{{ product.name }}{% endif %}">
+													{% if key > 5 %}
+														<img class="{{ crutch }}" height="220px" width="100%" loading="lazy" src="{{ product.thumb }}" alt="{{ product.name }}" onerror='this.onerror = null; this.src="{{ product.reserve_img }}"' />
+													{% else %}
+														<img class="{{ crutch }}" height="220px" width="100%" src="{{ product.thumb }}" alt="{{ product.name }}" onerror='this.onerror = null; this.src="{{ product.reserve_img }}"' />
+													{% endif %}
+												</a>
+												<button class="wishlist" onclick="wishlist($(this).parents('.product'))">
+													<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M11.5 21L9.9775 19.5668C4.57 14.4714 1 11.109 1 6.99455C1 3.63215 3.53575 1 6.775 1C8.602 1 10.3555 1.88283 11.5 3.27248C12.6445 1.88283 14.398 1 16.225 1C19.4642 1 22 3.63215 22 6.99455C22 11.109 18.43 14.4714 13.0225 19.5668L11.5 21Z" fill="#ffffff" stroke="#989898"/>
+													</svg>											
+												</button>	
+											</div>
+											<p class="product-name">{{ product.name }}</p>
+										</div>								
+
+										<div class="product-caption">
+											<div class="product-caption-price">
+												{% if not product.special %}
+													<p class="new">{{ product.price }}</p>
+												{% else %}
+													<p class="old line-through">{{ product.price }}</p>
+													<p class="new">{{ product.special }}</p>
+												{% endif %}
+											</div>
+											<div class="button-wrapper">
+												<input type="hidden" name="product_id" value="{{ product.product_id }}">
+												<button type="button" data-loading-text="Загрузка..." onclick="addToCart(this)">{# Добавить в корзину #}</button>
+											</div>
+											<button type="button" class="one_click">Купить в 1 клик</button>
+										</div>							
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					{% else %}
+						<div class="products-list">
+							<div class="products-list-body">
+								{% for product in products %}
+									<div class="product {{ crutch }}" data-id="{{ product.product_id }}">
+
+										<div class="product-top">
+											<p class="product-name">{{ product.name }}</p>
+											{% if product.product_color %}
+												<p class="product-color">{{ product.product_color }}</p>
+											{% else %}
+												<p class="product-color"> </p>
+											{% endif %}
+										</div>			
+										
+										<div class="product-image">
+											<a href="{{ product.href }}" title="{% if product.product_color %}{{ product.name }}, цвет: {{ product.product_color }}{% else %}{{ product.name }}{% endif %}">
+												<img class="{{ crutch }}" height="266px" width="100%" loading="lazy" src="{{ product.thumb }}" alt="{{ product.name }}" onerror='this.onerror = null; this.src="{{ product.reserve_img }}"' />
+											</a>
+											{% if product.special_label != '' %}
+												<div class="product-special">-{{ product.special_label }}%</div>
+											{% endif %}
+											<button class="wishlist" onclick="wishlist($(this).parents('.product'))">
+												<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M11.5 21L9.9775 19.5668C4.57 14.4714 1 11.109 1 6.99455C1 3.63215 3.53575 1 6.775 1C8.602 1 10.3555 1.88283 11.5 3.27248C12.6445 1.88283 14.398 1 16.225 1C19.4642 1 22 3.63215 22 6.99455C22 11.109 18.43 14.4714 13.0225 19.5668L11.5 21Z" fill="#ffffff" stroke="#989898"/>
+												</svg>											
+											</button>
+											<button class="quick_view">Быстрый просмотр</button>
+										</div>
+
+										<div class="product-caption">
+											<div class="button-wrapper">
+												<input type="hidden" name="product_id" value="{{ product.product_id }}">
+												<button type="button" data-loading-text="Загрузка..." onclick="addToCart(this)">{# Добавить в корзину #}</button>
+											</div>
+											<div class="product-caption-price">
+												{% if not product.special %}
+												<p class="old"> </p>
+													<p class="new">{{ product.price }}</p>
+												{% else %}
+													<p class="old line-through">{{ product.price }}</p>
+													<p class="new">{{ product.special }}</p>
+												{% endif %}
+											</div>
+											<button type="button" class="one_click">Купить в 1 клик</button>
+										</div>						
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					{% endif %}
+
+					<div class="row">
+						<div class="col-sm-12 text-left">
+							{{ pagination }}
+						</div>
+					</div>
+				{% else %}
+					<p>{{ text_empty }}</p>
+				{% endif %}
+			</div>
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+<script type="text/javascript"><!--
+$('#button-search').bind('click', function() {
+	url = 'index.php?route=product/search';
+
+	var search = $('#content input[name=\'search\']').prop('value');
+
+	if (search) {
+		url += '&search=' + encodeURIComponent(search);
+	}
+
+	var category_id = $('#content select[name=\'category_id\']').prop('value');
+
+	if (category_id > 0) {
+		url += '&category_id=' + encodeURIComponent(category_id);
+	}
+
+	var sub_category = $('#content input[name=\'sub_category\']:checked').prop('value');
+
+	if (sub_category) {
+		url += '&sub_category=true';
+	}
+
+	var filter_description = $('#content input[name=\'description\']:checked').prop('value');
+
+	if (filter_description) {
+		url += '&description=true';
+	}
+
+	location = url;
+});
+
+$('#content input[name=\'search\']').bind('keydown', function(e) {
+	if (e.keyCode == 13) {
+		$('#button-search').trigger('click');
+	}
+});
+
+$('select[name=\'category_id\']').on('change', function() {
+	if (this.value == '0') {
+		$('input[name=\'sub_category\']').prop('disabled', true);
+	} else {
+		$('input[name=\'sub_category\']').prop('disabled', false);
+	}
+});
+
+$('select[name=\'category_id\']').trigger('change');
+//add in cart
+$(".button-search").on("click", function () {
+    $.ajax({
+        url: "index.php?route=checkout/cart/add",
+        type: "post",
+        data: {product_id: $(this).next().val()},
+        dataType: "json",
+        success: function (json) {
+            $(".alert-dismissible, .text-danger").remove();
+            $(".form-group").removeClass("has-error");
+
+            if (json["error"]) {
+                if (json["error"]["option"]) {
+                    for (i in json["error"]["option"]) {
+                        var element = $("#input-option" + i.replace("_", "-"));
+
+                        if (element.parent().hasClass("input-group")) {
+                            element
+                                .parent()
+                                .after(
+                                    '<div class="text-danger">' +
+                                    json["error"]["option"][i] +
+                                    "</div>"
+                                );
+                        } else {
+                            element.after(
+                                '<div class="text-danger">' +
+                                json["error"]["option"][i] +
+                                "</div>"
+                            );
+                        }
+                    }
+                }
+
+                if (json["error"]["recurring"]) {
+                    $("select[name='recurring_id']").after(
+                        '<div class="text-danger">' +
+                        json["error"]["recurring"] +
+                        "</div>"
+                    );
+                }
+
+                // Highlight any found errors
+                $(".text-danger").parent().addClass("has-error");
+            }
+
+            if (json["success"]) {
+                $(".breadcrumb").after(
+                    '<div class="alert alert-success alert-dismissible">' +
+                    json["success"] +
+                    '<button type="button" class="close" data-dismiss="alert">&times;</button></div>'
+                );
+
+                $("#cart > button .cart__amount").html(
+                 
+                    json["total"]
+
+                );
+
+                $("html, body").animate({scrollTop: 0}, "slow");
+
+                $("#cart > ul").load("index.php?route=common/cart/info ul li");
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(
+                thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText
+            );
+        },
+    });
+});
+</script>
+{{ footer }}

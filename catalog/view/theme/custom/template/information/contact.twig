@@ -1,0 +1,214 @@
+{{ header }}
+<section class="contacts-top">
+	<div class="wrapper">
+		<h1 class="contacts-top__title">Контактная информация</h1>
+		<div class="contacts-top__body">
+			<section class="contacts-top__left">
+				<h2 class="visually-hidden">Адреса магазинов</h2>
+				<ul class="contacts-top__info">
+					<li itemscope itemtype="http://schema.org/LocalBusiness" class="contacts-top__item">
+						<p itemprop="name" class="contacts-top__name">Магазин-офис Юг:</p>
+						<div class="contacts-top__value">
+							<p itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" class="contacts-top__address">
+								<span itemprop="addressLocality">Видное</span>, <span itemprop="streetAddress">Старо-Нагорная ул., 20</span>
+							</p>
+							<p class="contacts-top__small-text">(розничный отдел)</p>
+							<a itemprop="telephone" href="tel:{{ telephone }}">{{ telephone }}</a>
+							<time itemprop="openingHours" datetime="Mo-Su, 9:00−21:00" class="contacts-top__time">Режим работы: Пн-Вс: 9:00-21:00</time>
+						</div>
+					</li>
+					<li itemscope itemtype="http://schema.org/LocalBusiness" class="contacts-top__item">
+						<p itemprop="name" class="contacts-top__name">Магазин Север:</p>
+						<div class="contacts-top__value">
+							<p itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" class="contacts-top__address">
+								<span itemprop="addressLocality">Красногорск</span>, квартал Коммунальный, 
+								<span itemprop="streetAddress">Знаменская ул., 5</span>, ТЦ “Июнь”, -1 этаж
+							</p>
+							<p class="contacts-top__small-text">(розничный отдел)</p>
+							<a itemprop="telephone" href="tel:+7 (495) 021-73-00">+7 (495) 021-73-00</a>
+							<time itemprop="openingHours" datetime="Mo-Su, 10:00−22:00" class="contacts-top__time">Режим работы: Пн-Вс: 10:00-22:00</time>
+						</div>
+					</li>
+					{# <div class="item">
+						<p class="name">E-mail:</p>
+						<a href="mailto:{{ email }}" class="value">{{ email }}</a>
+					</div> #}
+					{# <div class="item">
+						<p class="name">Режим работы:</p>
+						<p class="value">Понедельник-воскресенье: 9:00-21:00</p>
+					</div> #}
+				</ul>
+				<form action="telegram.php" method="POST">
+					<input type="text" name="phone" class="button" placeholder="Ваш телефон">
+					<input type="submit" name="submit" class="button black" value="Перезвонить мне">
+					<input type="hidden" name="spam_check" value="{{ spam_check }}">
+					<input type="hidden" name="page" value="Контакты">
+					<input type="hidden" name="form_subject" value="Перезвонить мне">
+				</form>
+			</section>
+
+			<section class="contacts-top__right">
+				<h2 class="contacts-top__requisites">Реквизиты:</h2>
+				<p>ИП Кулис И.П.</p>
+				<p>ИНН: 500316276369</p>
+				<p>ОГРН: 319502700075608</p>
+				<p>Юр. адрес: 142000, Россия, Московская область, город Домодедово, ул. Курыжова (мкр Южный), д.30</p>
+				<p>БИК: 044525225</p>
+				<p>К/с: 30101810400000000225</p>
+				<p>Р/с: 40802810340000162000</p>
+			</section>
+		</div>
+	</div>
+</section>
+<section id="information-contact">
+	<div class="row">{{ column_left }}
+		{% if column_left and column_right %}
+		{% set class = 'col-sm-6' %}
+		{% elseif column_left or column_right %}
+		{% set class = 'col-sm-9' %}
+		{% else %}
+		{% set class = 'col-sm-12' %}
+		{% endif %}
+		<div id="content" class="{{ class }}">{{ content_top }}
+			<div class="contacts">
+				<div class="wrapper">
+					<div class="item">
+						<h2 class="contacts__title">Розничный отдел</h2>
+						<div class="employee">
+							<img src="image/contacts/Artem.png" alt="Артем 100Дверей">
+							<div class="info">
+								<p class="contacts__name">Артем</p>
+								<p class="contacts__position">Менеджер по работе с клиентами</p>
+								<a class="contacts__phone" href="tel:+74950215532">+7 (495) 021-55-32</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="item">
+						<div class="contacts__title"></div>
+						<div class="employee">
+							<img src="image/contacts/Ekaterina.png" alt="Екатерина 100Дверей">
+							<div class="info">
+								<p class="contacts__name">Екатерина</p>
+								<p class="contacts__position">Менеджер по работе с клиентами</p>
+								<a class="contacts__phone" href="tel:+74950215532">+7 (495) 021-55-32</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="item">
+						<h2 class="contacts__title">Монтажный отдел</h2>
+						<div class="employee">
+							<img src="image/contacts/Pavel.png" alt="Павел 100Дверей">
+							<div class="info">
+								<p class="contacts__name">Павел</p>
+								<p class="contacts__position">Начальник монтажного отдела</p>
+								<a class="contacts__phone" href="tel:+74950215400">+7 (495) 021-54-00</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="item">
+						<div class="contacts__title"></div>
+						<div class="employee">
+							<img src="image/contacts/Juriy.png" alt="Юрий 100Дверей">
+							<div class="info">
+								<p class="contacts__name">Юрий</p>
+								<p class="contacts__position">Отдел закупок</p>
+								<a class="contacts__phone" href="tel:+74950215532">+7 (495) 021-55-32</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="item">
+						<h2 class="contacts__title">Сервисный отдел</h2>
+						<div class="employee">
+							<img src="image/contacts/pavel2.png" alt="Павел сервисный отдел 100Дверей">
+							<div class="info">
+								<p class="contacts__name">Павел</p>
+								<p class="contacts__position">Вопросы после установки</p>
+								<a class="contacts__phone" href="tel:+74950215400">+7 (495) 021-54-00</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="item">
+						<div class="contacts__title"></div>
+						<div class="employee">
+							<img src="image/contacts/vlad.png" alt="Влад 100Дверей">
+							<div class="info">
+								<p class="contacts__name">Влад</p>
+								<p class="contacts__position">Вопрос по дате и времени монтажна</p>
+								<a class="contacts__phone" href="tel:+74950215400">+7 (495) 021-54-00</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="item">
+						<h2 class="contacts__title">Сотрудничество</h2>
+						<div class="employee">
+							<img src="image/contacts/irina.png" alt="Ирина 100Дверей">
+							<div class="info">
+								<p class="contacts__name">Ирина</p>
+								<p class="contacts__position">Менеджер по развитию</p>
+								<a class="contacts__phone" href="tel:+74950215532">+7 (495) 021-55-32</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="item">
+						<h2 class="contacts__title">Подразделение ProfilDoors</h2>
+						<div class="employee">
+							<img src="image/contacts/vika.png" alt="Виктория 100Дверей">
+							<div class="info">
+								<p class="contacts__name">Виктория</p>
+								<p class="contacts__position">Менеджер по работе с клиентами</p>
+								<a class="contacts__phone" href="tel:+74950215532">+7 (495) 021-55-32</a>
+							</div>
+						</div>
+					</div>			
+				</div>
+			</div>
+			</div>
+	</div>
+</section>
+
+<section class="branch_offices">
+	<h2 class="visually-hidden">Карта расположения магазинов</h2>
+	<script src="//yastatic.net/taxi-widget/ya-taxi-widget.js" async></script>
+	<div class="wrapper">
+		<p class="title">Лучше один раз увидеть</p>
+		<p class="description">Мы предлагаем самый актуальный ассортимент на сегодня и предоставляем клиентам все возможности быть уверенными в покупке. Приглашаем посетить
+			фирменный шоу-рум и лично оценить качество используемых материалов, проверить работу механизмов и убедиться в надежности дверей!</p>
+		<div class="map">
+			<div id="map_frame" class="frame"></div>
+			<div class="office" data-latitude="55.566102" data-longitude="37.689853">
+				<p class="address">г. Видное, Старо-Нагорная ул., 20</p>
+				<a href="tel:+7 (495) 021-55-32" class="phone">+7 (495) 021-55-32</a>
+				<p class="work_time">Ежедневно с 9:00 до 21:00</p>
+				<div class="buttons">
+					<a href="https://yandex.ru/maps/213/moscow/?from=tabbar&ll=37.609044%2C55.571097&mode=routes&rtext=~55.566102%2C37.689853&rtt=auto&ruri=~ymapsbm1%3A%2F%2Forg%3Foid%3D45351131535&source=serp_navig&z=20"  target="_blank" class="build_rout">Построить маршрут</a>
+					<div class="taxi">
+						<div class="ya-taxi-widget" data-use-location="true" data-app="3" data-redirect="1178268795219780156" data-tariff="econom" data-lang="ru" data-size="xs" data-theme="normal" data-title="Доехать на такси" data-point-a="" data-point-b="37.60894,55.572207" data-ref="https%3A%2F%2F100-dverei.ru%2F" data-proxy-url="https://{app}.redirect.appmetrica.yandex.com/route?start-lat={start-lat}&amp;start-lon={start-lon}&amp;end-lat={end-lat}&amp;end-lon={end-lon}&amp;ref={ref}&amp;appmetrica_tracking_id={redirect}&amp;tariffClass={tariff}&amp;lang={lang}"></div>
+					</div>
+				</div>
+				{# <img src="image/branch_offices/main_office.webp" alt="Главный офис 100 Дверей в ТЦ Бухта"> #}
+				<div class="cross"></div>
+			</div>
+			<div class="office" data-latitude="55.819322" data-longitude="37.346513">
+				<p class="address">г. Красногорск, квартал Коммунальный, Знаменская ул., 5</p>
+				<a href="tel:+7 (495) 021-73-00" class="phone">+7 (495) 021-73-00</a>
+				<p class="work_time">Ежедневно с 10:00 до 22:00</p>
+				<div class="buttons">
+					<a href="https://yandex.ru/maps/213/moscow/?from=tabbar&ll=37.347596%2C55.819213&mode=routes&rtext=~55.819322%2C37.346513&rtt=auto&ruri=~ymapsbm1%3A%2F%2Forg%3Foid%3D1141393821&source=serp_navig&z=19"  target="_blank" class="build_rout">Построить маршрут</a>
+					<div class="taxi">
+						<div class="ya-taxi-widget" data-use-location="true" data-app="3" data-redirect="1178268795219780156" data-tariff="econom" data-lang="ru" data-size="xs" data-theme="normal" data-title="Доехать на такси" data-point-a="" data-point-b="37.346739,55.818882" data-ref="https%3A%2F%2F100-dverei.ru%2F" data-proxy-url="https://{app}.redirect.appmetrica.yandex.com/route?start-lat={start-lat}&amp;start-lon={start-lon}&amp;end-lat={end-lat}&amp;end-lon={end-lon}&amp;ref={ref}&amp;appmetrica_tracking_id={redirect}&amp;tariffClass={tariff}&amp;lang={lang}"></div>
+					</div>
+				</div>
+				{# <img src="image/branch_offices/main_office.webp" alt="Главный офис 100 Дверей в ТЦ Июнь"> #}
+				<div class="cross"></div>
+			</div>
+		</div>
+	</div>
+</section>
+{{ footer }}

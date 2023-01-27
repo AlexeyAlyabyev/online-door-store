@@ -1,0 +1,642 @@
+{{ header }}
+{% if edit %}
+	<noindex><a class="admin_product_edit" target="_blank" href="{{ edit }}" rel="nofollow">Редактировать</a></noindex>
+{% endif %}
+<div itemscope itemtype="http://schema.org/Product" id="product-product" class="wrapper">
+	<ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+		{% for key,breadcrumb in breadcrumbs %}
+			<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+				{% if loop.last %}
+					<p itemprop="item">
+						<span itemprop="name">
+							{{ breadcrumb.text }}
+						</span>
+					</p>
+				{% else %}
+					<a itemprop="item" href="{{ breadcrumb.href }}">
+						<span itemprop="name">
+							{{ breadcrumb.text }}
+						</span>
+					</a>				
+				{% endif %}
+				{% set position = key + 1 %}
+				<meta itemprop="position" content="{{ position }}" />
+			</li>
+		{% endfor %}
+	</ul>
+
+	<div class="product_block" data-id="{{ product_id }}">
+		<div class="photo swiper">
+			<ul class="thumbnails swiper-wrapper">
+				{% if thumb %}
+					<li class="swiper-slide">
+						<a class="thumbnail" href="{{ popup }}" data-fancybox="images" title="{{ heading_title }}">
+							<img itemprop="image" src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
+						</a>
+					</li>
+				{% endif %} 
+				{% if images %}
+					{% for image in images %}
+						<li class="swiper-slide">
+							<a class="thumbnail" data-fancybox="images" href="{{ image.popup }}" title="{{ heading_title }}">
+								<img src="{{ image.popup }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
+							</a>
+						</li>
+					{% endfor %}
+				{% endif %}
+			</ul>
+			<button class="wishlist" onclick="wishlist($(this).parents('.product_block'))">
+				<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M11.5 21L9.9775 19.5668C4.57 14.4714 1 11.109 1 6.99455C1 3.63215 3.53575 1 6.775 1C8.602 1 10.3555 1.88283 11.5 3.27248C12.6445 1.88283 14.398 1 16.225 1C19.4642 1 22 3.63215 22 6.99455C22 11.109 18.43 14.4714 13.0225 19.5668L11.5 21Z" fill="#ffffff" stroke="#989898"/>
+				</svg>											
+			</button>	
+			<div class="swiper-pagination"></div>
+			<div class="attention">
+				<b>Внимание!</b> Изображения и цвета могут отличаться от реальных, в зависимости от цветопередачи и разрешения монитора.
+			</div>
+		</div>
+
+		<div class="info">
+			<div class="top">
+				<h1 itemprop="name">{{ heading_title }}</h1>
+				{% if stock_status_id == 5 or stock_status_id == 8 %}
+					<div class="stock_status {% if stock_status_id == 5 %}red{% endif %}">
+						{{ stock }}
+					</div>
+				{% endif %}
+				<div class="installment" data-fancybox="" data-src="#modal">
+					<img src="image/pay_systems/sber.svg" alt="Сбербанк">
+					<img src="image/pay_systems/tinkoff.svg" alt="Тинькофф">
+					Рассрочка {# от <b><span>{{ installment }}</span> ₽ в мес.</b> #}
+				</div>
+			</div>
+
+			{% if glazing and products_related_by_glazing|length > 1 %}
+				<div class="product-link-option">
+					<div class="title">Тип</div>
+					{% for related_glazing in products_related_by_glazing|sort %}
+						{% if related_glazing.href %}
+							<a href="{{ related_glazing.href }}" class="glass-link option_value">
+								{{ related_glazing.glazing }}
+							</a>
+						{% else %}
+							<div class="glass current-option option_value">
+								{{ related_glazing.glazing }}
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			{% endif %}
+
+			{% set isset_options = 0 %}
+			{% for option in options %}
+				{% if option.type == 'radio' %}
+					{% set isset_options = 1 %}
+				{% endif %}
+			{% endfor %}
+
+			{% if isset_options %}
+				<div class="product-link-option">
+					{% for option in options %}
+						{% if option.type == 'radio' %}
+							<div class="title">
+								{% if main_category == 59 %}
+									Размер полотна:
+								{% else %}
+									Размер коробки:
+								{% endif %}
+							</div>
+							{% for key, option_value in option.product_option_value %}
+								{% if key == 0 %}
+									<input id="option[{{ option.product_option_id }}]x{{option_value.id_name}}" type="radio"
+										value="{{ option_value.product_option_value_id }}" checked
+										name="option[{{ option.product_option_id }}]" />
+								{% else %}
+									<input id="option[{{ option.product_option_id }}]x{{option_value.id_name}}" type="radio"
+										value="{{ option_value.product_option_value_id }}"
+										name="option[{{ option.product_option_id }}]" />
+								{% endif %}
+								<label class="size option_value" for="option[{{ option.product_option_id }}]x{{option_value.id_name}}">
+									{{ option_value.name }}
+									{% if option_value.price %}
+										({{ option_value.price_prefix }}{{ option_value.price }})
+									{% endif %}
+								</label>
+							{% endfor %}
+						{% endif %}
+					{% endfor %}
+				</div>
+			{% endif %}	
+
+			{% if products_related_by_color %}
+				<div class="product-link-option">
+					<div class="title">Цвет полотна</div>
+					{% for related_color in products_related_by_color|sort %}
+						{% if related_color.href %}
+							<a href="{{ related_color.href }}" class="color-link">
+								<div class="color" style="background: url(/image/{{ related_color.color_image }});"></div>
+							</a>
+						{% else %}
+							<div class="color current-option" style="background: url(/image/{{ related_color.color_image }});"></div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			{% endif %}
+
+			<div class="price">
+				<div class="price-option {% if stock_status_id == 5 %}disabled{% endif %}">
+					<div class="price-option-checkbox {% if stock_status_id != 5 %}border-yellow{% endif %}">
+						{% if main_category == 59 %}
+							Цена полотна:
+						{% else %}
+							Цена:
+						{% endif %} 
+						<div>
+							<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" id="calc-price" class="price_value" data-price="{% if special %}{{ special }}{% else %}{{ price }}{% endif %}">
+								<meta itemprop="price" content="{% if special %}{{ special|replace({' ': ''}) }}{% else %}{{ price|replace({' ': ''}) }}{% endif %}">
+								<meta itemprop="priceCurrency" content="RUB">
+								<link itemprop="availability" href="http://schema.org/InStock">
+								{% if special %}{{ special }}{% else %}{{ price }}{% endif %}
+							</span>
+							<span>₽</span>
+						</div>
+					</div>
+
+					{% if main_category == 59 and is_options_with_checkboxes != 0 %}
+					<div class="price-option-checkbox">
+							Цена комплекта: 
+							<img src="/catalog/view/theme/custom/image/info-discription.svg" alt="информация о комплекте">
+							<div>
+								<span id="calc-final" class="price_value">{{ price_with_options }}</span>
+								<span>₽</span>
+							</div>
+							<div class="option_info"><b>в комплект входит: </b>{{ tooltip_to_option_price }}</div>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="door-controls">
+				{% if stock_status_id == 5 %}
+					<div class="product-buttons">
+						<button type="button" id="report_receipt" class="btn btn-block" data-fancybox data-src="#modal">Сообщить о поступлении товара</button>	
+					</div>
+				{% else %}
+					<div class="quantity">
+						<div class="minus">
+							<svg width="12" height="6" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M7.5927 8.11905C7.98322 8.50958 8.61639 8.50958 9.00691 8.11905L15.3709 1.75509C15.7614 1.36457 15.7614 0.731403 15.3709 0.340878C14.9803 -0.0496454 14.3472 -0.0496454 13.9567 0.340878L8.2998 5.99773L2.64295 0.340878C2.25243 -0.0496454 1.61926 -0.0496454 1.22874 0.340878C0.838212 0.731403 0.838212 1.36457 1.22874 1.75509L7.5927 8.11905ZM7.2998 6.07861V7.41195H9.2998V6.07861H7.2998Z" fill="#2C2B3F" />
+							</svg>
+						</div>
+
+						<input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity"/>
+
+						<div class="plus">
+							<svg width="12" height="6" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M7.5927 8.11905C7.98322 8.50958 8.61639 8.50958 9.00691 8.11905L15.3709 1.75509C15.7614 1.36457 15.7614 0.731403 15.3709 0.340878C14.9803 -0.0496454 14.3472 -0.0496454 13.9567 0.340878L8.2998 5.99773L2.64295 0.340878C2.25243 -0.0496454 1.61926 -0.0496454 1.22874 0.340878C0.838212 0.731403 0.838212 1.36457 1.22874 1.75509L7.5927 8.11905ZM7.2998 6.07861V7.41195H9.2998V6.07861H7.2998Z" fill="#2C2B3F" />
+							</svg>
+						</div>
+					</div>
+
+					<button type="button" class="one_click">
+						<img src="image/product_card/one-click-arrow.svg" alt="купить в 1 клик">							
+						<span>Купить в 1 клик</span>
+					</button>
+
+					<div class="product-buttons">
+						<input type="hidden" name="product_id" value="{{ product_id }}" />
+						<button type="button" onclick="addToCartFromProductCard()">Добавить в корзину</button>
+					</div>
+				{% endif %}
+			</div>
+
+			<p class="prepayment">Заказы осуществляются по предоплате от 20%</p>
+
+			{# {% if main_category == 59 and not mobile %}
+				<div class="doors-type">
+					<p class="caption">Возможные варианты открывания</p>
+					<div class="body">
+						<div class="item">
+							<img class="image" src="catalog/view/theme/default/image/slide-door.svg" alt="Раздвижная дверь">
+							<div class="description">
+								<p class="name">Раздвижная</p>
+								<p class="subtitle">(Двери купе)</p>
+							</div>
+						</div>
+						<div class="item">
+							<img class="image" src="catalog/view/theme/default/image/wing-door.svg" alt="Распашная дверь">
+							<div class="description">
+								<p class="name">Распашная</p>
+								<p class="subtitle">(Двери двустворчатые)</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endif %} #}
+		</div>
+	</div>
+</div>
+
+<div class="measuring_consultation">
+	<div class="wrapper">
+		<div class="item" data-fancybox data-src="#modal" href="#">
+			<img src="image/product_card/zamer.svg" alt="Бесплатный замер">
+			<p>ЗАКАЗАТЬ БЕСПЛАТНЫЙ ЗАМЕР</p>
+		</div>	
+	
+		<a class="item" href="tel:{{ telephone }}">
+			<img src="image/product_card/consult.svg" alt="Консультация">
+			<p>ПРОКОНСУЛЬТИРОВАТЬСЯ</p>
+		</a>
+	</div>
+</div>
+
+<div class="door-data">
+	<div class="wrapper">
+		<ul>
+			<li class="active">{{ tab_attribute }}</li>
+
+			{% if options and is_options_with_checkboxes != 0 %}
+				<li id="components">Комплектующие</li>
+			{% endif %}
+
+			{% if main_category == 59 %}
+				<li>Схема</li>
+			{% endif %} 
+
+			{% if description %}
+				<li>Описание</li>
+			{% endif %} 
+		</ul>
+
+		<div class="tabs">
+			<div class="wrapper">
+				{% if attribute_groups %}
+					<div class="tab active">
+						<div class="attributes_table">
+							{% for attribute_group in attribute_groups %}
+								{% for attribute in attribute_group.attribute %}
+									<div class="attribute">
+										<p>{{ attribute.name }}</p>
+										<p>{{ attribute.text }}</p>
+									</div>
+								{% endfor %}
+
+								<div class="attribute">
+									<p>Производитель</p>
+									<p itemprop="brand">{{ manufacturer }}</p>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+
+				{% if options and is_options_with_checkboxes != 0 %}
+					<div class="tab">
+						{% for option in options %} 
+							{% if option.type =='checkbox' %}
+
+								<div class="components">
+									<div class="components-options" id="input-option{{ option.product_option_id }}">
+										{% for key,option_value in option.product_option_value %}
+											<div class="option">
+												{% if key < 2 %}
+													<input type="checkbox" id="option[{{ option.product_option_id }}][]{{ loop.index }}" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}" data-kopmlekt="{{ option_value.price }}" checked />
+												{% else %}
+													<input type="checkbox" id="option[{{ option.product_option_id }}][]{{ loop.index }}" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}" data-kopmlekt="{{ option_value.price }}" />
+												{% endif %}
+												<label for="option[{{ option.product_option_id }}][]{{ loop.index }}">
+													<span class="checkmark"></span>
+													{{ option_value.name }}
+												</label>
+												{% if not mobile %}
+													<p class="static-price">{{ option_value.price }} ₽</p>
+												{% endif %}
+												<input type="number" min="0" value="1" name="component_quantity" />
+												<p data-price="{{ option_value.price }}" class="price"><span>{{ option_value.price }}</span> ₽</p>
+
+											</div>
+										{% endfor %}
+									</div>
+
+									<div class="results">
+										<div class="sum"><b>Цена с полотном:</b> <span>{{ price_with_options }}</span> ₽</div>
+										<button onclick="addToCartFromProductCard()">Добавить в корзину</button>
+									</div>
+								</div>
+
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %} 
+				
+				{% if main_category == 59 %}
+					<div class="tab">
+						<img src="catalog/view/theme/custom/image/bagetnoe_polotno.png" class="img-responsive" alt="Схема дверного полотна" />
+					</div>
+				{% endif %}
+				
+				{% if description %}
+					<div class="tab product_description">
+						{{ description }}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<div class="delivery_mounting">
+		<div class="wrapper">
+			<a href="/delivery" class="item">
+				<img src="image/product_card/delivery.svg" alt="Доставка">
+				<div class="info">
+					<div class="title">
+						<p>Доставка</p>
+						<img src="image/product_card/arrow.svg" alt="Перейти к доставке">
+					</div>
+					<p class="text">{{ delivery_text }} {{ delivery_plus_text }}</p>
+				</div>
+			</a>
+	
+			<a href="/mezhkomnatnye-dveri-nedorogo-s-ustanovkoi-pod-klyuch" class="item">
+				<img src="image/product_card/install.svg" alt="Установка">
+				<div class="info">
+					<div class="title">
+						<p>Установка</p>
+						<img src="image/product_card/arrow.svg" alt="Перейти к установке">
+					</div>
+					<p class="text">{{ installment_text }} {{ installment_plus_text }}</p>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+
+{% if vhodnye %}
+	<div class="container">
+		<h3 class="section-title">Системы открывания входных дверей</h3>
+		<img src="/catalog/view/theme/custom/image/systems/narujy.jpg" class="img-responsive" alt="Системы открывания входных дверей наружу" />
+		<img src="/catalog/view/theme/custom/image/systems/vnitry.jpg" class="img-responsive" alt="Системы открывания входных дверей внутрь" />
+	</div>
+{% endif %} 
+
+{% if products %}
+	<div class="hit_slider">
+		<div class="title">Похожие товары</div>
+		<div class="body">
+			{% for product in products %}
+				<div class="item" data-id="{{ product.product_id }}">
+
+					<a href="{{ product.href }}">
+						<div class="image">
+							<img loading="lazy" src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}">
+							{% if product.special %}
+								<span class="sale">
+									-{{ product.sale_percent }}%
+								</span>
+							{% endif %}
+							<button class="quick_view">Быстрый просмотр</button>
+						</div>
+
+						<p class="name">{{ product.name }}</p>
+
+						<p class="price">
+							{% if product.special %}
+								{{ product.special }}
+							{% else %}
+								{{ product.price }}
+							{% endif %}
+						</p>
+					</a>
+					<input type="hidden" name="product_id" value="{{ product.product_id }}">
+					<div class="button_block">
+						<button class="cart_btn" onclick="addToCart(this)"></button>
+						<button type="button" class="one_click">Купить в 1 клик</button>
+					</div>
+					<button class="wishlist" onclick="wishlist($(this).parent())">
+						<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M11.5 21L9.9775 19.5668C4.57 14.4714 1 11.109 1 6.99455C1 3.63215 3.53575 1 6.775 1C8.602 1 10.3555 1.88283 11.5 3.27248C12.6445 1.88283 14.398 1 16.225 1C19.4642 1 22 3.63215 22 6.99455C22 11.109 18.43 14.4714 13.0225 19.5668L11.5 21Z" fill="#ffffff" stroke="#989898"/>
+						</svg>											
+					</button>	
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endif %}
+
+{% if product_accessories %}
+	<div class="hit_slider">
+		<h3 class="title">Фурнитура</h3>
+		<div class="body">
+			{% for product in product_accessories %}
+				<div class="item" data-id="{{ product.product_id }}">
+					<a href="{{ product.href }}">
+						<div class="image">
+							<img loading="lazy" src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}">
+							{% if product.special %}
+								<span class="sale">
+									-{{ product.sale_percent }}%
+								</span>
+							{% endif %}
+							<button class="quick_view">Быстрый просмотр</button>
+						</div>
+
+						<p class="name">{{ product.name }}</p>
+
+						<p class="price">
+							{% if product.special %}
+								{{ product.special }}
+							{% else %}
+								{{ product.price }}
+							{% endif %}
+						</p>
+					</a>
+					<input type="hidden" name="product_id" value="{{ product.product_id }}">
+					<div class="button_block">
+						<button class="cart_btn" onclick="addToCart(this)"></button>
+						<button type="button" class="one_click">Купить в 1 клик</button>
+					</div>
+					<button class="wishlist" onclick="wishlist($(this).parent())">
+						<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M11.5 21L9.9775 19.5668C4.57 14.4714 1 11.109 1 6.99455C1 3.63215 3.53575 1 6.775 1C8.602 1 10.3555 1.88283 11.5 3.27248C12.6445 1.88283 14.398 1 16.225 1C19.4642 1 22 3.63215 22 6.99455C22 11.109 18.43 14.4714 13.0225 19.5668L11.5 21Z" fill="#ffffff" stroke="#989898"/>
+						</svg>											
+					</button>	
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endif %} 
+
+<script type="text/javascript">
+	$("select[name='recurring_id'], input[name=\"quantity\"]").change(
+		function () {
+			$.ajax({
+				url: "index.php?route=product/product/getRecurringDescription",
+				type: "post",
+				data: $(
+					"input[name='product_id'], input[name='quantity'], select[name='recurring_id']"
+				),
+				dataType: "json",
+				beforeSend: function () {
+					$("#recurring-description").html("");
+				},
+				success: function (json) {
+					$(".alert-dismissible, .text-danger").remove();
+
+					if (json["success"]) {
+						$("#recurring-description").html(json["success"]);
+					}
+				},
+			});
+		}
+	);
+</script>
+
+<script type="text/javascript">
+	function addToCartFromProductCard() {
+		let ajax_data;
+
+		if ($("#product-product .info .price .price-option .border-yellow").index())
+			ajax_data = $(" #product-product input[name='product_id'], #product-product input[name='quantity'], input[name^='option']:checked");
+		else 
+			ajax_data = $("#product-product input[name='product_id'], #product-product input[name='quantity'], input[name^='option'][type='radio']:checked");
+		
+		$.ajax({
+				url: "index.php?route=checkout/cart/add",
+				type: "post",
+				data: ajax_data,
+				dataType: "json",
+				success: function (e) {
+					// showNotice("Товар добавлен в корзину", "/cart");
+					$(".added_to_cart").load("index.php?route=product/added_to_cart&cart_id=" + e.cart_id + " .body", function(){
+						$(".added_to_cart img").eq(0).on("load", showAddedToCart);
+					});
+					// showAddedToCart();
+					$(".mobile_menu .navigation .item .quantity, #cart .cart__amount").html(e.total);
+					e.redirect && (location = e.redirect);
+					$("#cart > ul").load("index.php?route=common/cart/info ul li");
+				},
+				error: function (e, t, n) {
+						alert(n + "\r\n" + e.statusText + "\r\n" + e.responseText);
+				},
+		});
+	}
+</script>
+
+<script type="text/javascript">
+	$("button[id^='button-upload']").on("click", function () {
+		var node = this;
+
+		$("#form-upload").remove();
+
+		$("body").prepend(
+			'<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>'
+		);
+
+		$("#form-upload input[name='file']").trigger("click");
+
+		if (typeof timer != "undefined") {
+			clearInterval(timer);
+		}
+
+		timer = setInterval(function () {
+			if ($("#form-upload input[name='file']").val() != "") {
+				clearInterval(timer);
+
+				$.ajax({
+					url: "index.php?route=tool/upload",
+					type: "post",
+					dataType: "json",
+					data: new FormData($("#form-upload")[0]),
+					cache: false,
+					contentType: false,
+					processData: false,
+					beforeSend: function () {
+						$(node).button("loading");
+					},
+					complete: function () {
+						$(node).button("reset");
+					},
+					success: function (json) {
+						$(".text-danger").remove();
+
+						if (json["error"]) {
+							$(node)
+								.parent()
+								.find("input")
+								.after('<div class="text-danger">' + json["error"] + "</div>");
+						}
+
+						if (json["success"]) {
+							alert(json["success"]);
+
+							$(node).parent().find("input").val(json["code"]);
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						alert(
+							thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr
+							.responseText
+						);
+					},
+				});
+			}
+		}, 500);
+	});
+</script>
+
+<script type="text/javascript">
+	$("#review").delegate(".pagination a", "click", function (e) {
+		e.preventDefault();
+
+		$("#review").fadeOut("slow");
+
+		$("#review").load(this.href);
+
+		$("#review").fadeIn("slow");
+	});
+
+	$("#review").load(
+		"index.php?route=product/product/review&product_id={{ product_id }}"
+	);
+
+	$("#button-review").on("click", function () {
+		$.ajax({
+			url: "index.php?route=product/product/write&product_id={{ product_id }}",
+			type: "post",
+			dataType: "json",
+			data: $("#form-review").serialize(),
+			beforeSend: function () {
+				$("#button-review").button("loading");
+			},
+			complete: function () {
+				$("#button-review").button("reset");
+			},
+			success: function (json) {
+				$(".alert-dismissible").remove();
+
+				if (json["error"]) {
+					$("#review").after(
+						'<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' +
+						json["error"] +
+						"</div>"
+					);
+				}
+
+				if (json["success"]) {
+					$("#review").after(
+						'<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' +
+						json["success"] +
+						"</div>"
+					);
+
+					$("input[name='name']").val("");
+					$("textarea[name='text']").val("");
+					$("input[name='rating']:checked").prop("checked", false);
+				}
+			},
+		});
+	});
+</script>
+
+{{ footer }}
